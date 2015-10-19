@@ -1,5 +1,4 @@
 <?php
-
 if (!class_exists('RapidAddon')) {
 	
 	class RapidAddon {
@@ -1074,7 +1073,4 @@ if (!class_exists('RapidAddon')) {
 
 		}
 	}	
-
 }
-
-

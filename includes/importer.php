@@ -1,27 +1,19 @@
 <?php
-
-
-// Add Fields Address EXAMPLE
-// $epl_wpimport->add_field('property_address_display', 'Property Address Display', 'text');
-
-function epl_ai_get_meta_boxes($epl_meta_boxes) {
-    global $epl_ai_meta_fields;
-    $epl_ai_meta_fields = $epl_meta_boxes;
-	return $epl_meta_boxes;
+function epl_wpimport_get_meta_boxes($epl_meta_boxes) {
+	global $epl_ai_meta_fields;
+	$epl_ai_meta_fields = $epl_meta_boxes;
+		return $epl_meta_boxes;
 }
+add_filter('epl_listing_meta_boxes','epl_wpimport_get_meta_boxes');
 
-add_filter('epl_listing_meta_boxes','epl_ai_get_meta_boxes');
-
-
-	
-function epl_ai_register_fields() {
-    global $epl_ai_meta_fields,$epl_wpimport;
-    $epl_wpimport = new RapidAddon('EPL WP All Import Add-on', 'epl_wpimport_addon');
-    if(!empty($epl_ai_meta_fields)) {
+function epl_wpimport_register_fields() {
+	global $epl_ai_meta_fields,$epl_wpimport;
+	$epl_wpimport = new RapidAddon('Easy Property Listings Custom Fields', 'epl_wpimport_addon');
+	if(!empty($epl_ai_meta_fields)) {
 	    foreach($epl_ai_meta_fields as $epl_meta_box) {
 		    if(!empty($epl_meta_box['groups'])) {
-                foreach($epl_meta_box['groups'] as $group) {
-                		$epl_wpimport->add_title( $group['label'], $group['label'] );
+	        foreach($epl_meta_box['groups'] as $group) {
+	        		$epl_wpimport->add_title( $group['label'], $group['label'] );
 		                $fields = $group['fields'];
 		                $fields = array_filter($fields);
 		                if(!empty($fields)) {
@@ -67,50 +59,47 @@ function epl_ai_register_fields() {
 			}
 		}
 	}
-
+	
 	    // Register Import Function
-        $epl_wpimport->set_import_function('epl_wpimport_import_function');
-
-        // display a dismiss able notice warning the user to install WP All Import to use the add-on.
-        // Customize the notice text by passing a string to admin_notice(), i.e. admin_notice("XYZ Theme recommends you install WP All Import (free | pro)")
-        $epl_wpimport->admin_notice("Easy Property Listings requires <a href='http://wordpress.org/plugins/wp-all-import'>WP All Import Pro</a>");
-
-
-        // the add-on will run for all themes/post types if no arguments are passed to run()
-        $epl_wpimport->run(
+	$epl_wpimport->set_import_function('epl_wpimport_import_function');
+	
+	// display a dismiss able notice warning the user to install WP All Import to use the add-on.
+	// Customize the notice text by passing a string to admin_notice(), i.e. admin_notice("XYZ Theme recommends you install WP All Import (free | pro)")
+	$epl_wpimport->admin_notice("Easy Property Listings requires <a href='http://wordpress.org/plugins/wp-all-import'>WP All Import Pro</a>");
+	
+	
+	// the add-on will run for all themes/post types if no arguments are passed to run()
+	$epl_wpimport->run(
 	        array(
 		        "post_types" => epl_get_core_post_types()
 	        )
-        ); 
-    }
+	);
+	 
+	}
 }
 
-add_action('init','epl_ai_register_fields');
-
+add_action('init','epl_wpimport_register_fields');
 
 // Import Function
 function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 	global $epl_wpimport,$epl_ai_meta_fields;
 	if(!empty($epl_ai_meta_fields)) {
-	    foreach($epl_ai_meta_fields as $epl_meta_box) {
-		    if(!empty($epl_meta_box['groups'])) {
-                foreach($epl_meta_box['groups'] as $group) {
-                 
-		                $fields = $group['fields'];
-		                $fields = array_filter($fields);
-		                if(!empty($fields)) {
-			                foreach($fields as $field) {
-				                
-			                   if ( $epl_wpimport->can_update_meta($field['name'], $import_options) ) {
-			                        update_post_meta($post_id, $field['name'], $data[$field['name']]);
-		                       }
-				                
-			                }
-		                }
-                }
-            }
-	    }
-    }
+		foreach($epl_ai_meta_fields as $epl_meta_box) {
+			if(!empty($epl_meta_box['groups'])) {
+				foreach($epl_meta_box['groups'] as $group) {
+				        $fields = $group['fields'];
+				        $fields = array_filter($fields);
+				        if(!empty($fields)) {
+						foreach($fields as $field) {
+							if ( $epl_wpimport->can_update_meta($field['name'], $import_options) ) {
+								update_post_meta($post_id, $field['name'], $data[$field['name']]);
+							}
+						}
+				        }
+				}
+			}
+		}
+	}
 }
 
 function epl_wpimport_image_needs_update($unique_id,$url,$mod_time,$id) {
@@ -170,7 +159,7 @@ function epl_wpimport_img_loop($unique_id,$mod_time,$url,$id) {
 }
 
 // skip image uploading
-function wp_all_import_is_image_to_update($default,$post_object,$xml_object) {
+function epl_wpimport_is_image_to_update($default,$post_object,$xml_object) {
 	// default is true 
 	echo "<pre>aaaa";
 	print_r($default);
@@ -178,21 +167,14 @@ function wp_all_import_is_image_to_update($default,$post_object,$xml_object) {
 	print_r($xml_object);
 	die; 
 }
-//add_filter('wp_all_import_is_image_to_update','wp_all_import_is_image_to_update',10,3);
+//add_filter('wp_all_import_is_image_to_update','epl_wpimport_is_image_to_update',10,3);
 
 // skip old image delition
-function wp_all_import_delete_images($default,$post_object,$xml_object) {
-	// default is true 
-	/*
-	echo "<pre>aaaa";
-	print_r($default);
-	print_r($post_object);
-	print_r($xml_object);
-	die;
-	*/
+function epl_wpimport_delete_images($default,$post_object,$xml_object) {
+	// default is true
 	return false; 
 }
-add_filter('wp_all_import_delete_images','wp_all_import_delete_images',10,3);
+add_filter('wp_all_import_delete_images','epl_wpimport_delete_images',10,3);
 
 function epl_wpimport_is_post_to_update($pid,$xml_node) {
 	
@@ -213,6 +195,5 @@ function epl_wpimport_is_post_to_update($pid,$xml_node) {
 		return false;
 	}
 	return true;
- 
 }
 add_filter('wp_all_import_is_post_to_update', 'epl_wpimport_is_post_to_update', 10, 2);
