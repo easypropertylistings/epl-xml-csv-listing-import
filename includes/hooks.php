@@ -19,7 +19,7 @@ add_filter('epl_license_options_filter', 'epl_wpimport_license_options_filter', 
 function epl_wpimport_extensions_options_filter($epl_fields = null) {
 	$fields = array();
 	$epl_of_fields = array(
-		'label'		=>	__('EPL WP Import','epl-wpimport')
+		'label'		=>	__('WP All Import Add-On','epl-wpimport')
 	);
 	
 	$fields[] = array(
@@ -39,11 +39,9 @@ function epl_wpimport_extensions_options_filter($epl_fields = null) {
 			),
 		)
 	);
-	
-	
-	
+
 	$epl_of_fields['fields'] = $fields;
-	$epl_fields['offices'] = $epl_of_fields;
+	$epl_fields['epl_wpimport'] = $epl_of_fields;
 	return $epl_fields;
 }
 add_filter('epl_extensions_options_filter_new', 'epl_wpimport_extensions_options_filter', 10, 1);
