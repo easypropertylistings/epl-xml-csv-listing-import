@@ -109,7 +109,11 @@ function epl_wpimport_image_needs_update($unique_id,$url,$mod_time,$id) {
 		echo $url;
 		return;
 	}*/
-
+	$live_import	=	function_exists('epl_get_option')  ?  epl_get_option('epl_wpimport_skip_update') : 'off';
+	if ( $live_import != 'on' ) {
+		echo $url;
+		return;
+	}
 	/** check if post with unique id already exists **/
 	$args = array(
 	    'meta_key' 			=> 'property_unique_id',
