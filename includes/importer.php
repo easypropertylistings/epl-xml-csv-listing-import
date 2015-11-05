@@ -165,13 +165,13 @@ function epl_wpimport_log_pmxi_gallery_image( $post_id ) {
 	global $epl_wpimport;
 	
 	// Importer Title
-	$epl_wpimport_label 	= "<strong>EPL IMPORTER ACTIVATED: </strong>";
+	$epl_wpimport_label 	= "<strong>EPL IMPORTER ACTIVATED IMAGES : </strong>";
 	
 	// Live Import Status						
 	$live_import		= function_exists('epl_get_option')  ?  epl_get_option('epl_wpimport_skip_update') : 'off';
 	
 	// Live Import Label
-	$live_import_label	= $live_import == 'on'  ?  'Record Skipping Enabled' : 'Record Skipping Disabled';
+	$live_import_label	= $live_import == 'on'  ?  'IMAGES Record Skipping Enabled' : 'IMAGES Record Skipping Disabled';
 	
 	// Log EPL All Importer Activation Status
 	$epl_wpimport->log( $epl_wpimport_label . $live_import_label );
@@ -179,7 +179,9 @@ function epl_wpimport_log_pmxi_gallery_image( $post_id ) {
 	
 
 }
-add_action('pmxi_gallery_image', 'epl_wpimport_log_pmxi_gallery_image', 10, 1);
+add_action('pmxi_before_post_import', 'epl_wpimport_log_pmxi_gallery_image', 10, 1);
+
+//add_action('pmxi_gallery_image', 'epl_wpimport_log_pmxi_gallery_image', 10, 1);
 
 
 
@@ -211,6 +213,7 @@ function epl_wpimport_image_needs_update($unique_id,$url,$mod_time,$id) {
 		
 		$epl_wpimport->log( '<strong>UPDATE IMAGE LIVE_IMPORT_OFF:</strong>' );
 		
+		
 		echo $url;
 		return;
 	}
@@ -233,15 +236,18 @@ function epl_wpimport_image_needs_update($unique_id,$url,$mod_time,$id) {
 			/** only upload images which are recently modified **/
 			if( get_post_meta($epl_post->ID,'property_images_mod_date',true)  != '') {
 				if(strtotime(get_post_meta($epl_post->ID,'property_images_mod_date',true)) < strtotime($mod_time) ) {
+					$epl_wpimport->log( '<strong>UPDATE IMAGE IMAGE LIVE_IMPORT_>>>>> 1111111:</strong>' );
 					echo $url;
 				}
 			} else {
+				$epl_wpimport->log( '<strong>UPDATE IMAGE IMAGE LIVE_IMPORT_>>>>> 2222222:</strong>' );
 				echo $url;
 
 			}
 		}
 
 	} else {
+		$epl_wpimport->log( '<strong>UPDATE IMAGE IMAGE LIVE_IMPORT_>>>>> 333333:</strong>' );
 		echo $url;
 	}
 }
@@ -292,6 +298,8 @@ function epl_wpimport_delete_images($default,$post_object,$xml_object) {
 		
 		$epl_wpimport->log( '<strong>UPDATE IMAGE LIVE_IMPORT_ON: KEEP IMAGES</strong>' );
 		
+		
+		// 
 		return false;
 	}
 	
