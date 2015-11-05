@@ -303,11 +303,11 @@ function epl_wpimport_delete_images($default,$post_object,$xml_object) {
 		return false;
 	}
 	
-	$epl_wpimport->log( '<strong>UPDATE IMAGE LIVE_IMPORT_ON: DELETE IMAGES</strong>' );
+	$epl_wpimport->log( '<strong>UPDATE IMAGE LIVE_IMPORT_OFF: DELETE IMAGE for : '.$post_object["post_title"].' </strong>' );
 	// default filter values in WP All Import is: true
 	return true; 
 }
-add_filter('wp_all_import_delete_images','epl_wpimport_delete_images',10,3);
+//add_filter('wp_all_import_delete_images','epl_wpimport_delete_images',10,3);
 
 
 
@@ -401,8 +401,100 @@ function epl_wpimport_is_post_to_update( $pid , $xml_node) {
 add_filter('wp_all_import_is_post_to_update', 'epl_wpimport_is_post_to_update', 10, 2);
 
 
+if( !function_exists('epl_wpimport_delete_attachments') ) {
+	/**
+	 * Delete attachments linked to a specified post
+	 * @param int $parent_id Parent id of post to delete attachments for
+	 */
+	function epl_wpimport_delete_attachments($parent_id, $unlink = true, $type = 'images',$post_object,$xml_object) {	
+		global $epl_wpimport;
+		$del_attchments = true;
+		if ( $type == 'images' and has_post_thumbnail($parent_id) ) delete_post_thumbnail($parent_id);
 
+		$ids = array();
 
+		$attachments = get_posts(array('post_parent' => $parent_id, 'post_type' => 'attachment', 'numberposts' => -1, 'post_status' => null));
+		
+		if( get_post_meta($parent_id,'property_images_mod_date',true)  != '') { 
+			$mod_date =  strtotime(get_post_meta($parent_id,'property_images_mod_date',true));
+		}
+		
+		$new_mod_date = 
+		isset($xml_object['images']['img']) ? 
+			current($xml_object['images']['img'][0]['modTime']) : 
+			current($xml_object['objects']['img'][0]['modTime']);
+		
+		$new_mod_date = strtotime($new_mod_date);
+		$live_import	=	function_exists('epl_get_option')  ?  epl_get_option('epl_wpimport_skip_update') : 'off';
+		$epl_wpimport->log( 
+			'<strong> EPL Image processing started : Old Mod Date : '.$mod_date.' New Mod Date : '.$new_mod_date.'</strong> Live Import : '.$live_import
+		);
+		foreach ($attachments as $attach) {
+
+			if ( $live_import == 'off' ) {
+				// if live update is off delete
+				$del_attchments = true;
+				$epl_wpimport->log( 
+					'<strong>UPDATE IMAGE LIVE_IMPORT_OFF: DELETING IMAGE > ID : '.$attach->ID.' NAME : '.$attach->post_title.' </strong>' 
+				);
+			} else {
+				// possible delete
+				if( $mod_date == $new_mod_date )  {
+					// DO not delete
+					$del_attchments = false;
+					$epl_wpimport->log( '<strong>Images unchanged, skipping > ID : '.$attach->ID.' NAME : '.$attach->post_title.' </strong>' );
+				} else {
+					// delete
+					$del_attchments = true;
+					$epl_wpimport->log( 
+						'<strong>Images changes detected, deleting image > ID : '.$attach->ID.' NAME : '.$attach->post_title.' </strong>'
+					 );
+				
+				}
+			}
+			if( $del_attchments ) {
+			
+				if ($type == 'files' and ! wp_attachment_is_image( $attach->ID ) ){
+			
+					if ($unlink)
+					{
+						wp_delete_attachment($attach->ID, true);							
+					}
+					else
+					{
+						$ids[] = $attach->ID;
+					}
+				}	
+				elseif ($type == 'images' and wp_attachment_is_image( $attach->ID )) {
+
+					if ($unlink)
+					{ 
+						wp_delete_attachment($attach->ID, true);
+					}
+					else
+					{																		
+						$ids[] = $attach->ID;				
+					}
+				}
+			}	
+		}
+
+		global $wpdb;
+				
+		if ( ! empty( $ids ) ) {
+
+			$ids_string = implode( ',', $ids );
+			// unattach
+			$result = $wpdb->query( "UPDATE $wpdb->posts SET post_parent = 0 WHERE post_type = 'attachment' AND ID IN ( $ids_string )" );
+
+			foreach ( $ids as $att_id ) {
+				clean_attachment_cache( $att_id );
+			}
+		}
+
+		return $ids;
+	}
+}
 
 
 
