@@ -110,7 +110,7 @@ function epl_wpimport_image_needs_update($unique_id,$url,$mod_time,$id) {
 		return;
 	}*/
 	$live_import	=	function_exists('epl_get_option')  ?  epl_get_option('epl_wpimport_skip_update') : 'off';
-	if ( $live_import != 'on' ) {
+	if ( $live_import == 'off' ) {
 		echo $url;
 		return;
 	}
@@ -175,29 +175,31 @@ function epl_wpimport_is_image_to_update($default,$post_object,$xml_object) {
 
 // skip old image delition
 function epl_wpimport_delete_images($default,$post_object,$xml_object) {
-	// default is true
-	return false; 
+	$live_import	=	function_exists('epl_get_option')  ?  epl_get_option('epl_wpimport_skip_update') : 'off';
+	if ( $live_import == 'on' ) {
+		return false;
+	}
+	// default filter values in WP All Import is: true
+	return true; 
 }
 add_filter('wp_all_import_delete_images','epl_wpimport_delete_images',10,3);
 
 function epl_wpimport_is_post_to_update($pid,$xml_node) {
 	
 	$live_import	=	function_exists('epl_get_option')  ?  epl_get_option('epl_wpimport_skip_update') : 'off';
-	if ( $live_import == 'on' ) {
-
+	if ( $live_import == 'on' && get_post_meta($pid,'property_mod_date',true) != '' ) {
 		/** only update posts if new data is available **/
-		if( get_post_meta($pid,'property_mod_date',true)  != '') {
-		
-			$postmodtime 		= epl_feedsync_format_date(get_post_meta($pid, 'property_mod_date',true ));
-			$updatemodtime		= epl_feedsync_format_date($xml_node['@attributes']['modTime']);
-	
-			if( strtotime($updatemodtime) > strtotime($postmodtime) ) {
-				// update
-				return true;
-			}
+		$postmodtime 		= epl_feedsync_format_date(get_post_meta($pid, 'property_mod_date',true ));
+		$updatemodtime		= epl_feedsync_format_date($xml_node['@attributes']['modTime']);
+
+		if( strtotime($updatemodtime) > strtotime($postmodtime) ) {
+			// update
+			return true;
 		}
+		// Don't update
 		return false;
 	}
+	// Don't update
 	return true;
 }
 add_filter('wp_all_import_is_post_to_update', 'epl_wpimport_is_post_to_update', 10, 2);
