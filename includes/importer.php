@@ -409,14 +409,13 @@ if( !function_exists('epl_wpimport_delete_attachments') ) {
 	function epl_wpimport_delete_attachments($parent_id, $unlink = true, $type = 'images',$post_object,$xml_object) {	
 		global $epl_wpimport;
 		$del_attchments = true;
-		if ( $type == 'images' and has_post_thumbnail($parent_id) ) delete_post_thumbnail($parent_id);
-
+		
 		$ids = array();
 
 		$attachments = get_posts(array('post_parent' => $parent_id, 'post_type' => 'attachment', 'numberposts' => -1, 'post_status' => null));
 		
 		if( get_post_meta($parent_id,'property_images_mod_date',true)  != '') { 
-			$mod_date =  strtotime(get_post_meta($parent_id,'property_images_mod_date',true));
+			$mod_date =  strtotime(epl_feedsync_format_date(get_post_meta($parent_id,'property_images_mod_date',true)));
 		}
 		
 		$new_mod_date = 
@@ -424,7 +423,7 @@ if( !function_exists('epl_wpimport_delete_attachments') ) {
 			current($xml_object['images']['img'][0]['modTime']) : 
 			current($xml_object['objects']['img'][0]['modTime']);
 		
-		$new_mod_date = strtotime($new_mod_date);
+		$new_mod_date = strtotime(epl_feedsync_format_date($new_mod_date));
 		$live_import	=	function_exists('epl_get_option')  ?  epl_get_option('epl_wpimport_skip_update') : 'off';
 		$epl_wpimport->log( 
 			'<strong> EPL Image processing started : Old Mod Date : '.$mod_date.' New Mod Date : '.$new_mod_date.'</strong> Live Import : '.$live_import
@@ -453,7 +452,9 @@ if( !function_exists('epl_wpimport_delete_attachments') ) {
 				}
 			}
 			if( $del_attchments ) {
-			
+
+				if ( $type == 'images' and has_post_thumbnail($parent_id) ) delete_post_thumbnail($parent_id);
+				
 				if ($type == 'files' and ! wp_attachment_is_image( $attach->ID ) ){
 			
 					if ($unlink)
