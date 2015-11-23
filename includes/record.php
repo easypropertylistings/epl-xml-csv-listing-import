@@ -1682,12 +1682,12 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 
 							if ( $this->options['update_all_data'] == 'yes' or ( $this->options['update_all_data'] == 'no' and $this->options['is_update_attachments'])) {
 								$logger and call_user_func($logger, sprintf(__('Deleting attachments for `%s`', 'wp_all_import_plugin'), $articleData['post_title']));								
-								wp_delete_attachments($articleData['ID'], true, 'files');
+								epl_wpimport_delete_attachments($articleData['ID'], true, 'files',$articleData,wp_all_import_xml2array($rootNodes[$i]));
 							}
 							// handle obsolete attachments (i.e. delete or keep) according to import settings
 							if ( $this->options['update_all_data'] == 'yes' or ( $this->options['update_all_data'] == 'no' and $this->options['is_update_images'] and $this->options['update_images_logic'] == "full_update")){
 								$logger and call_user_func($logger, sprintf(__('Deleting images for `%s`', 'wp_all_import_plugin'), $articleData['post_title']));								
-								$missing_images = wp_delete_attachments($articleData['ID'], ! $this->options['do_not_remove_images'], 'images');
+								$missing_images = epl_wpimport_delete_attachments($articleData['ID'], ! $this->options['do_not_remove_images'], 'images',$articleData,wp_all_import_xml2array($rootNodes[$i]));
 							}
 						}
 
