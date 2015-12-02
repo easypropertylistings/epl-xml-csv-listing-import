@@ -38,7 +38,7 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 		 * @see EPL_TM()
 		 * @return The one true EPL_WP_All_Import_Add_On
 		 */
-		public static function instance() {
+		public static function instance() { //die('blocked');
 			if ( ! isset( self::$instance ) && ! ( self::$instance instanceof EPL_WP_All_Import_Add_On ) ) {
 				self::$instance = new EPL_WP_All_Import_Add_On;
 				self::$instance->hooks();
