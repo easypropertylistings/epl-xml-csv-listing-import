@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Easy Property Listings WP All Import Add On
-Plugin URL: https://easypropertylistings.com.au/extension/easy-property-listings-xml-csv-import/
+Plugin URL: https://easypropertylistings.com.au/extension/epl-xml-csv-listing-import/
 Description: Import Listings into Easy Property Listings with WP All Import
-Version: 0.9
+Version: 1.0
 Author: Merv Barrett
-Author URI: http://realestateconnected.com.au/
+Author URI: http://www.realestateconnected.com.au/
 Contributors: mervb
 */
  
@@ -38,7 +38,7 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 		 * @see EPL_TM()
 		 * @return The one true EPL_WP_All_Import_Add_On
 		 */
-		public static function instance() { //die('blocked');
+		public static function instance() {
 			if ( ! isset( self::$instance ) && ! ( self::$instance instanceof EPL_WP_All_Import_Add_On ) ) {
 				self::$instance = new EPL_WP_All_Import_Add_On;
 				self::$instance->hooks();
@@ -60,9 +60,6 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 		private function hooks() {
 			// activation
 			add_action( 'admin_init', array( $this, 'activation' ) );
-
-			//add_filter('wp_all_import_is_post_to_update', 'is_post_to_update', 10, 1);
-
 		}
 		
 		/**
@@ -146,7 +143,7 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 		private function includes() {
 
 			if ( is_admin() ) {
-				$eplir_license = new EPL_License( __FILE__, EPL_WPIMPORT_PRODUCT_NAME, '0.9', 'Merv Barrett' );
+				// $eplir_license = new EPL_License( __FILE__, EPL_WPIMPORT_PRODUCT_NAME, '1.0', 'Merv Barrett' );
 				require_once EPL_WPIMPORT_PLUGIN_PATH_INCLUDES . 'hooks.php';
 				require_once EPL_WPIMPORT_PLUGIN_PATH_INCLUDES . 'rapid-addon.php';
 				require_once EPL_WPIMPORT_PLUGIN_PATH_INCLUDES . 'importer.php';
