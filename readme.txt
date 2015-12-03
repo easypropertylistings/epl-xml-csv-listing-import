@@ -1,13 +1,13 @@
 === Easy Property Listings Extension - WP All Import Pro ===
 Author URI: http://www.realestateconnected.com.au/
-Plugin URI: https://easypropertylistings.com.au/extensions/epl-wpimporter/
+Plugin URI: https://easypropertylistings.com.au/extensions/epl-xml-csv-listing-import/
 Contributors: mervb1
 Donate link: https://easypropertylistings.com.au/support-the-site/
 Tags: extension, easy property listings, wp all import, wp all import pro, import, reaxml, jupix, MLS, real estate listings, property, rental
 Requires at least: 3.3
-Tested up to: 4.1
+Tested up to: 4.4
 
-Stable Tag: 0.9
+Stable Tag: 1.0
 
 License: GNU Version 2 or Any Later Version
 
@@ -24,6 +24,9 @@ Once you have added your account details to your website a customisable Book Ins
 
 
 == Change log ==
+= 1, December 3, 2015 =
+
+* Initial release.
 
 = 0.9, October 19, 2015 =
 
