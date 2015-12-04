@@ -11,11 +11,15 @@ Stable Tag: 1.0.1
 
 License: GNU Version 2 or Any Later Version
 
-This add-on for Easy Property Listings allows you to integrate with your Inspect Real Estate online booking system account.
+This add-on for Easy Property Listings and WP All Import allows you to import listings into your WordPress website with ease. Supported formats are CSV and XML files with full support for the Australian REAXML format and Jupix UK format. We have implemented an image and ID skipping to minimise image imports so they are only updated when changed. We are seeing a 78% spped improvement using this plugin.
+
+Faster and easier than ever to import data into Easy Property Listings custom post types with WP All Import.
 
 == Description ==
 
-Once you have added your account details to your website a customisable Book Inspection button is added to your listings.
+This add-on for Easy Property Listings and WP All Import allows you to import listings into your WordPress website with ease. Supported formats are CSV and XML files with full support for the Australian REAXML format and Jupix UK format. We have implemented an image and ID skipping to minimise image imports so they are only updated when changed. We are seeing a 78% spped improvement using this plugin.
+
+Faster and easier than ever to import data into Easy Property Listings custom post types with WP All Import.
 
 == Installation ==
 
@@ -33,5 +37,4 @@ Once you have added your account details to your website a customisable Book Ins
 * Image Skipping and updating implemented.
 
 = 0.9, October 19, 2015 =
-
 * Initial release.
