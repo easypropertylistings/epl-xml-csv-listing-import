@@ -32,6 +32,7 @@ function epl_wpimport_register_fields() {
 							case 'date':
 							case 'sold-date':
 							case 'sold-date':
+							case 'auction-date':
 							case 'decimal':
 							case 'number':
 							case 'checkbox':
