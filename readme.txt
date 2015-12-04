@@ -7,7 +7,7 @@ Tags: extension, easy property listings, wp all import, wp all import pro, impor
 Requires at least: 3.3
 Tested up to: 4.4
 
-Stable Tag: 1.0
+Stable Tag: 1.0.1
 
 License: GNU Version 2 or Any Later Version
 
@@ -24,9 +24,13 @@ Once you have added your account details to your website a customisable Book Ins
 
 
 == Change log ==
-= 1, December 3, 2015 =
+= 4, December 3, 2015 =
+* Added action date field.
 
-* Initial release.
+= 1, December 3, 2015 =
+* Full Release Version release.
+* Logger added.
+* Image Skipping and updating implemented.
 
 = 0.9, October 19, 2015 =
 
