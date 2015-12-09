@@ -1,10 +1,7 @@
 <?php
-function epl_wpimport_get_meta_boxes($epl_meta_boxes) {
-	global $epl_ai_meta_fields;
-	$epl_ai_meta_fields = $epl_meta_boxes;
-		return $epl_meta_boxes;
-}
-add_filter('epl_listing_meta_boxes','epl_wpimport_get_meta_boxes');
+include('meta-boxes.php');
+global $epl_ai_meta_fields;
+$epl_ai_meta_fields = epl_allimport_get_meta_fields();
 
 function epl_wpimport_register_fields() {
 	global $epl_ai_meta_fields, $epl_wpimport;
