@@ -1,16 +1,33 @@
 <?php
 /*
-Plugin Name: Easy Property Listings WP All Import Add On
-Plugin URL: https://easypropertylistings.com.au/extension/epl-xml-csv-listing-import/
-Description: Import Listings into Easy Property Listings with WP All Import
-Version: 1.0.1
-Author: Merv Barrett
-Author URI: http://www.realestateconnected.com.au/
-Contributors: mervb
-*/
- 
+ * Plugin Name: Easy Property Listings Import CSV, XML WP All Import Add On
+ * Plugin URL: https://www.easypropertylistings.com.au/
+ * Description: Import CSV and XML into Easy Property Listings with this WP All Import Add-on
+ * Version: 1.0.2
+ * Text Domain: epl-import
+ * Author: Merv Barrett
+ * Author URI: http://www.realestateconnected.com.au
+ * Contributors: mervb
+ *
+ * Easy Property Listings Import CSV, XML WP All Import Add On, is free
+ * software: you can redistribute it and/or modify it under the terms
+ * of the GNU General Public License as published by the Free Software
+ * Foundation, either version 2 of the License, or any later version.
+ *
+ * Easy Property Listings Import CSV, XML WP All Import Add On is
+ * distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public
+ * License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Easy Property Listings. If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
+
 if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 	/*
 	 * Main EPL_WP_All_Import_Add_On Class
@@ -18,13 +35,12 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 	 * @since 1.0
 	 */
 	final class EPL_WP_All_Import_Add_On {
-		
 		/*
 		 * @var EPL_WP_All_Import_Add_On The one true EPL_WP_All_Import_Add_On
 		 * @since 1.0
 		 */
 		private static $instance;
-		
+
 		/*
 		 * Main EPL_WP_All_Import_Add_On Instance
 		 *
@@ -49,7 +65,7 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 			}
 			return self::$instance;
 		}
-		
+
 		/**
 		 * Setup the default hooks and actions
 		 *
@@ -61,7 +77,7 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 			// activation
 			add_action( 'admin_init', array( $this, 'activation' ) );
 		}
-		
+
 		/**
 		 * Activation function fires when the plugin is activated.
 		 * @since 1.0
@@ -80,7 +96,7 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 				}
 			}
 		}
-		
+
 		/**
 		 * Admin notices
 		 *
@@ -90,10 +106,10 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 
 			if ( ! defined('EPL_RUNNING') ) {
 				echo '<div class="error"><p>';
-				_e( 'Please activate <b>Easy Property Listings</b> to enable all functions of EPL - WP All Import Add-On', 'epl' );
+				_e( 'Please activate <b>Easy Property Listings 2.3 or newer</b> to enable all functions of Easy Property Listings WP All Import Add-On', 'epl-wpimport' );
 				echo '</p></div>';
 			}
-		}		
+		}
 		/*
 		 * Setup plugin constants
 		 *
@@ -101,37 +117,28 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 		 * @since 1.0
 		 * @return void
 		 */
-		private function setup_constants() {		
-			// API URL
-			if ( ! defined( 'EPL_TEMPLATES' ) ) {
-				define( 'EPL_TEMPLATES', 'http://easypropertylistings.com.au' );
-			}
-			
-			// Extension name on API server
-			if ( ! defined( 'EPL_WPIMPORT_PRODUCT_NAME' ) ) {
-				define( 'EPL_WPIMPORT_PRODUCT_NAME', 'WP All Import Add On' );
-			}
-			
+		private function setup_constants() {
+
 			// Plugin File
 			if ( ! defined( 'EPL_WPIMPORT_PLUGIN_FILE' ) ) {
 				define( 'EPL_WPIMPORT_PLUGIN_FILE', __FILE__ );
 			}
-			
+
 			// Plugin Folder URL
 			if ( ! defined( 'EPL_WPIMPORT_PLUGIN_URL' ) ) {
 				define( 'EPL_WPIMPORT_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 			}
-			
+
 			// Plugin Folder Path
 			if ( ! defined( 'EPL_WPIMPORT_PLUGIN_PATH' ) ) {
 				define( 'EPL_WPIMPORT_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 			}
-			
+
 			// Plugin Sub-Directory Paths
 			if ( ! defined( 'EPL_WPIMPORT_PLUGIN_PATH_INCLUDES' ) ) {
 				define( 'EPL_WPIMPORT_PLUGIN_PATH_INCLUDES', EPL_WPIMPORT_PLUGIN_PATH . 'includes/' );
 			}
-			
+
 		}
 		/*
 		 * Include required files
@@ -142,8 +149,7 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 		 */
 		private function includes() {
 
-			if ( is_admin() ) {
-				// $eplir_license = new EPL_License( __FILE__, EPL_WPIMPORT_PRODUCT_NAME, '1.0.1', 'Merv Barrett' );
+			if ( is_admin() || defined( 'DOING_CRON' ) ) {
 				require_once EPL_WPIMPORT_PLUGIN_PATH_INCLUDES . 'hooks.php';
 				require_once EPL_WPIMPORT_PLUGIN_PATH_INCLUDES . 'rapid-addon.php';
 				require_once EPL_WPIMPORT_PLUGIN_PATH_INCLUDES . 'importer.php';
@@ -151,11 +157,11 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 		}
 
 		function is_post_to_update($pid) {
-		   $do_not_update = get_post_meta($pid, 'do_not_update', true);
-		   return (!empty($do_not_update)) ? false : true;
+			$do_not_update = get_post_meta($pid, 'do_not_update', true);
+			return (!empty($do_not_update)) ? false : true;
 		}
-		
-		
+
+
 	}
 endif; // End if class_exists check
 /*
