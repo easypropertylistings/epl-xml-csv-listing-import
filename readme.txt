@@ -47,6 +47,7 @@ Requires Easy Property Listings 2.3 or newer.
 
 = 1.0.2 December 9, 2015 =
 
+* Tweak: Included meta-boxes from Easy Property Listings core for import to correctly run with cron.
 * Fix: Import corrected while doing cron job import.
 
 = 1.0.1 December 3, 2015 =
