@@ -1,32 +1,15 @@
 <?php
-function epl_wpimport_license_options_filter($fields = null) {
-	$fields[] = array(
-		'label'		=>	'',
-		'fields'	=>	array(
-			array(
-				'name'	=>	'wp_all_import',
-				'label'	=>	'WP All Import Add-on license key',
-				'type'	=>	'text'
-			)
-		)
-	);
-	
-	return $fields;
-}
-add_filter('epl_license_options_filter', 'epl_wpimport_license_options_filter', 10, 3);
-
-
 function epl_wpimport_extensions_options_filter($epl_fields = null) {
 	$fields = array();
 	$epl_of_fields = array(
 		'label'		=>	__('WP All Import Add-On','epl-wpimport')
 	);
-	
+
 	$fields[] = array(
 		'label'		=>	__('Single', 'epl-of'),
-		'intro'		=>	__('<h3 style="margin-top:0;">Importer Settings.</p>' , 'epl-of'),
+		'intro'		=>	__('<h3 style="margin-top:0;">Importer Settings.</p>' , 'epl-wpimport'),
 		'fields'	=>	array(
-			
+
 			array(
 				'name'	=>	'epl_wpimport_skip_update',
 				'label'	=>	__('Activate once initial import is set', 'epl-wpimport'),
