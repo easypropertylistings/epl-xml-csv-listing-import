@@ -1,5 +1,5 @@
-=== Easy Property Listings CSV, XML Import ===
-Author URI: https://easypropertylistings.com.au/
+=== Easy Property Listings Import CSV, XML WP All Import Add On ===
+Author URI: http://www.realestateconnected.com.au/
 Plugin URI: https://wordpress.org/easy-property-listings-xml-csv-import/
 Contributors: mervb1
 Donate link: https://easypropertylistings.com.au/support-the-site/
@@ -21,7 +21,11 @@ This add-on for Easy Property Listings and WP All Import allows you to import li
 
 Faster and easier than ever to import data into Easy Property Listings custom post types with WP All Import.
 
-Requires Easy Property Listings 2.3 or newer
+Requires Easy Property Listings 2.3 or newer.
+
+> <strong>Premium Support</strong><br>
+> The Easy Property Listings team provides support and one on one forum support is available to people who bought [Premium support](https://easypropertylistings.com.au/support/pricing/?utm_source=readme&utm_medium=description_tab&utm_content=premium_support&utm_campaign=wordpressorg_import).
+
 
 == Installation ==
 
@@ -29,18 +33,32 @@ Requires Easy Property Listings 2.3 or newer
 2. Configure your imports from Dashboard > All Import.
 3. Download REAXML and Jupix import scripts from http://easypropertylistings.com.au/
 
+== Screenshots ==
+
+1. Archive Page Display with Listing Widgets
+2. Admin view of Property listing type
+3. Custom fields configured for a Property Listing type
+4. User Profile options for author box
+5. Search Widget adapts to child theme style 
+6. Home open shortcode and Multi Author widget
+
 
 == Change log ==
+
 = 1.0.2 December 9, 2015 =
+
 * Fix: Import corrected while doing cron job import.
 
 = 1.0.1 December 3, 2015 =
+
 * Tweak: Added action date field.
 
 = 1.0 December 2, 2015 =
+
 * Full Release Version.
 * New: Logger added.
 * New: Image Skipping and updating implemented.
 
 = 0.9 October 19, 2015 =
+
 * Initial release.
