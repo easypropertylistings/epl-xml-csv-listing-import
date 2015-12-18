@@ -1,9 +1,9 @@
-=== Easy Property Listings Import CSV, XML WP All Import Add On ===
+=== Import into Easy Property Listings ===
 Author URI: http://www.realestateconnected.com.au/
-Plugin URI: https://wordpress.org/easy-property-listings-xml-csv-import/
+Plugin URI: https://wordpress.org/plugins/easy-property-listings-xml-csv-import/
 Contributors: mervb1
 Donate link: https://easypropertylistings.com.au/support-the-site/
-Tags: extension, easy property listings, wp all import, wp all import pro, csv, xml, import, reaxml, jupix, MLS, real estate listings, property, rental, land, rural
+Tags: extension, easy property listings, wp all import, wp all import pro, csv, xml, ,xls, import, reaxml, jupix, MLS, real estate listings, property, rental, land, rural
 Requires at least: 3.3
 Tested up to: 4.4
 
@@ -11,17 +11,20 @@ Stable Tag: 1.0.2
 
 License: GNU Version 2 or Any Later Version
 
-This add-on for Easy Property Listings and WP All Import allows you to import listings into your WordPress website with ease. Supported formats are CSV and XML files with full support for the Australian REAXML format and Jupix UK format. We have implemented an image and ID skipping to minimise image imports so they are only updated when changed. We are seeing a 78% speed improvement using this plugin.
-
-Faster and easier than ever to import data into Easy Property Listings custom post types with WP All Import.
+This add-on for Easy Property Listings and WP All Import allows you to import listings into your WordPress website with ease.
 
 == Description ==
 
-This add-on for Easy Property Listings and WP All Import allows you to import listings into your WordPress website with ease. Supported formats are CSV and XML files with full support for the Australian REAXML format and Jupix UK format. We have implemented an image and ID skipping to minimise image imports so they are only updated when changed. We are seeing a 78% speed improvement using this plugin.
+This add-on for  [Easy Property Listings](https://easypropertylistings.com.au/?utm_source=readme&utm_medium=description_tab&utm_content=description&utm_campaign=wordpressorg_import) and WP All Import allows you to import listings into your WordPress website with ease with all the Easy Property Listings custom fields pre-configured.
+
+Our goal with this add-on is not to just be able to import listings into Easy Property Listings but to improve import speed especially with images.
+
+Supported formats are CSV and XML files with full support for the Australian REAXML format and Jupix UK format. We have implemented an image and ID skipping to minimise image imports so they are only updated when changed. We are seeing a 78% speed improvement using this plugin.
 
 Faster and easier than ever to import data into Easy Property Listings custom post types with WP All Import.
 
-Requires Easy Property Listings 2.3 or newer.
+* Requires Easy Property Listings 2.3 or newer.
+* Requires WP All Import.
 
 > <strong>Premium Support</strong><br>
 > The Easy Property Listings team provides support and one on one forum support is available to people who bought [Premium support](https://easypropertylistings.com.au/support/pricing/?utm_source=readme&utm_medium=description_tab&utm_content=premium_support&utm_campaign=wordpressorg_import).
@@ -29,18 +32,19 @@ Requires Easy Property Listings 2.3 or newer.
 
 == Installation ==
 
-1. Install the plugin from Dashboard > Plugins > Add New > and search Easy Property Listings Import, install and activate the plugin.
-2. Configure your imports from Dashboard > All Import.
-3. Download REAXML and Jupix import scripts from http://easypropertylistings.com.au/
+1. Install the plugin from Dashboard > Plugins > Add New > and search for Easy Property Listings Import, install and activate the plugin.
+2. Download Import Scripts from Easy Property Listings.
+3. Import pre-configured scripts for AP All Import from Dashboard > All Import > Settings > Templates.
+4. Configure your imports from Dashboard > All Import > New Import
+5. Download REAXML and Jupix import scripts from https://easypropertylistings.com.au/.
+6. Enable the advanced modified listing image and data skipper from Dashboard > Easy Property Listings > Extensions > WP All Import Add-On
+
 
 == Screenshots ==
 
-1. Archive Page Display with Listing Widgets
-2. Admin view of Property listing type
-3. Custom fields configured for a Property Listing type
-4. User Profile options for author box
-5. Search Widget adapts to child theme style 
-6. Home open shortcode and Multi Author widget
+1. Add-On Settings
+2. Import Job Easy Property Listings Field Section
+3. Example of a few of the hundreds of custom fields
 
 
 == Change log ==
@@ -62,4 +66,4 @@ Requires Easy Property Listings 2.3 or newer.
 
 = 0.9 October 19, 2015 =
 
-* Initial release.
+* Beta release.
