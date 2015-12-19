@@ -1,7 +1,7 @@
 <?php
 /*
- * Plugin Name: Easy Property Listings Import - WP All Import Add On
- * Plugin URL: https://wordpress.org/plugins/easy-property-listings-xml-csv-import/
+ * Plugin Name: Easy Property Listings Import CSV, XML WP All Import Add On
+ * Plugin URL: https://www.easypropertylistings.com.au/
  * Description: Import CSV and XML into Easy Property Listings with this WP All Import Add-on
  * Version: 1.0.2
  * Text Domain: epl-wpimport
@@ -29,19 +29,19 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
-/*
+	/*
 	 * Main EPL_WP_All_Import_Add_On Class
 	 *
 	 * @since 1.0
 	 */
-final class EPL_WP_All_Import_Add_On {
-    /*
+	final class EPL_WP_All_Import_Add_On {
+		/*
 		 * @var EPL_WP_All_Import_Add_On The one true EPL_WP_All_Import_Add_On
 		 * @since 1.0
 		 */
-    private static $instance;
+		private static $instance;
 
-    /*
+		/*
 		 * Main EPL_WP_All_Import_Add_On Instance
 		 *
 		 * Insures that only one instance of EPL_WP_All_Import_Add_On exists in memory at any one time.
@@ -54,126 +54,127 @@ final class EPL_WP_All_Import_Add_On {
 		 * @see EPL_TM()
 		 * @return The one true EPL_WP_All_Import_Add_On
 		 */
-    public static function instance() {
-        if ( ! isset( self::$instance ) && ! ( self::$instance instanceof EPL_WP_All_Import_Add_On ) ) {
-            self::$instance = new EPL_WP_All_Import_Add_On;
-            self::$instance->hooks();
-            if ( defined('EPL_RUNNING') ) {
-                self::$instance->setup_constants();
-                self::$instance->includes();
-            }
-        }
-        return self::$instance;
-    }
+		public static function instance() {
+			if ( ! isset( self::$instance ) && ! ( self::$instance instanceof EPL_WP_All_Import_Add_On ) ) {
+				self::$instance = new EPL_WP_All_Import_Add_On;
+				self::$instance->hooks();
+				if ( defined('EPL_RUNNING') ) {
+					self::$instance->setup_constants();
+					self::$instance->includes();
+				}
+			}
+			return self::$instance;
+		}
 
-    /**
+		/**
 		 * Setup the default hooks and actions
 		 *
 		 * @since 1.0
 		 *
 		 * @return void
 		 */
-    private function hooks() {
-        // activation
-        add_action( 'admin_init', array( $this, 'activation' ) );
-        add_action("activated_plugin", array($this, "epl_wpallimport_load_last") );
-    }
+		private function hooks() {
+			// activation
+			add_action( 'admin_init', array( $this, 'activation' ) );
+            add_action("activated_plugin", array($this, "epl_wpallimport_load_last") );
+		}
 
-    /**
+		/**
 		 * Activation function fires when the plugin is activated.
 		 * @since 1.0
 		 * @access public
 		 *
 		 * @return void
 		 */
-    public function activation() {
-        if ( ! defined('EPL_RUNNING') ) {
-            // is this plugin active?
-            if ( is_plugin_active( plugin_basename( __FILE__ ) ) ) {
-                // unset activation notice
-                unset( $_GET[ 'activate' ] );
-                // display notice
-                add_action( 'admin_notices', array( $this, 'admin_notices' ) );
-            }
-        }
-    }
+		public function activation() {
+			if ( ! defined('EPL_RUNNING') ) {
+				// is this plugin active?
+				if ( is_plugin_active( plugin_basename( __FILE__ ) ) ) {
+			 		// unset activation notice
+			 		unset( $_GET[ 'activate' ] );
+			 		// display notice
+			 		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
+				}
+			}
+		}
 
-    /**
+		/**
 		 * Admin notices
 		 *
 		 * @since 1.0
 		*/
-    public function admin_notices() {
+		public function admin_notices() {
 
-        if ( ! defined('EPL_RUNNING') ) {
-            echo '<div class="error"><p>';
-            _e( 'Please activate <b>Easy Property Listings 2.3 or newer</b> to enable all functions of Easy Property Listings WP All Import Add-On', 'epl-wpimport' );
-            echo '</p></div>';
-        }
-    }
-    /*
+			if ( ! defined('EPL_RUNNING') ) {
+				echo '<div class="error"><p>';
+				_e( 'Please activate <b>Easy Property Listings 2.3 or newer</b> to enable all functions of Easy Property Listings WP All Import Add-On', 'epl-wpimport' );
+				echo '</p></div>';
+			}
+		}
+		/*
 		 * Setup plugin constants
 		 *
 		 * @access private
 		 * @since 1.0
 		 * @return void
 		 */
-    private function setup_constants() {
+		private function setup_constants() {
 
-        // Plugin File
-        if ( ! defined( 'EPL_WPIMPORT_PLUGIN_FILE' ) ) {
-            define( 'EPL_WPIMPORT_PLUGIN_FILE', __FILE__ );
-        }
+			// Plugin File
+			if ( ! defined( 'EPL_WPIMPORT_PLUGIN_FILE' ) ) {
+				define( 'EPL_WPIMPORT_PLUGIN_FILE', __FILE__ );
+			}
 
-        // Plugin Folder URL
-        if ( ! defined( 'EPL_WPIMPORT_PLUGIN_URL' ) ) {
-            define( 'EPL_WPIMPORT_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
-        }
+			// Plugin Folder URL
+			if ( ! defined( 'EPL_WPIMPORT_PLUGIN_URL' ) ) {
+				define( 'EPL_WPIMPORT_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+			}
 
-        // Plugin Folder Path
-        if ( ! defined( 'EPL_WPIMPORT_PLUGIN_PATH' ) ) {
-            define( 'EPL_WPIMPORT_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
-        }
+			// Plugin Folder Path
+			if ( ! defined( 'EPL_WPIMPORT_PLUGIN_PATH' ) ) {
+				define( 'EPL_WPIMPORT_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
+			}
 
-        // Plugin Sub-Directory Paths
-        if ( ! defined( 'EPL_WPIMPORT_PLUGIN_PATH_INCLUDES' ) ) {
-            define( 'EPL_WPIMPORT_PLUGIN_PATH_INCLUDES', EPL_WPIMPORT_PLUGIN_PATH . 'includes/' );
-        }
+			// Plugin Sub-Directory Paths
+			if ( ! defined( 'EPL_WPIMPORT_PLUGIN_PATH_INCLUDES' ) ) {
+				define( 'EPL_WPIMPORT_PLUGIN_PATH_INCLUDES', EPL_WPIMPORT_PLUGIN_PATH . 'includes/' );
+			}
 
-    }
-    /*
+		}
+		/*
 		 * Include required files
 		 *
 		 * @access private
 		 * @since 1.0
 		 * @return void
 		 */
-    private function includes() {
+		private function includes() {
 
-        if ( is_admin() || defined( 'DOING_CRON' ) ) {
-            require_once EPL_WPIMPORT_PLUGIN_PATH_INCLUDES . 'hooks.php';
-            require_once EPL_WPIMPORT_PLUGIN_PATH_INCLUDES . 'rapid-addon.php';
-            require_once EPL_WPIMPORT_PLUGIN_PATH_INCLUDES . 'importer.php';
+			if ( is_admin() || defined( 'DOING_CRON' ) ) {
+				require_once EPL_WPIMPORT_PLUGIN_PATH_INCLUDES . 'hooks.php';
+				require_once EPL_WPIMPORT_PLUGIN_PATH_INCLUDES . 'rapid-addon.php';
+				require_once EPL_WPIMPORT_PLUGIN_PATH_INCLUDES . 'importer.php';
+			}
+		}
+
+		function is_post_to_update($pid) {
+			$do_not_update = get_post_meta($pid, 'do_not_update', true);
+			return (!empty($do_not_update)) ? false : true;
+		}
+        
+        function epl_wpallimport_load_last() {
+            $this_plugin = str_replace( WP_PLUGIN_DIR . '/', '', __FILE__ );
+            $active_plugins = get_option('active_plugins');
+            $this_plugin_key = array_search($this_plugin, $active_plugins);
+            if ($this_plugin_key) { // if it's 0 it's the first plugin already, no need to continue
+                array_splice($active_plugins, $this_plugin_key, 1);
+                $active_plugins[] = $this_plugin;
+                update_option('active_plugins', $active_plugins);
+            }
         }
-    }
 
-    function is_post_to_update($pid) {
-        $do_not_update = get_post_meta($pid, 'do_not_update', true);
-        return (!empty($do_not_update)) ? false : true;
-    }
 
-    function epl_wpallimport_load_last() {
-        $this_plugin = str_replace( WP_PLUGIN_DIR . '/', '', __FILE__ );
-        $active_plugins = get_option('active_plugins');
-        $this_plugin_key = array_search($this_plugin, $active_plugins);
-        if ($this_plugin_key) { // if it's 0 it's the first plugin already, no need to continue
-            array_splice($active_plugins, $this_plugin_key, 1);
-            $active_plugins[] = $this_plugin;
-            update_option('active_plugins', $active_plugins);
-        }
-    }
-
-}
+	}
 endif; // End if class_exists check
 /*
  * The main function responsible for returning the one true EPL_WP_All_Import_Add_On
@@ -188,8 +189,7 @@ endif; // End if class_exists check
  * @return object The one true EPL_WP_All_Import_Add_On Instance
  */
 function EPL_WPIMPORT() {
-    return EPL_WP_All_Import_Add_On::instance();
+	return EPL_WP_All_Import_Add_On::instance();
 }
 // Get EPL_WPIMPORT Running
 EPL_WPIMPORT();
-
