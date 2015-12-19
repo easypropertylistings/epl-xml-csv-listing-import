@@ -76,6 +76,7 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 		private function hooks() {
 			// activation
 			add_action( 'admin_init', array( $this, 'activation' ) );
+            add_action("activated_plugin", array($this, "epl_wpallimport_load_last") );
 		}
 
 		/**
@@ -160,6 +161,17 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 			$do_not_update = get_post_meta($pid, 'do_not_update', true);
 			return (!empty($do_not_update)) ? false : true;
 		}
+        
+        function epl_wpallimport_load_last() {
+            $this_plugin = str_replace( WP_PLUGIN_DIR . '/', '', __FILE__ );
+            $active_plugins = get_option('active_plugins');
+            $this_plugin_key = array_search($this_plugin, $active_plugins);
+            if ($this_plugin_key) { // if it's 0 it's the first plugin already, no need to continue
+                array_splice($active_plugins, $this_plugin_key, 1);
+                $active_plugins[] = $this_plugin;
+                update_option('active_plugins', $active_plugins);
+            }
+        }
 
 
 	}
