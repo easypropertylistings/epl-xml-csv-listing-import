@@ -7,7 +7,7 @@ Tags: extension, easy property listings, wp all import, wp all import pro, csv, 
 Requires at least: 3.3
 Tested up to: 4.4
 
-Stable Tag: 1.0.2
+Stable Tag: 1.0.3
 
 License: GNU Version 2 or Any Later Version
 
@@ -48,6 +48,10 @@ Faster and easier than ever to import data into Easy Property Listings custom po
 
 
 == Change log ==
+
+= 1.0.3 December 19, 2015 =
+
+* Fix: Corrected plugin loading order which occurred in some cases.
 
 = 1.0.2 December 9, 2015 =
 
