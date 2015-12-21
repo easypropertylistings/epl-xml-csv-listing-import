@@ -21,6 +21,7 @@ Our goal with this add-on is not to just be able to import listings into Easy Pr
 
 Supported formats are CSV, XML and XLS files with full support for the Australian REAXML format when using the [FeedSync Pre-Processor](https://easypropertylistings.com.au/extensions/feedsync/?utm_source=readme&utm_medium=description_tab&utm_content=feedsync&utm_campaign=wordpressorg_import_feedsync) and Jupix UK formats. We have implemented an image and date/time skipping to minimise image imports so they are only updated when changed. We are seeing a 78% speed improvement using this plugin.
 
+
 * Requires Easy Property Listings 2.3 or newer.
 * Requires WP All Import.
 
@@ -50,9 +51,11 @@ Supported formats are CSV, XML and XLS files with full support for the Australia
 
 = 1.0.4 December 22, 2015 =
 
-* New: Added translation files.
-* Tweak: Log entry wording.
+* New: Added translation files and set textdomain to strings.
+* New: Added WP All Import notice if not activated.
+* Tweak: Log entry wording adjusted and translation strings added.
 * Fix: Additional plugin loading order tweaks made.
+* Tweak
 
 = 1.0.3 December 19, 2015 =
 
