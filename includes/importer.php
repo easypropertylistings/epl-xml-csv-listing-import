@@ -83,7 +83,7 @@ function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 
 	if(!empty($epl_ai_meta_fields)) {
 
-		$epl_wpimport->log( '<strong>EPL IMPORTER UPDATING FIELDS:</strong>' );
+		$epl_wpimport->log( '<strong>' . __('EPL IMPORTER UPDATING FIELDS' , 'epl-wpimport') . ': </strong>' );
 
 		foreach($epl_ai_meta_fields as $epl_meta_box) {
 
@@ -101,21 +101,21 @@ function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 								if($field['name'] == 'property_images_mod_date') {
 									$old_mod_date = get_post_meta($post_id,'property_images_mod_date',true);
 									update_post_meta($post_id,'property_images_mod_date_old', $old_mod_date);
-									$epl_wpimport->log( 'POST : '.$post_id.': - EPL Field Updated: `property_images_mod_date_old` value `' . $old_mod_date . '`' );
+									$epl_wpimport->log( 'POST : '.$post_id.': - ' . __('EPL Field Updated:' , 'epl-wpimport') . '`property_images_mod_date_old`' . __('value' , 'epl-wpimport') . '`' . $old_mod_date . '`' );
                                 				}
 								update_post_meta($post_id, $field['name'], $data[$field['name']]);
 							}
 
 							// Log
 							if ( !empty( $data[$field['name']] ) ) {
-								$epl_wpimport->log( '- EPL Field Updated: `' . $field['name'] . '` value `' . $data[$field['name']] . '`' );
+								$epl_wpimport->log( '- ' . __('EPL Field Updated:' , 'epl-wpimport') . '`' . $field['name'] . '` value `' . $data[$field['name']] . '`' );
 							}
 						}
 				        }
 				}
 			}
 		}
-        $epl_wpimport->log( 'All EPL Field Updated' );
+        $epl_wpimport->log( __('All EPL Fields Updated' , 'epl-wpimport') );
 	}
 }
 
@@ -125,13 +125,13 @@ function epl_wpimport_log( $post_id ) {
 	global $epl_wpimport;
 
 	// Importer Title
-	$epl_wpimport_label 	= "<strong>EPL IMPORTER ACTIVATED: </strong>";
+	$epl_wpimport_label 	= '<strong>' . __('EPL IMPORTER ACTIVE' , 'epl-wpimport') . ': </strong>';
 
 	// Live Import Status
 	$live_import		= function_exists('epl_get_option')  ?  epl_get_option('epl_wpimport_skip_update') : 'off';
 
 	// Live Import Label
-	$live_import_label	= $live_import == 'on'  ?  'Record Skipping Enabled' : 'Record Skipping Disabled';
+	$live_import_label	= $live_import == 'on'  ?  __('Record Skipping Enabled' , 'epl-wpimport') : __('Record Skipping Disabled' , 'epl-wpimport');
 
 	// Log EPL All Importer Activation Status
 	$epl_wpimport->log( $epl_wpimport_label . $live_import_label );
@@ -152,13 +152,13 @@ function epl_wpimport_log_pmxi_gallery_image( $post_id ) {
 	global $epl_wpimport;
 
 	// Importer Title
-	$epl_wpimport_label 	= "<strong>EPL IMPORTER IMAGES : </strong>";
+	$epl_wpimport_label 	= '<strong>' . __('EPL IMPORTER' , 'epl-wpimport') . ': </strong>';
 
 	// Live Import Status
 	$live_import		= function_exists('epl_get_option')  ?  epl_get_option('epl_wpimport_skip_update') : 'off';
 
 	// Live Import Label
-	$live_import_label	= $live_import == 'on'  ?  'IMAGES Record Skipping Enabled' : 'IMAGES Record Skipping Disabled';
+	$live_import_label	= $live_import == 'on'  ?  __('IMAGES Record Skipping Enabled' , 'epl-wpimport') : __('IMAGES Record Skipping Disabled' , 'epl-wpimport');
 
 	// Log EPL All Importer Activation Status
 	$epl_wpimport->log( $epl_wpimport_label . $live_import_label );
@@ -169,7 +169,7 @@ add_action('pmxi_before_post_import', 'epl_wpimport_log_pmxi_gallery_image', 10,
 function epl_wpimport_post_skipped_notification($vars) {
 	global $epl_wpimport;
 
-	$epl_wpimport->log( '<strong>EPL Importer Record Skipped.</strong>' );
+	$epl_wpimport->log( '<strong>' . __('EPL Importer Record Skipped' , 'epl-wpimport') . '.</strong>' );
 
 	return $vars;
 }
@@ -217,18 +217,18 @@ function epl_wpimport_is_image_to_update($default,$post_object,$xml_object) {
 	        );
 
 	        $epl_wpimport->log(
-				'<strong>EPL Image Updating process started : Old Mod Date : '.$old_mod_date.' New Mod Date : '.$new_mod_date.'</strong>'
+				'<strong>' . __('EPL Image Updating process started : Old Mod Date : ' , 'epl-wpimport') .$old_mod_date. __('New Mod Date' , 'epl-wpimport') .' : '.$new_mod_date . '</strong>'
 			);
 
 		if($old_mod_date < $new_mod_date ) {
-			$epl_wpimport->log( '<strong>Updated Images, Uploading... </strong>' );
+			$epl_wpimport->log( '<strong>' . __('Updated Images, Uploading' , 'epl-wpimport') . '...</strong>' );
 			return true;
 		} else {
-	        	$epl_wpimport->log( '<strong>No new images, Skipping image update </strong>' );
+	        	$epl_wpimport->log( '<strong>' . __('No new images, Skipping image update' , 'epl-wpimport') . '.</strong>' );
 	        	return false;
 	        }
         } else {
-		$epl_wpimport->log( '<strong>New Images, Updating... </strong>' );
+		$epl_wpimport->log( '<strong>' . __('New Images, Updating' , 'epl-wpimport') . '...</strong>' );
 		return true;
 	}
 }
@@ -255,26 +255,20 @@ function epl_wpimport_delete_images($default,$post_object,$xml_object) {
 
 	$new_mod_date = strtotime(epl_feedsync_format_date($new_mod_date));
 
-	$epl_wpimport->log(
-		'<strong> EPL Image Processing Started : Old Mod Date : '.$mod_date.' New Mod Date : '.$new_mod_date.'</strong> Live Import : '.$live_import
-	);
+	$epl_wpimport->log( '<strong>' . __('EPL Image Processing Started : Old Mod Date : ' , 'epl-wpimport') . $mod_date . __('New Mod Date : ' , 'epl-wpimport') . $new_mod_date . '</strong>' . __('Live Import : ' , 'epl-wpimport') . $live_import );
 
 	if ( $live_import == 'off' ) {
 		// if live update is off delete
-		$epl_wpimport->log(
-			'<strong>EPL Import : Live import off, default WP All Import functions...</strong>'
-		);
+		$epl_wpimport->log( '<strong>' . __('EPL Import : Live import off, default WP All Import functions' , 'epl-wpimport') . '...</strong>' );
 		return $default;
 	} else {
 		// possible delete
 		if( $mod_date == $new_mod_date )  {
 			// DO not delete
-			$epl_wpimport->log( '<strong>Images unchanged, skipping image deletion...</strong>' );
+			$epl_wpimport->log( '<strong>' . __('Images unchanged, skipping image deletion' , 'epl-wpimport') . '...</strong>' );
 			return false;
 		} else {
-			$epl_wpimport->log(
-				'<strong>Images changes detected, deleting images.. </strong>'
-			 );
+			$epl_wpimport->log( '<strong>' . __('Images changes detected, deleting images' , 'epl-wpimport') . '...</strong>' );
 			 return true;
 
 		}
@@ -290,10 +284,10 @@ function epl_wpimport_notification( $notification = 'skip' , $post_id = false ) 
 	global $epl_wpimport;
 
 	// Importer Title
-	$epl_wpimport_label 	= "<strong>EPL IMPORTER: </strong>";
+	$epl_wpimport_label 	= '<strong>' . __('EPL IMPORTER' , 'epl-wpimport') . ': </strong>';
 
 
-	$notification_label 	= 'Record Skipped';
+	$notification_label 	= __('Record Skipped' , 'epl-wpimport');
 
 	$post_title = '';
 
@@ -304,27 +298,27 @@ function epl_wpimport_notification( $notification = 'skip' , $post_id = false ) 
 	}
 
 	if ( $notification == 'update' ) {
-		$notification_label 	= 'Date modified, updating';
+		$notification_label 	= __('Date modified, updating...' , 'epl-wpimport');
 	}
 
 	if ( $notification == 'modified'  ) {
-		$notification_label	= 'Modified Listing, updating';
+		$notification_label	= __('Modified Listing, updating...' , 'epl-wpimport');
 	}
 
 	if ( $notification == 'update_field'  ) {
-		$notification_label	= 'Updating Field';
+		$notification_label	= __('Updating Field...' , 'epl-wpimport');
 	}
 
 	if ( $notification == 'skip_unchanged' ) {
-		$notification_label	= 'Listing Modified Time Unchanged, Skipping Record Update';
+		$notification_label	= __('Listing Modified Time Unchanged, Skipping Record Update.' , 'epl-wpimport');
 	}
 
 	if ( $notification == 'updating' ) {
-		$notification_label	= 'Updating Fields:';
+		$notification_label	= __('Updating Fields:' , 'epl-wpimport');
 	}
 
 	if ( $notification == 'skip' ) {
-		$notification_label	= 'Skipped, previously imported record found for:';
+		$notification_label	= __('Skipped, previously imported record found for:' , 'epl-wpimport');
 	}
 
 	// Output

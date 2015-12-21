@@ -1560,6 +1560,6 @@ function epl_allimport_get_meta_fields() {
 				}
 			}
 		}
-       return $epl_allimport_meta_boxes = apply_filters('epl_listing_meta_boxes', $epl_allimport_meta_boxes);
-    }
+		return $epl_allimport_meta_boxes = apply_filters('epl_listing_meta_boxes', $epl_allimport_meta_boxes);
+	}
 }
