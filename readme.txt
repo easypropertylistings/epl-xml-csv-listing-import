@@ -7,7 +7,7 @@ Tags: extension, easy property listings, wp all import, wp all import pro, csv, 
 Requires at least: 3.3
 Tested up to: 4.4
 
-Stable Tag: 1.0.2
+Stable Tag: 1.0.3
 
 License: GNU Version 2 or Any Later Version
 
@@ -15,7 +15,7 @@ This add-on for Easy Property Listings and WP All Import allows you to import li
 
 == Description ==
 
-Import your listings into [Easy Property Listings](https://easypropertylistings.com.au/?utm_source=readme&utm_medium=description_tab&utm_content=description&utm_campaign=wordpressorg_import) with the WP All Import add-on with ease and faster than ever. This plugin has over 150 custom fields already configured and supports any XML, CSV, XLS format. Save even more time by grabbing the latest REAXML and Jupix import scripts here.
+This add-on for  [Easy Property Listings](https://easypropertylistings.com.au/?utm_source=readme&utm_medium=description_tab&utm_content=description&utm_campaign=wordpressorg_import) and WP All Import allows you to import listings into your WordPress website with ease with all the Easy Property Listings custom fields pre-configured.
 
 Our goal with this add-on is not to just be able to import listings into Easy Property Listings but to improve import speed especially with images.
 
