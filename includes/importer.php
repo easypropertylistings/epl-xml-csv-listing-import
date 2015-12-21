@@ -217,7 +217,7 @@ function epl_wpimport_is_image_to_update($default,$post_object,$xml_object) {
 	        );
 
 	        $epl_wpimport->log(
-				'<strong>' . __('EPL Image Updating process started : Old Mod Date : ' , 'epl-wpimport') .$old_mod_date. __('New Mod Date' , 'epl-wpimport') .' : '.$new_mod_date . '</strong>'
+				'<strong>' . __('EPL Image Updating process started : Old Mod Date : ' , 'epl-wpimport') . $old_mod_date . ' - '. __('New Mod Date' , 'epl-wpimport') .' : '.$new_mod_date . '</strong>'
 			);
 
 		if($old_mod_date < $new_mod_date ) {
