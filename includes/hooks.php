@@ -6,8 +6,8 @@ function epl_wpimport_extensions_options_filter($epl_fields = null) {
 	);
 
 	$fields[] = array(
-		'label'		=>	__('Single', 'epl-of'),
-		'intro'		=>	__('<h3 style="margin-top:0;">Importer Settings.</p>' , 'epl-wpimport'),
+		'label'		=>	__('Settings', 'epl-of'),
+		'intro'		=>	'<h3 style="margin-top:0;">' . __('Importer Settings.' , 'epl-wpimport') . '</h3>',
 		'fields'	=>	array(
 
 			array(

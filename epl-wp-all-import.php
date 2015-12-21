@@ -111,7 +111,7 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 		public function admin_notices() {
 			if ( ! defined('EPL_RUNNING') ) {
 				echo '<div class="error"><p>';
-				_e( 'Please activate <b>Easy Property Listings 2.3.1+</b> to enable all functions of Easy Property Listings WP All Import Add-On', 'epl-wpimport' );
+				_e( 'Please activate <b>Easy Property Listings</b> to enable all functions of the EPL Import Add-On', 'epl-wpimport' );
 				echo '</p></div>';
 			}
 		}
