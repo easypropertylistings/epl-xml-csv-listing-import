@@ -10,13 +10,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  */
 function epl_allimport_get_meta_fields() {
 	global $epl_settings;
-	$opts_users = array();
-	$users = get_users('orderby=display_name&order=ASC');
-	if(!empty($users)) {
-		foreach ($users as $user) {
-			$opts_users[ $user->ID ] = $user->display_name;
-		}
-	}
 
 	$opts_property_status = apply_filters (  'epl_opts_property_status_filter', array(
 			'current'	=>	__('Current', 'epl-wpimport'),
