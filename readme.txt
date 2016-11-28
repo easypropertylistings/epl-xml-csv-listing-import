@@ -7,7 +7,7 @@ Tags: extension, easy property listings, wp all import, wp all import pro, csv, 
 Requires at least: 3.3
 Tested up to: 4.7
 
-Stable Tag: 1.0.5
+Stable Tag: 1.0.6
 
 License: GNU Version 2 or Any Later Version
 
