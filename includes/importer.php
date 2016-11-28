@@ -103,7 +103,10 @@ function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 									update_post_meta($post_id,'property_images_mod_date_old', $old_mod_date);
 									$epl_wpimport->log( 'POST : '.$post_id.': - ' . __('EPL Field Updated:' , 'epl-wpimport') . '`property_images_mod_date_old`' . __('value' , 'epl-wpimport') . '`' . $old_mod_date . '`' );
                                 				}
-								update_post_meta($post_id, $field['name'], $data[$field['name']]);
+                                				// Field Import exclude empty fields
+                                				if ( !empty( $data[$field['name']] ) ) {
+									update_post_meta($post_id, $field['name'], $data[$field['name']]);
+								}
 							}
 
 							// Log
