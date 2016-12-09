@@ -3,7 +3,7 @@
  * Plugin Name: Easy Property Listings Import CSV, XML WP All Import Add On
  * Plugin URL: https://wordpress.org/plugins/easy-property-listings-xml-csv-import/
  * Description: Import CSV and XML into Easy Property Listings with this WP All Import Add-on
- * Version: 1.0.6
+ * Version: 1.0.7
  * Text Domain: epl-wpimport
  * Author: Merv Barrett
  * Author URI: http://www.realestateconnected.com.au/
@@ -26,7 +26,7 @@
  * @package EPL-Import
  * @category Importer
  * @author Merv Barrett
- * @version 1.0.6
+ * @version 1.0.7
  */
 
 // Exit if accessed directly
@@ -62,11 +62,11 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 			if ( ! isset( self::$instance ) && ! ( self::$instance instanceof EPL_WP_All_Import_Add_On ) ) {
 				self::$instance = new EPL_WP_All_Import_Add_On;
 				self::$instance->hooks();
+				self::$instance->setup_constants();
+				self::$instance->load_textdomain();
 				if ( defined('EPL_RUNNING') ) {
-					self::$instance->setup_constants();
 					self::$instance->includes();
 				}
-				self::$instance->load_textdomain();
 			}
 			return self::$instance;
 		}
