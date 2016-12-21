@@ -1,12 +1,12 @@
 <?php
 /*
  * Plugin Name: Easy Property Listings Import CSV, XML WP All Import Add On
- * Plugin URL: https://www.easypropertylistings.com.au/
+ * Plugin URL: https://wordpress.org/plugins/easy-property-listings-xml-csv-import/
  * Description: Import CSV and XML into Easy Property Listings with this WP All Import Add-on
- * Version: 1.0.2
+ * Version: 1.0.6
  * Text Domain: epl-wpimport
  * Author: Merv Barrett
- * Author URI: http://www.realestateconnected.com.au
+ * Author URI: http://www.realestateconnected.com.au/
  * Contributors: mervb
  *
  * Easy Property Listings Import CSV, XML WP All Import Add On, is free
@@ -23,6 +23,10 @@
  * You should have received a copy of the GNU General Public License
  * along with Easy Property Listings. If not, see <http://www.gnu.org/licenses/>.
  *
+ * @package EPL-Import
+ * @category Importer
+ * @author Merv Barrett
+ * @version 1.0.6
  */
 
 // Exit if accessed directly
@@ -62,6 +66,7 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 					self::$instance->setup_constants();
 					self::$instance->includes();
 				}
+				self::$instance->load_textdomain();
 			}
 			return self::$instance;
 		}
@@ -76,7 +81,7 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 		private function hooks() {
 			// activation
 			add_action( 'admin_init', array( $this, 'activation' ) );
-            add_action("activated_plugin", array($this, "epl_wpallimport_load_last") );
+			add_action( 'activated_plugin', array($this, 'epl_wpallimport_load_epl_core_first' ) );
 		}
 
 		/**
@@ -104,10 +109,9 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 		 * @since 1.0
 		*/
 		public function admin_notices() {
-
 			if ( ! defined('EPL_RUNNING') ) {
 				echo '<div class="error"><p>';
-				_e( 'Please activate <b>Easy Property Listings 2.3 or newer</b> to enable all functions of Easy Property Listings WP All Import Add-On', 'epl-wpimport' );
+				_e( 'Please activate <b>Easy Property Listings</b> to enable all functions of the EPL Import Add-On', 'epl-wpimport' );
 				echo '</p></div>';
 			}
 		}
@@ -149,7 +153,6 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 		 * @return void
 		 */
 		private function includes() {
-
 			if ( is_admin() || defined( 'DOING_CRON' ) ) {
 				require_once EPL_WPIMPORT_PLUGIN_PATH_INCLUDES . 'hooks.php';
 				require_once EPL_WPIMPORT_PLUGIN_PATH_INCLUDES . 'rapid-addon.php';
@@ -157,23 +160,57 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 			}
 		}
 
-		function is_post_to_update($pid) {
-			$do_not_update = get_post_meta($pid, 'do_not_update', true);
-			return (!empty($do_not_update)) ? false : true;
+		/*
+		 * Force Easy Property Listings to load first on activation
+		 *
+		 * @access private
+		 * @since 1.0.4
+		 * @return void
+		 */
+		function epl_wpallimport_load_epl_core_first() {
+			$epl_core_path = 'easy-property-listings/easy-property-listings.php';
+			if ( is_plugin_active( $epl_core_path ) ) {
+				if ( $plugins = get_option( 'active_plugins' ) ) {
+					if ( $key = array_search( $epl_core_path, $plugins ) ) {
+						array_splice( $plugins, $key, 1 );
+						array_unshift( $plugins, $epl_core_path );
+						update_option( 'active_plugins', $plugins );
+					}
+				}
+			}
 		}
-        
-        function epl_wpallimport_load_last() {
-            $this_plugin = str_replace( WP_PLUGIN_DIR . '/', '', __FILE__ );
-            $active_plugins = get_option('active_plugins');
-            $this_plugin_key = array_search($this_plugin, $active_plugins);
-            if ($this_plugin_key) { // if it's 0 it's the first plugin already, no need to continue
-                array_splice($active_plugins, $this_plugin_key, 1);
-                $active_plugins[] = $this_plugin;
-                update_option('active_plugins', $active_plugins);
-            }
-        }
 
+		/**
+		 * Loads the plugin language files
+		 *
+		 * @access public
+		 * @since 1.0.4
+		 * @return void
+		 */
+		public function load_textdomain() {
+			// Set filter for plugin's languages directory
+			$epl_lang_dir = EPL_WPIMPORT_PLUGIN_PATH . 'languages/';
+			$epl_lang_dir = apply_filters( 'epl_wpimport_languages_directory', $epl_lang_dir );
 
+			// Traditional WordPress plugin locale filter
+			$locale        = apply_filters( 'plugin_locale',  get_locale(), 'epl-wpimport' );
+			$mofile        = sprintf( '%1$s-%2$s.mo', 'epl', $locale );
+
+			// Setup paths to current locale file
+			$mofile_local  = $epl_lang_dir . $mofile;
+			$mofile_global = WP_LANG_DIR . '/epl-wpimport/' . $mofile;
+
+			if ( file_exists( $mofile_global ) ) {
+				// Look in global /wp-content/languages/epl-wpimport folder
+				load_textdomain( 'epl-wpimport', $mofile_global );
+			} elseif ( file_exists( $mofile_local ) ) {
+				// Look in local /wp-content/plugins/easy-property-listings-xml-csv-import/languages/ folder
+				load_textdomain( 'epl-wpimport', $mofile_local );
+			} else {
+				// Load the default language files
+				load_plugin_textdomain( 'epl-wpimport', false, $epl_lang_dir );
+			}
+		}
 	}
 endif; // End if class_exists check
 /*
