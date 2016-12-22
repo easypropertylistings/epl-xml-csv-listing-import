@@ -3,7 +3,7 @@ Author URI: http://www.realestateconnected.com.au/
 Plugin URI: https://wordpress.org/plugins/easy-property-listings-xml-csv-import/
 Contributors: mervb1
 Donate link: https://easypropertylistings.com.au/support-the-site/
-Tags: extension, easy property listings, wp all import, wp all import pro, csv, xml, xls, import, reaxml, jupix, MLS, real estate listings, property, rental, land, rural, business, commercial
+Tags: extension, easy property listings, wp all import, wp all import pro, csv, xml, xls, import, reaxml, jupix, BLM, MLS, real estate listings, property, rental, land, rural, business, commercial
 Requires at least: 3.3
 Tested up to: 4.7
 
@@ -49,7 +49,12 @@ Supported formats are CSV, XML and XLS files with full support for the Australia
 
 == Change log ==
 
+= 1.0.7 December 10, 2016 =
+
+* Fix: Undefined error if Easy Property Listings is not activated.
+
 = 1.0.6 November 28, 2016 =
+
 * New: Additional fields added for Easy Property Listings 3.1 compatibility. Pet Friendly, Open Spaces.
 * Tweak: Exclude importing empty fields.
 
