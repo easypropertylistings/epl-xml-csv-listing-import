@@ -227,6 +227,26 @@ function epl_wpimport_is_image_to_update($default,$post_object,$xml_object) {
 			$epl_wpimport->log( '<strong>' . __('Updated Images, Uploading' , 'epl-wpimport') . '...</strong>' );
 			return true;
 		} else {
+
+				$attachments = get_children( array( 'post_parent' => $post_object['ID'], 'post_type'	=>	'attachment' ) );
+				$count = count( $attachments );
+
+				// if attachment count is 0 then maybe all attachments are deleted for this listings due to faulty old mod date
+				if( absint($count) == 0) {
+					if($old_mod_date > $new_mod_date ) {
+
+						$epl_wpimport->log( '<strong>' . __('Old Mod date greater than new mod date, Attachment Count : ' , 'epl-wpimport') .$count. '</strong>' );
+
+					} else {
+											
+						$epl_wpimport->log( '<strong>' . __('Old Mod date equal to new mod date, Attachment Count : ' , 'epl-wpimport') .$count. '</strong>' );
+
+					}
+
+					$epl_wpimport->log( '<strong>' . __('insert & restore deleted attachments' ).'</strong>' );
+					return true;
+				}
+				
 	        	$epl_wpimport->log( '<strong>' . __('No new images, Skipping image update' , 'epl-wpimport') . '.</strong>' );
 	        	return false;
 	        }
