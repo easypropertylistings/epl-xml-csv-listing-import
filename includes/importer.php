@@ -227,6 +227,26 @@ function epl_wpimport_is_image_to_update($default,$post_object,$xml_object) {
 			$epl_wpimport->log( '<strong>' . __('Updated Images, Uploading' , 'epl-wpimport') . '...</strong>' );
 			return true;
 		} else {
+
+				$attachments = get_children( array( 'post_parent' => $post_object['ID'], 'post_type'	=>	'attachment' ) );
+				$count = count( $attachments );
+
+				// if attachment count is 0 then maybe all attachments are deleted for this listings due to faulty old mod date
+				if( absint($count) == 0) {
+					if($old_mod_date > $new_mod_date ) {
+
+						$epl_wpimport->log( '<strong>' . __('Old Mod date greater than new mod date, Attachment Count : ' , 'epl-wpimport') .$count. '</strong>' );
+
+					} else {
+
+						$epl_wpimport->log( '<strong>' . __('Old Mod date equal to new mod date, Attachment Count : ' , 'epl-wpimport') .$count. '</strong>' );
+
+					}
+
+					$epl_wpimport->log( '<strong>' . __('insert & restore deleted attachments' ).'</strong>' );
+					return true;
+				}
+
 	        	$epl_wpimport->log( '<strong>' . __('No new images, Skipping image update' , 'epl-wpimport') . '.</strong>' );
 	        	return false;
 	        }
@@ -369,3 +389,19 @@ function epl_wpimport_pmxi_custom_field_to_delete($default, $pid, $post_type, $o
 	return true;
 }
 add_action('pmxi_custom_field_to_delete','epl_wpimport_pmxi_custom_field_to_delete',10,5);
+
+/** Format Date function for EAC API **/
+function epl_feedsync_format_date_eac( $date , $sep = '/') {
+
+	if ( empty ( $date ) )
+		return;
+
+	$date_example = '4/11/2015';
+
+	$tempdate = explode( $sep , $date );
+	$date = $tempdate[0].'-'.$tempdate[1].'-'.$tempdate[2].' '.$tempdate[3];
+
+	return  date("Y-m-d H:i:s",strtotime($date));
+}
+// Usage
+// [epl_feedsync_format_date_eac({ORIG_LDATE[1]},'/')]
