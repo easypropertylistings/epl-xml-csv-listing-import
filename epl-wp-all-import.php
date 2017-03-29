@@ -229,4 +229,4 @@ function EPL_WPIMPORT() {
 	return EPL_WP_All_Import_Add_On::instance();
 }
 // Get EPL_WPIMPORT Running
-EPL_WPIMPORT();
+add_action( 'plugins_loaded', 'EPL_WPIMPORT' );
