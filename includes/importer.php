@@ -388,7 +388,7 @@ function epl_wpimport_pmxi_custom_field_to_delete($default, $pid, $post_type, $o
 	}
 	return true;
 }
-add_action('pmxi_custom_field_to_delete','epl_wpimport_pmxi_custom_field_to_delete',10,5);
+add_filter('pmxi_custom_field_to_delete','epl_wpimport_pmxi_custom_field_to_delete',10,5);
 
 /** Format Date function for EAC API **/
 function epl_feedsync_format_date_eac( $date , $sep = '/') {
