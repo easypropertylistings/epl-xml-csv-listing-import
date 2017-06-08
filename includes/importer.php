@@ -271,10 +271,15 @@ function epl_wpimport_delete_images($default,$post_object,$xml_object) {
 		);
 	}
 
-	$new_mod_date =
-	isset($xml_object['images']['img']) ?
-		current($xml_object['images']['img'][0]['modTime']) :
-		current($xml_object['objects']['img'][0]['modTime']);
+	if( function_exists('EPL_MLS') ){
+		$new_mod_date = $xml_object['images']['@attributes']['modTime'];
+	} else {
+		$new_mod_date =
+		isset($xml_object['images']['img']) ?
+			current($xml_object['images']['img'][0]['modTime']) :
+			current($xml_object['objects']['img'][0]['modTime']);
+
+	}
 
 	$new_mod_date = strtotime(epl_feedsync_format_date($new_mod_date));
 
