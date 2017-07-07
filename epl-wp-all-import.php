@@ -153,11 +153,9 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 		 * @return void
 		 */
 		private function includes() {
-			if ( is_admin() || defined( 'DOING_CRON' ) ) {
-				require_once EPL_WPIMPORT_PLUGIN_PATH_INCLUDES . 'hooks.php';
-				require_once EPL_WPIMPORT_PLUGIN_PATH_INCLUDES . 'rapid-addon.php';
-				require_once EPL_WPIMPORT_PLUGIN_PATH_INCLUDES . 'importer.php';
-			}
+			require_once EPL_WPIMPORT_PLUGIN_PATH_INCLUDES . 'hooks.php';
+			require_once EPL_WPIMPORT_PLUGIN_PATH_INCLUDES . 'rapid-addon.php';
+			require_once EPL_WPIMPORT_PLUGIN_PATH_INCLUDES . 'importer.php';
 		}
 
 		/*
