@@ -52,6 +52,7 @@ Supported formats are CSV, XML and XLS files with full support for the Australia
 = 1.0.10 July 7, 2017 =
 
 * Fix: Implemented loading files for cron processing.
+* Fix: Implemented additional checks for alternate image modified time node in REAXML.
 * Tweak: Image checking on new FeedSync Image Modified field.
 
 = 1.0.9 May 9, 2017 =
