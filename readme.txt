@@ -49,11 +49,14 @@ Supported formats are CSV, XML and XLS files with full support for the Australia
 
 == Change log ==
 
-= 1.0.9 May 9, 2017 =
+= 1.0.10 July 7, 2017 =
 
 * Fix: Implemented loading files for cron processing.
+* Tweak: Image checking on new FeedSync Image Modified field.
+
+= 1.0.9 May 9, 2017 =
+
 * Fix: Image Modified Time Filter.
-* Tweak: Image checking on new feedsync Image Modified field.
 
 = 1.0.8 March 29, 2017 =
 
