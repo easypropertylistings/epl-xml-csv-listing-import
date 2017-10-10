@@ -363,7 +363,7 @@ function epl_wpimport_is_post_to_update_depricated( $pid , $xml_node) {
 
 	global $epl_wpimport;
 	//add_action('pmxi_before_post_import', 'epl_wpimport_post_saved_notification', 10, 1);
-
+	$epl_wpimport->log( '<b>deprecated version running<b>' );
 	$live_import	=	function_exists('epl_get_option')  ?  epl_get_option('epl_wpimport_skip_update') : 'off';
 	if ( $live_import == 'on' && get_post_meta($pid,'property_mod_date',true) != '' ) {
 		/** only update posts if new data is available **/
@@ -395,6 +395,7 @@ function epl_wpimport_is_post_to_update( $continue_import,$pid , $xml_node,$impo
 
 	global $epl_wpimport;
 	//add_action('pmxi_before_post_import', 'epl_wpimport_post_saved_notification', 10, 1);
+	$epl_wpimport->log( '<b>latest version running<b>' );
 
 	$live_import	=	function_exists('epl_get_option')  ?  epl_get_option('epl_wpimport_skip_update') : 'off';
 	if ( $live_import == 'on' && get_post_meta($pid,'property_mod_date',true) != '' ) {
@@ -424,7 +425,7 @@ function epl_wpimport_is_post_to_update( $continue_import,$pid , $xml_node,$impo
 if( defined('PMXI_VERSION') && version_compare( PMXI_VERSION, '4.5.0', '<' ) ) {
 	add_filter('wp_all_import_is_post_to_update', 'epl_wpimport_is_post_to_update_depricated', 10, 2);
 } else {
-	add_filter('wp_all_import_is_post_to_update', 'epl_wpimport_is_post_to_update', 10, 2);
+	add_filter('wp_all_import_is_post_to_update', 'epl_wpimport_is_post_to_update', 10, 4);
 }
 
 /** dont let wp all import pro delete image mod date **/
