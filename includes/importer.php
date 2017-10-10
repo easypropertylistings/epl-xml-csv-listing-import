@@ -359,7 +359,7 @@ function epl_wpimport_notification( $notification = 'skip' , $post_id = false ) 
 }
 
 /*** only update post of mod date is newer **/
-function epl_wpimport_is_post_to_update( $pid , $xml_node) {
+function epl_wpimport_is_post_to_update_depricated( $pid , $xml_node) {
 
 	global $epl_wpimport;
 	//add_action('pmxi_before_post_import', 'epl_wpimport_post_saved_notification', 10, 1);
@@ -389,7 +389,45 @@ function epl_wpimport_is_post_to_update( $pid , $xml_node) {
 	// Don't update
 	return true;
 }
-add_filter('wp_all_import_is_post_to_update', 'epl_wpimport_is_post_to_update', 10, 2);
+
+/*** only update post of mod date is newer for WP ALL Import Pro version > = 4.5.0 **/
+function epl_wpimport_is_post_to_update( $continue_import,$pid , $xml_node,$import_id) {
+
+	global $epl_wpimport;
+	//add_action('pmxi_before_post_import', 'epl_wpimport_post_saved_notification', 10, 1);
+
+	$live_import	=	function_exists('epl_get_option')  ?  epl_get_option('epl_wpimport_skip_update') : 'off';
+	if ( $live_import == 'on' && get_post_meta($pid,'property_mod_date',true) != '' ) {
+		/** only update posts if new data is available **/
+		$postmodtime 		= epl_feedsync_format_date(get_post_meta($pid, 'property_mod_date',true ));
+		$updatemodtime		= epl_feedsync_format_date($xml_node['@attributes']['modTime']);
+
+		if( strtotime($updatemodtime) > strtotime($postmodtime) ) {
+
+			epl_wpimport_notification( 'update'  , $pid );
+
+			// update
+			return true;
+		}
+
+		epl_wpimport_notification( 'skip_unchanged'  , $pid );
+
+		// Don't update
+		return false;
+	}
+
+	epl_wpimport_notification( 'skip' , $pid );
+
+	// Don't update
+	return true;
+}
+add_filter('wp_all_import_is_post_to_update', 'epl_wpimport_is_post_to_update', 10, 4);
+
+if( defined('PMXI_VERSION') && version_compare( PMXI_VERSION, '4.5.0', '<' ) ) {
+	add_filter('wp_all_import_is_post_to_update', 'epl_wpimport_is_post_to_update_depricated', 10, 2);
+} else {
+	add_filter('wp_all_import_is_post_to_update', 'epl_wpimport_is_post_to_update', 10, 2);
+}
 
 /** dont let wp all import pro delete image mod date **/
 function epl_wpimport_pmxi_custom_field_to_delete($default, $pid, $post_type, $options, $cur_meta_key) {
