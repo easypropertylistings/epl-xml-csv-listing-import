@@ -5,9 +5,9 @@ Contributors: mervb1
 Donate link: https://easypropertylistings.com.au/support-the-site/
 Tags: extension, easy property listings, wp all import, wp all import pro, csv, xml, xls, import, reaxml, jupix, BLM, MLS, real estate listings, property, rental, land, rural, business, commercial
 Requires at least: 3.3
-Tested up to: 4.8
+Tested up to: 4.8.2
 
-Stable Tag: 1.0.9
+Stable Tag: 1.0.10
 
 License: GNU Version 2 or Any Later Version
 
@@ -48,6 +48,10 @@ Supported formats are CSV, XML and XLS files with full support for the Australia
 
 
 == Change log ==
+
+= 1.0.11 October 10, 2017 =
+
+* Fix: Critical fix for WP All Import Pro 4.5, this fix is backward compatible with 4.4.5 and earlier versions. Ensure you update the importer add-on to minimise listing processing data.
 
 = 1.0.10 July 7, 2017 =
 
