@@ -1,9 +1,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Easy Property Listings XML CSV Import 1.0.8\n"
+"Project-Id-Version: Easy Property Listings XML CSV Import 1.0.11\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/easy-property-listings\n"
-"POT-Creation-Date: 2017-03-29 14:40+0800\n"
+"POT-Creation-Date: 2017-10-10 16:23+0800\n"
 "PO-Revision-Date: 2015-09-09 16:02+0800\n"
 "Last-Translator: Merv Barrett <suppport@realestateconnected.com.au>\n"
 "Language-Team: Real Estate Connected <suppport@realestateconnected.com.au>\n"
@@ -74,7 +74,7 @@ msgstr ""
 msgid "Record Skipping Disabled"
 msgstr ""
 
-#: includes/importer.php:158 includes/importer.php:310
+#: includes/importer.php:158 includes/importer.php:320
 msgid "EPL IMPORTER"
 msgstr ""
 
@@ -122,55 +122,55 @@ msgstr ""
 msgid "New Images, Updating"
 msgstr ""
 
-#: includes/importer.php:281
+#: includes/importer.php:291
 msgid "EPL Image Processing Started : Old Mod Date : "
 msgstr ""
 
-#: includes/importer.php:281
+#: includes/importer.php:291
 msgid "New Mod Date : "
 msgstr ""
 
-#: includes/importer.php:281
+#: includes/importer.php:291
 msgid "Live Import : "
 msgstr ""
 
-#: includes/importer.php:285
+#: includes/importer.php:295
 msgid "EPL Import : Live import off, default WP All Import functions"
 msgstr ""
 
-#: includes/importer.php:291
+#: includes/importer.php:301
 msgid "Images unchanged, skipping image deletion"
 msgstr ""
 
-#: includes/importer.php:294
+#: includes/importer.php:304
 msgid "Images changes detected, deleting images"
 msgstr ""
 
-#: includes/importer.php:313
+#: includes/importer.php:323
 msgid "Record Skipped"
 msgstr ""
 
-#: includes/importer.php:324
+#: includes/importer.php:334
 msgid "Date modified, updating..."
 msgstr ""
 
-#: includes/importer.php:328
+#: includes/importer.php:338
 msgid "Modified Listing, updating..."
 msgstr ""
 
-#: includes/importer.php:332
+#: includes/importer.php:342
 msgid "Updating Field..."
 msgstr ""
 
-#: includes/importer.php:336
+#: includes/importer.php:346
 msgid "Listing Modified Time Unchanged, Skipping Record Update."
 msgstr ""
 
-#: includes/importer.php:340
+#: includes/importer.php:350
 msgid "Updating Fields:"
 msgstr ""
 
-#: includes/importer.php:344
+#: includes/importer.php:354
 msgid "Skipped, previously imported record found for:"
 msgstr ""
 
