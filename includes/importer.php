@@ -421,8 +421,6 @@ function epl_wpimport_is_post_to_update( $continue_import,$pid , $xml_node,$impo
 	// Don't update
 	return true;
 }
-add_filter('wp_all_import_is_post_to_update', 'epl_wpimport_is_post_to_update', 10, 4);
-
 if( defined('PMXI_VERSION') && version_compare( PMXI_VERSION, '4.5.0', '<' ) ) {
 	add_filter('wp_all_import_is_post_to_update', 'epl_wpimport_is_post_to_update_depricated', 10, 2);
 } else {
