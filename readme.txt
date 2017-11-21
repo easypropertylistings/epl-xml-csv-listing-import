@@ -5,7 +5,7 @@ Contributors: mervb1
 Donate link: https://easypropertylistings.com.au/support-the-site/
 Tags: extension, easy property listings, wp all import, wp all import pro, csv, xml, xls, import, reaxml, jupix, BLM, MLS, real estate listings, property, rental, land, rural, business, commercial
 Requires at least: 3.3
-Tested up to: 4.8.2
+Tested up to: 4.9
 Stable Tag: 1.0.10
 License: GNU Version 2 or Any Later Version
 
