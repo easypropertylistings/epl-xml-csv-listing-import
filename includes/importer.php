@@ -1,7 +1,16 @@
 <?php
-include('meta-boxes.php');
+
+
 global $epl_ai_meta_fields;
-$epl_ai_meta_fields = epl_allimport_get_meta_fields();
+
+if( function_exists('epl_get_meta_field_label') ) {
+	$epl_ai_meta_fields = epl_get_meta_boxes();
+} else {
+	include('meta-boxes-compat.php');
+	$epl_ai_meta_fields = epl_allimport_get_meta_fields();
+}
+
+
 
 function epl_wpimport_register_fields() {
 	global $epl_ai_meta_fields, $epl_wpimport;
