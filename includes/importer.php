@@ -378,6 +378,7 @@ function epl_wpimport_is_post_to_update_depricated( $pid , $xml_node) {
 		/** only update posts if new data is available **/
 		$postmodtime 		= epl_feedsync_format_date(get_post_meta($pid, 'property_mod_date',true ));
 		$updatemodtime		= epl_feedsync_format_date($xml_node['@attributes']['modTime']);
+		$updatemodtime		= apply_filters('epl_import_mod_time',$updatemodtime,$xml_node,$pid);
 
 		if( strtotime($updatemodtime) > strtotime($postmodtime) ) {
 
@@ -411,6 +412,7 @@ function epl_wpimport_is_post_to_update( $continue_import,$pid , $xml_node,$impo
 		/** only update posts if new data is available **/
 		$postmodtime 		= epl_feedsync_format_date(get_post_meta($pid, 'property_mod_date',true ));
 		$updatemodtime		= epl_feedsync_format_date($xml_node['@attributes']['modTime']);
+		$updatemodtime		= apply_filters('epl_import_mod_time',$updatemodtime,$xml_node,$pid);
 
 		if( strtotime($updatemodtime) > strtotime($postmodtime) ) {
 
