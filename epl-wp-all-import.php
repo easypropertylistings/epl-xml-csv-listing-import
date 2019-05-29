@@ -155,6 +155,7 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 		private function includes() {
 			require_once EPL_WPIMPORT_PLUGIN_PATH_INCLUDES . 'hooks.php';
 			require_once EPL_WPIMPORT_PLUGIN_PATH_INCLUDES . 'rapid-addon.php';
+			require_once EPL_WPIMPORT_PLUGIN_PATH_INCLUDES . 'functions.php';
 			require_once EPL_WPIMPORT_PLUGIN_PATH_INCLUDES . 'importer.php';
 		}
 
