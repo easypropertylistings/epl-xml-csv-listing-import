@@ -3,14 +3,7 @@
 
 global $epl_ai_meta_fields;
 
-if( function_exists('epl_get_meta_field_label') ) {
-	$epl_ai_meta_fields = epl_get_meta_boxes();
-} else {
-	include('meta-boxes-compat.php');
-	$epl_ai_meta_fields = epl_allimport_get_meta_fields();
-}
-
-
+$epl_ai_meta_fields = epl_wpimport_get_meta_fields();
 
 function epl_wpimport_register_fields() {
 	global $epl_ai_meta_fields, $epl_wpimport;
@@ -88,7 +81,10 @@ add_action('init','epl_wpimport_register_fields');
 
 // Import Function
 function epl_wpimport_import_function( $post_id, $data, $import_options ) {
+
 	global $epl_wpimport,$epl_ai_meta_fields;
+
+	$live_import		= function_exists('epl_get_option')  ?  epl_get_option('epl_wpimport_skip_update') : 'off';
 
 	if(!empty($epl_ai_meta_fields)) {
 
@@ -105,15 +101,26 @@ function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 				        if(!empty($fields)) {
 						foreach($fields as $field) {
 
-							if ( $epl_wpimport->can_update_meta($field['name'], $import_options) ) {
+							if ( pmai_is_epl_update_allowed($field['name'], $import_options['options']) ) {
 
 								if($field['name'] == 'property_images_mod_date') {
 									$old_mod_date = get_post_meta($post_id,'property_images_mod_date',true);
 									update_post_meta($post_id,'property_images_mod_date_old', $old_mod_date);
 									$epl_wpimport->log( 'POST : '.$post_id.': - ' . __('EPL Field Updated:' , 'epl-wpimport') . '`property_images_mod_date_old`' . __('value' , 'epl-wpimport') . '`' . $old_mod_date . '`' );
-                                				}
-                                				// Field Import exclude empty fields
-                                				if ( !empty( $data[$field['name']] ) ) {
+                				}
+
+                				if($live_import == 'on' && in_array( $field['name'], epl_wpimport_skip_fields() ) ){
+
+                					$existing_value = get_post_meta($post_id,$field['name'],true);
+
+                					if( !empty($existing_value) ){
+                						continue;
+                					}
+									
+								}
+
+                				// Field Import exclude empty fields
+                				if ( !empty( $data[$field['name']] ) ) {
 									update_post_meta($post_id, $field['name'], $data[$field['name']]);
 								}
 							}
@@ -439,14 +446,6 @@ if( defined('PMXI_VERSION') && version_compare( PMXI_VERSION, '4.5.0', '<' ) ) {
 	add_filter('wp_all_import_is_post_to_update', 'epl_wpimport_is_post_to_update', 10, 4);
 }
 
-/** dont let wp all import pro delete image mod date **/
-function epl_wpimport_pmxi_custom_field_to_delete($default, $pid, $post_type, $options, $cur_meta_key) {
-	if($cur_meta_key == 'property_images_mod_date' || $cur_meta_key == 'property_images_mod_date_old') {
-		return false;
-	}
-	return true;
-}
-add_filter('pmxi_custom_field_to_delete','epl_wpimport_pmxi_custom_field_to_delete',10,5);
 
 /** Format Date function for EAC API **/
 function epl_feedsync_format_date_eac( $date , $sep = '/') {
