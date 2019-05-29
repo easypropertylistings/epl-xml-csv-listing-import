@@ -1,10 +1,26 @@
 <?php
+/**
+ * Importer Functions
+ *
+ * @package     EPL-IMPORTER-ADD-ON
+ * @subpackage  Functions/Importer
+ * @copyright   Copyright (c) 2019, Merv Barrett
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since       1.0
+ */
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 global $epl_ai_meta_fields;
 
 $epl_ai_meta_fields = epl_wpimport_get_meta_fields();
 
+/**
+ * Register Importer Fields
+ *
+ * @since 1.0
+ */
 function epl_wpimport_register_fields() {
 	global $epl_ai_meta_fields, $epl_wpimport;
 
@@ -116,7 +132,7 @@ function epl_wpimport_import_function( $post_id, $data, $import_options ) {
                 					if( !empty($existing_value) ){
                 						continue;
                 					}
-									
+
 								}
 
                 				// Field Import exclude empty fields
