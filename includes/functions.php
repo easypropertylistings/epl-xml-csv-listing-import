@@ -69,7 +69,7 @@ function epl_wpimport_pmxi_reimport($entry, $post) {
 		<input type="hidden" name="epl_list" value="0" />
 		<input type="hidden" name="is_update_epl" value="0" />
 		<input type="checkbox" id="is_update_epl_<?php echo $entry; ?>" name="is_update_epl" value="1" <?php echo $post['is_update_epl'] ? 'checked="checked"': '' ?>  class="switcher"/>
-		<label for="is_update_epl_<?php echo $entry; ?>"><?php _e('Easy Property Listings', 'epl-wpimport') ?></label>
+		<label for="is_update_epl_<?php echo $entry; ?>"><?php _e('Easy Property Listings Custom Fields', 'epl-wpimport') ?></label>
 		<div class="switcher-target-is_update_epl_<?php echo $entry; ?>" style="padding-left:17px;">
 			<div class="input">
 				<input type="radio" id="update_epl_logic_full_update_<?php echo $entry; ?>" name="update_epl_logic" value="full_update" <?php echo ( "full_update" == $post['update_epl_logic'] ) ? 'checked="checked"': '' ?> class="switcher"/>
