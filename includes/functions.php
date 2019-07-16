@@ -191,6 +191,11 @@ add_filter('pmxi_save_options','epl_wpimport_pmxi_save_options');
 function pmai_is_epl_update_allowed( $cur_meta_key, $options ){
 	//epl_print_r($options,true);
 
+	if ($options['update_all_data'] == 'yes') {
+
+		return apply_filters('epl_wpimport_is_epl_update_allowed', true, $cur_meta_key, $options);
+	}
+
 	if ($options['update_all_data'] == 'no' and $options['is_update_epl'] and $options['update_epl_logic'] == 'full_update') {
 
 		return apply_filters('epl_wpimport_is_epl_update_allowed', true, $cur_meta_key, $options);
