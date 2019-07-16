@@ -1,10 +1,26 @@
 <?php
+/**
+ * Importer Functions
+ *
+ * @package     EPL-IMPORTER-ADD-ON
+ * @subpackage  Functions/Importer
+ * @copyright   Copyright (c) 2019, Merv Barrett
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since       1.0
+ */
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 global $epl_ai_meta_fields;
 
 $epl_ai_meta_fields = epl_wpimport_get_meta_fields();
 
+/**
+ * Register Importer Fields
+ *
+ * @since 1.0
+ */
 function epl_wpimport_register_fields() {
 	global $epl_ai_meta_fields, $epl_wpimport;
 
@@ -79,7 +95,11 @@ function epl_wpimport_register_fields() {
 }
 add_action('init','epl_wpimport_register_fields');
 
-// Import Function
+/**
+ * Import Function
+ *
+ * @since 1.0
+ */
 function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 
 	global $epl_wpimport,$epl_ai_meta_fields;
@@ -116,7 +136,7 @@ function epl_wpimport_import_function( $post_id, $data, $import_options ) {
                 					if( !empty($existing_value) ){
                 						continue;
                 					}
-									
+
 								}
 
                 				// Field Import exclude empty fields
@@ -138,7 +158,11 @@ function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 	}
 }
 
-// Notification that EPL Importer is Running
+/**
+ * Notification that EPL Importer is Running Logging Output
+ *
+ * @since 1.0
+ */
 function epl_wpimport_log( $post_id ) {
 
 	global $epl_wpimport;
@@ -158,7 +182,11 @@ function epl_wpimport_log( $post_id ) {
 }
 add_action('pmxi_before_post_import', 'epl_wpimport_log', 10, 1);
 
-// Notification that EPL Importer is Running
+/**
+ * Notification that EPL Importer is processing images logging output
+ *
+ * @since 1.0
+ */
 function epl_wpimport_log_pmxi_gallery_image( $post_id ) {
 
 	/*
@@ -184,7 +212,11 @@ function epl_wpimport_log_pmxi_gallery_image( $post_id ) {
 }
 add_action('pmxi_before_post_import', 'epl_wpimport_log_pmxi_gallery_image', 10, 1);
 
-// Update notification: Skipped
+/**
+ * Update notification: Skipped
+ *
+ * @since 1.0
+ */
 function epl_wpimport_post_skipped_notification($vars) {
 	global $epl_wpimport;
 
@@ -193,6 +225,11 @@ function epl_wpimport_post_skipped_notification($vars) {
 	return $vars;
 }
 
+/**
+ * Image loop
+ *
+ * @since 1.0
+ */
 function epl_wpimport_img_loop($unique_id,$mod_time,$url,$id) {
 
 	$urls 		= array_unique(array_filter(explode(",",$url)));
@@ -211,7 +248,11 @@ function epl_wpimport_img_loop($unique_id,$mod_time,$url,$id) {
 	}
 }
 
-// skip image uploading if if images mod date is not newer
+/**
+ * Skip image uploading if if images mod date is not newer
+ *
+ * @since 1.0
+ */
 function epl_wpimport_is_image_to_update($default,$post_object,$xml_object) {
 
 	$live_import	= function_exists('epl_get_option')  ?  epl_get_option('epl_wpimport_skip_update') : 'off';
@@ -273,7 +314,11 @@ function epl_wpimport_is_image_to_update($default,$post_object,$xml_object) {
 }
 add_filter('pmxi_is_images_to_update','epl_wpimport_is_image_to_update',10,3);
 
-// skip old image deletion if images mod date is not newer
+/**
+ * Skip old image deletion if images mod date is not newer
+ *
+ * @since 1.0
+ */
 function epl_wpimport_delete_images($default,$post_object,$xml_object) {
 
 	global $epl_wpimport;
@@ -327,7 +372,11 @@ function epl_wpimport_delete_images($default,$post_object,$xml_object) {
 }
 add_filter('pmxi_delete_images','epl_wpimport_delete_images',10,3);
 
-// Notification that EPL Importer is Running
+/**
+ * Notification that EPL Importer is Running
+ *
+ * @since 1.0
+ */
 function epl_wpimport_notification( $notification = 'skip' , $post_id = false ) {
 
 	global $epl_wpimport;
@@ -374,7 +423,11 @@ function epl_wpimport_notification( $notification = 'skip' , $post_id = false ) 
 	$epl_wpimport->log( $epl_wpimport_label . $notification_label . $post_title );
 }
 
-/*** only update post of mod date is newer **/
+/**
+ * Only update post of mod date is newer
+ *
+ * @since 1.0
+ */
 function epl_wpimport_is_post_to_update_depricated( $pid , $xml_node) {
 
 	global $epl_wpimport;
@@ -407,7 +460,11 @@ function epl_wpimport_is_post_to_update_depricated( $pid , $xml_node) {
 	return true;
 }
 
-/*** only update post of mod date is newer for WP ALL Import Pro version > = 4.5.0 **/
+/**
+ * Only update post of mod date is newer for WP ALL Import Pro version > = 4.5.0
+ *
+ * @since 1.0
+ */
 function epl_wpimport_is_post_to_update( $continue_import,$pid , $xml_node,$import_id) {
 
 	global $epl_wpimport;
@@ -446,8 +503,11 @@ if( defined('PMXI_VERSION') && version_compare( PMXI_VERSION, '4.5.0', '<' ) ) {
 	add_filter('wp_all_import_is_post_to_update', 'epl_wpimport_is_post_to_update', 10, 4);
 }
 
-
-/** Format Date function for EAC API **/
+/**
+ * Format Date function for EAC API
+ *
+ * @since 1.0.7
+ */
 function epl_feedsync_format_date_eac( $date , $sep = '/') {
 
 	if ( empty ( $date ) )
