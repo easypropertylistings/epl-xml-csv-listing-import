@@ -189,48 +189,53 @@ add_filter('pmxi_save_options','epl_wpimport_pmxi_save_options');
  * @return [type]               [description]
  */
 function pmai_is_epl_update_allowed( $cur_meta_key, $options ){
+	//epl_print_r($options,true);
 
-	if ($options['update_epl_logic'] == 'full_update')
+	if ($options['update_all_data'] == 'no' and $options['is_update_epl'] and $options['update_epl_logic'] == 'full_update') {
+
 		return apply_filters('epl_wpimport_is_epl_update_allowed', true, $cur_meta_key, $options);
+	}
 
 	if ($options['update_all_data'] == 'no' and $options['is_update_epl'] and $options['update_epl_logic'] == 'only'){
-
+		
 		if (! empty($options['epl_list']) and is_array($options['epl_list'])){
 
 			foreach ($options['epl_list'] as $key => $epl_field) {
 
 				$parts_temp = explode(" ", $epl_field);
-				$field_name = trim(array_shift($parts_temp), "[]");
+				$field_name = trim(array_shift($parts_temp), "[]");	
 
 				if($cur_meta_key == $field_name) {
 					return apply_filters('pmai_is_epl_update_allowed', true, $cur_meta_key, $options);
 						break;
-				}
+				}			
 
 			}
 			return apply_filters('pmai_is_epl_update_allowed', false, $cur_meta_key, $options);
-		}
+		}					
 
 	}
 
 	// Leave these epl alone, update all other epl
 	if ($options['update_all_data'] == 'no' and $options['is_update_epl'] and $options['update_epl_logic'] == 'all_except'){
-
+		
 		if (! empty($options['epl_list']) and is_array($options['epl_list'])){
 			foreach ($options['epl_list'] as $key => $epl_field) {
 
 				$parts_temp = explode(" ", $epl_field);
-				$field_name = trim(array_shift($parts_temp), "[]");
+				$field_name = trim(array_shift($parts_temp), "[]");	
 
 				if($cur_meta_key == $field_name) {
 					return apply_filters('pmai_is_epl_update_allowed', false, $cur_meta_key, $options);
 						break;
+				} else {
+					return apply_filters('pmai_is_epl_update_allowed', true, $cur_meta_key, $options);	
 				}
 			}
-		}
+		}		
 	}
 
-	return apply_filters('pmai_is_epl_update_allowed', true, $cur_meta_key, $options);
+	return apply_filters('pmai_is_epl_update_allowed', false, $cur_meta_key, $options);	
 }
 
 /**
