@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Easy Property Listings XML CSV Import 2.0\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/easy-property-listings\n"
-"POT-Creation-Date: 2019-07-17 10:01+0800\n"
+"POT-Creation-Date: 2019-07-17 10:03+0800\n"
 "PO-Revision-Date: 2015-09-09 16:02+0800\n"
 "Last-Translator: Merv Barrett <suppport@realestateconnected.com.au>\n"
 "Language-Team: Real Estate Connected <suppport@realestateconnected.com.au>\n"
@@ -191,11 +191,11 @@ msgid "Skipped, previously imported record found for:"
 msgstr ""
 
 #: includes/importer.php:433
-msgid "Deprecated version running"
+msgid "EPL IMPORTER: Deprecated version running"
 msgstr ""
 
 #: includes/importer.php:470
-msgid "Latest version running"
+msgid "EPL IMPORTER: Latest version running"
 msgstr ""
 
 #: includes/meta-boxes-compat.php:23
