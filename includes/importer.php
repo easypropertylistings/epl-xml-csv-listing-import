@@ -131,13 +131,8 @@ function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 
 		                				if($live_import == 'on' && in_array( $field['name'], epl_wpimport_skip_fields() ) ){
 
-		                					$existing_value = get_post_meta($post_id,$field['name'],true);
-
-		                					if( !empty($existing_value) ){
-
-		                						$epl_wpimport->log( '- ' . __('Field Skipped:' , 'epl-wpimport') . '`' . $field['name'] . '` value `' . $data[$field['name']] . '`' );
-		                						continue;
-		                					}
+		                					$epl_wpimport->log( '- ' . __('Field Skipped:' , 'epl-wpimport') . '`' . $field['name'] . '` value `' . $data[$field['name']] . '`' );
+	                						continue;
 								}
 
 		                				// Field Import exclude empty fields
