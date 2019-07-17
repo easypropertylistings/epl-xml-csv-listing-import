@@ -66,7 +66,12 @@ function epl_wpimport_pmxi_reimport($entry, $post) {
 				}
 			}
 		}
-	} ?>
+	} 
+
+	$update_epl_logic = $post['update_epl_logic'];
+	$update_epl_logic = $update_epl_logic == '' ? 'full_update' : $update_epl_logic;
+
+	?>
 
 	<div class="input">
 		<input type="hidden" name="epl_list" value="0" />
@@ -75,8 +80,8 @@ function epl_wpimport_pmxi_reimport($entry, $post) {
 		<label for="is_update_epl_<?php echo $entry; ?>"><?php _e('Easy Property Listings Custom Fields', 'epl-wpimport') ?></label>
 		<div class="switcher-target-is_update_epl_<?php echo $entry; ?>" style="padding-left:17px;">
 			<div class="input">
-				<input type="radio" id="update_epl_logic_full_update_<?php echo $entry; ?>" name="update_epl_logic" value="full_update" <?php echo ( "full_update" == $post['update_epl_logic'] ) ? 'checked="checked"': '' ?> class="switcher"/>
-				<label for="update_epl_logic_full_update_<?php echo $entry; ?>"><?php _e('Update all EPL', 'epl-wpimport') ?></label>
+				<input type="radio" id="update_epl_logic_full_update_<?php echo $entry; ?>" name="update_epl_logic" value="full_update" <?php echo ( "full_update" == $update_epl_logic ) ? 'checked="checked"': '' ?> class="switcher"/>
+				<label for="update_epl_logic_full_update_<?php echo $entry; ?>"><?php _e('Update all EPL fields', 'epl-wpimport') ?></label>
 			</div>
 
 			<div class="input">
