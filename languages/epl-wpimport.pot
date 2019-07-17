@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Easy Property Listings XML CSV Import 2.0\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/easy-property-listings\n"
-"POT-Creation-Date: 2019-07-17 09:48+0800\n"
+"POT-Creation-Date: 2019-07-17 11:06+0800\n"
 "PO-Revision-Date: 2015-09-09 16:02+0800\n"
 "Last-Translator: Merv Barrett <suppport@realestateconnected.com.au>\n"
 "Language-Team: Real Estate Connected <suppport@realestateconnected.com.au>\n"
@@ -62,132 +62,144 @@ msgstr ""
 msgid "Disable (operates as per WP All Import Pro Default)"
 msgstr ""
 
-#: includes/importer.php:111
-msgid "EPL IMPORTER UPDATING FIELDS"
+#: includes/importer.php:86
+msgid "Easy Property Listings Importer plugin recommends you install <a href='http://www.wpallimport.com/'>WP All Import Pro 4.2.6+</a>"
 msgstr ""
 
-#: includes/importer.php:129 includes/importer.php:148
-msgid "EPL Field Updated:"
-msgstr ""
-
-#: includes/importer.php:129
-msgid "value"
-msgstr ""
-
-#: includes/importer.php:159
-msgid "All EPL Fields Updated"
-msgstr ""
-
-#: includes/importer.php:173
-msgid "EPL IMPORTER ACTIVE"
-msgstr ""
-
-#: includes/importer.php:179
-msgid "Record Skipping Enabled"
-msgstr ""
-
-#: includes/importer.php:179
-msgid "Record Skipping Disabled"
-msgstr ""
-
-#: includes/importer.php:204 includes/importer.php:387
+#: includes/importer.php:111 includes/importer.php:169
+#: includes/importer.php:200 includes/importer.php:221
+#: includes/importer.php:277 includes/importer.php:280
+#: includes/importer.php:291 includes/importer.php:295
+#: includes/importer.php:299 includes/importer.php:303
+#: includes/importer.php:307 includes/importer.php:348
+#: includes/importer.php:352 includes/importer.php:358
+#: includes/importer.php:361 includes/importer.php:381
+#: includes/importer.php:430 includes/importer.php:467
 msgid "EPL IMPORTER"
 msgstr ""
 
-#: includes/importer.php:210
-msgid "IMAGES Record Skipping Enabled"
+#: includes/importer.php:111
+msgid "UPDATING FIELDS"
 msgstr ""
 
-#: includes/importer.php:210
-msgid "IMAGES Record Skipping Disabled"
+#: includes/importer.php:129 includes/importer.php:147
+msgid "Field Updated:"
 msgstr ""
 
-#: includes/importer.php:225
-msgid "EPL Importer Record Skipped"
+#: includes/importer.php:129
+msgid "Images Modified Date: "
 msgstr ""
 
-#: includes/importer.php:282
-msgid "EPL Image Updating process started : Old Mod Date : "
+#: includes/importer.php:155
+msgid "All EPL Fields Updated"
 msgstr ""
 
-#: includes/importer.php:282
-msgid "New Mod Date"
+#: includes/importer.php:175
+msgid "Record Skipping Enabled"
 msgstr ""
 
-#: includes/importer.php:286
-msgid "Updated Images, Uploading"
+#: includes/importer.php:175
+msgid "Record Skipping Disabled"
 msgstr ""
 
-#: includes/importer.php:297
-msgid "Old Mod date greater than new mod date, Attachment Count : "
+#: includes/importer.php:206
+msgid "Record Skipping Enabled for Images"
 msgstr ""
 
-#: includes/importer.php:301
-msgid "Old Mod date equal to new mod date, Attachment Count : "
+#: includes/importer.php:206
+msgid "Record Skipping Disabled for Images"
 msgstr ""
 
-#: includes/importer.php:305
-msgid "insert & restore deleted attachments"
-msgstr ""
-
-#: includes/importer.php:309
-msgid "No new images, Skipping image update"
-msgstr ""
-
-#: includes/importer.php:313
-msgid "New Images, Updating"
-msgstr ""
-
-#: includes/importer.php:354
-msgid "EPL Image Processing Started : Old Mod Date : "
-msgstr ""
-
-#: includes/importer.php:354
-msgid "New Mod Date : "
-msgstr ""
-
-#: includes/importer.php:354
-msgid "Live Import : "
-msgstr ""
-
-#: includes/importer.php:358
-msgid "EPL Import : Live import off, default WP All Import functions"
-msgstr ""
-
-#: includes/importer.php:364
-msgid "Images unchanged, skipping image deletion"
-msgstr ""
-
-#: includes/importer.php:367
-msgid "Images changes detected, deleting images"
-msgstr ""
-
-#: includes/importer.php:390
+#: includes/importer.php:221 includes/importer.php:383
 msgid "Record Skipped"
 msgstr ""
 
-#: includes/importer.php:401
+#: includes/importer.php:277
+msgid "Image Updating process started: Old Modified Date: "
+msgstr ""
+
+#: includes/importer.php:277
+msgid "New Modified Date:"
+msgstr ""
+
+#: includes/importer.php:280
+msgid "Updated Images, Uploading"
+msgstr ""
+
+#: includes/importer.php:291
+msgid "Old Modified date greater than new modified date. Attachment Count: "
+msgstr ""
+
+#: includes/importer.php:295
+msgid "Old Modified date equals new modified date. Attachment Count: "
+msgstr ""
+
+#: includes/importer.php:299
+msgid "Insert & restore deleted attachments"
+msgstr ""
+
+#: includes/importer.php:303
+msgid "No new images, skipping image update"
+msgstr ""
+
+#: includes/importer.php:307
+msgid "New Images, updating"
+msgstr ""
+
+#: includes/importer.php:348
+msgid "Image Processing Started: Old Modified Date: "
+msgstr ""
+
+#: includes/importer.php:348
+msgid "New Modified Date: "
+msgstr ""
+
+#: includes/importer.php:348
+msgid "Live Import: "
+msgstr ""
+
+#: includes/importer.php:352
+msgid "Live import off, default WP All Import functions"
+msgstr ""
+
+#: includes/importer.php:358
+msgid "Images unchanged, skipping image deletion"
+msgstr ""
+
+#: includes/importer.php:361
+msgid "Images changes detected, deleting images"
+msgstr ""
+
+#: includes/importer.php:394
 msgid "Date modified, updating..."
 msgstr ""
 
-#: includes/importer.php:405
+#: includes/importer.php:398
 msgid "Modified Listing, updating..."
 msgstr ""
 
-#: includes/importer.php:409
+#: includes/importer.php:402
 msgid "Updating Field..."
 msgstr ""
 
-#: includes/importer.php:413
+#: includes/importer.php:406
 msgid "Listing Modified Time Unchanged, Skipping Record Update."
 msgstr ""
 
-#: includes/importer.php:417
+#: includes/importer.php:410
 msgid "Updating Fields:"
 msgstr ""
 
-#: includes/importer.php:421
+#: includes/importer.php:414
 msgid "Skipped, previously imported record found for:"
+msgstr ""
+
+#: includes/importer.php:430
+msgid "Deprecated version running"
+msgstr ""
+
+#: includes/importer.php:467
+msgid "Latest version running"
 msgstr ""
 
 #: includes/meta-boxes-compat.php:23
