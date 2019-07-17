@@ -131,9 +131,10 @@ function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 										$epl_wpimport->log( '- ' . __('Field Updated:' , 'epl-wpimport') . '`property_images_mod_date_old`' . ' POST: ' . $post_id . ': - ' . __('Images Modified Date: ' , 'epl-wpimport') . '`' . $old_mod_date . '`' );
 	                						}
 
-			                				if($live_import == 'on' && in_array( $field['name'], epl_wpimport_skip_fields() ) ){
+			                				if( ( isset($field['import']) && $field['import'] == 'preserve' ) || in_array( $field['name'], epl_wpimport_skip_fields() ) ){
 
 			                					$epl_wpimport->log( '- ' . __('Field Skipped:' , 'epl-wpimport') . '`' . $field['name'] . '` value `' . $data[$field['name']] . '`' );
+
 		                						continue;
 									}
 
