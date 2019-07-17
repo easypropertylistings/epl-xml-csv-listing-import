@@ -1,4 +1,22 @@
 <?php
+/**
+ * Settings
+ *
+ * @package     EPL-IMPORTER-ADD-ON
+ * @subpackage  Functions/Admin
+ * @copyright   Copyright (c) 2019, Merv Barrett
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since       1.0
+ */
+
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+/**
+ * Display options configured from admin panel
+ *
+ * @since 1.0
+ */
 function epl_wpimport_extensions_options_filter($epl_fields = null) {
 	$fields = array();
 	$epl_of_fields = array(
