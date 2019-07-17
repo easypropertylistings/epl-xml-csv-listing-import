@@ -114,10 +114,13 @@ add_action('pmxi_reimport','epl_wpimport_pmxi_reimport',10,2);
  */
 function epl_wpimport_pmxi_custom_field_to_update( $field_to_update, $post_type, $options, $m_key ){
 
+	global $epl_wpimport;
+	
 	$live_import		= function_exists('epl_get_option')  ?  epl_get_option('epl_wpimport_skip_update') : 'off';
 
 	if($live_import == 'on' && in_array( $m_key, epl_wpimport_skip_fields() ) ){
 
+		$epl_wpimport->log( __( 'EPL IMPORTER' , 'epl-wpimport' ) . ': ' . sprintf( __('Skipping field : %s' , 'epl-wpimport'), $m_key) );
 		return false;
 	}
 
