@@ -104,6 +104,8 @@ function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 
 	global $epl_wpimport,$epl_ai_meta_fields;
 
+	$imported_metas = array();
+
 	$live_import		= function_exists('epl_get_option')  ?  epl_get_option('epl_wpimport_skip_update') : 'off';
 
 	if(!empty($epl_ai_meta_fields)) {
@@ -119,37 +121,45 @@ function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 				        $fields = array_filter($fields);
 
 				        if(!empty($fields)) {
-						foreach($fields as $field) {
+							foreach($fields as $field) {
 
-							if ( pmai_is_epl_update_allowed($field['name'], $import_options['options']) ) {
+								if ( pmai_is_epl_update_allowed($field['name'], $import_options['options']) ) {
 
-								if($field['name'] == 'property_images_mod_date') {
-									$old_mod_date = get_post_meta($post_id,'property_images_mod_date',true);
-									update_post_meta($post_id,'property_images_mod_date_old', $old_mod_date);
-									$epl_wpimport->log( '- ' . __('Field Updated:' , 'epl-wpimport') . '`property_images_mod_date_old`' . ' POST: ' . $post_id . ': - ' . __('Images Modified Date: ' , 'epl-wpimport') . '`' . $old_mod_date . '`' );
-                						}
+									if($field['name'] == 'property_images_mod_date') {
+										$old_mod_date = get_post_meta($post_id,'property_images_mod_date',true);
+										update_post_meta($post_id,'property_images_mod_date_old', $old_mod_date);
+										$epl_wpimport->log( '- ' . __('Field Updated:' , 'epl-wpimport') . '`property_images_mod_date_old`' . ' POST: ' . $post_id . ': - ' . __('Images Modified Date: ' , 'epl-wpimport') . '`' . $old_mod_date . '`' );
+	                						}
 
-		                				if($live_import == 'on' && in_array( $field['name'], epl_wpimport_skip_fields() ) ){
+			                				if($live_import == 'on' && in_array( $field['name'], epl_wpimport_skip_fields() ) ){
 
-		                					$epl_wpimport->log( '- ' . __('Field Skipped:' , 'epl-wpimport') . '`' . $field['name'] . '` value `' . $data[$field['name']] . '`' );
-	                						continue;
-								}
+			                					$epl_wpimport->log( '- ' . __('Field Skipped:' , 'epl-wpimport') . '`' . $field['name'] . '` value `' . $data[$field['name']] . '`' );
+		                						continue;
+									}
 
-		                				// Field Import exclude empty fields
-		                				if ( !empty( $data[$field['name']] ) ) {
+	                				// Field Import exclude empty fields
+	                				if ( !empty( $data[$field['name']] ) ) {
 
-									update_post_meta($post_id, $field['name'], $data[$field['name']]);
+										update_post_meta($post_id, $field['name'], $data[$field['name']]);
 
-									// Log
-									$epl_wpimport->log( '- ' . __('Field Updated:' , 'epl-wpimport') . '`' . $field['name'] . '` value `' . $data[$field['name']] . '`' );
+										// Log
+										$epl_wpimport->log( '- ' . __('Field Updated:' , 'epl-wpimport') . '`' . $field['name'] . '` value `' . $data[$field['name']] . '`' );
+									}
+
+									$imported_metas[] = $field['name'];
 								}
 							}
-						}
 				        }
 				}
 			}
 		}
-        $epl_wpimport->log( '- ' . __('All EPL Fields Updated' , 'epl-wpimport') );
+
+		if( !empty($imported_metas) ) {
+			$epl_wpimport->log( '- ' . __('All EPL Fields Updated' , 'epl-wpimport') );
+		} else {
+			$epl_wpimport->log( '- ' . __('Preserve EPL Fields' , 'epl-wpimport') );
+		}
+        
 	}
 }
 
