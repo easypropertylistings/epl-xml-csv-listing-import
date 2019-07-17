@@ -136,7 +136,7 @@ function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 	                					if( !empty($existing_value) ){
 	                						continue;
 	                					}
-										
+
 									}
 
 	                				// Field Import exclude empty fields
@@ -150,7 +150,7 @@ function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 
 								}
 
-								
+
 							}
 				        }
 				}

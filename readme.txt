@@ -47,9 +47,11 @@ Supported formats are CSV, XML and XLS files with full support for the Australia
 
 == Change log ==
 
-= 2.0 June 3, 2019 =
+= 2.0 July 18, 2019 =
 
-* New: Ability to select and override importer fields,
+* New: Select and override importer fields.
+* New: Filter epl_wpimport_skip_fields allowing record skipping of specific fields when importer is set to update everything. This allows you to use the featured listing system in EPL with imported data and by default will not update property_featured, property_year_built, property_owner custom fields.
+* Tweak: WP All Import rapid-addon updated to 1.1.1
 
 
 
