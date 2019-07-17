@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Easy Property Listings XML CSV Import 2.0\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/easy-property-listings\n"
-"POT-Creation-Date: 2019-07-17 09:48+0800\n"
+"POT-Creation-Date: 2019-07-17 10:01+0800\n"
 "PO-Revision-Date: 2015-09-09 16:02+0800\n"
 "Last-Translator: Merv Barrett <suppport@realestateconnected.com.au>\n"
 "Language-Team: Real Estate Connected <suppport@realestateconnected.com.au>\n"
@@ -66,7 +66,7 @@ msgstr ""
 msgid "EPL IMPORTER UPDATING FIELDS"
 msgstr ""
 
-#: includes/importer.php:129 includes/importer.php:148
+#: includes/importer.php:129 includes/importer.php:147
 msgid "EPL Field Updated:"
 msgstr ""
 
@@ -74,120 +74,128 @@ msgstr ""
 msgid "value"
 msgstr ""
 
-#: includes/importer.php:159
+#: includes/importer.php:155
 msgid "All EPL Fields Updated"
 msgstr ""
 
-#: includes/importer.php:173
+#: includes/importer.php:169
 msgid "EPL IMPORTER ACTIVE"
 msgstr ""
 
-#: includes/importer.php:179
+#: includes/importer.php:175
 msgid "Record Skipping Enabled"
 msgstr ""
 
-#: includes/importer.php:179
+#: includes/importer.php:175
 msgid "Record Skipping Disabled"
 msgstr ""
 
-#: includes/importer.php:204 includes/importer.php:387
+#: includes/importer.php:200 includes/importer.php:383
 msgid "EPL IMPORTER"
 msgstr ""
 
-#: includes/importer.php:210
+#: includes/importer.php:206
 msgid "IMAGES Record Skipping Enabled"
 msgstr ""
 
-#: includes/importer.php:210
+#: includes/importer.php:206
 msgid "IMAGES Record Skipping Disabled"
 msgstr ""
 
-#: includes/importer.php:225
+#: includes/importer.php:221
 msgid "EPL Importer Record Skipped"
 msgstr ""
 
-#: includes/importer.php:282
+#: includes/importer.php:278
 msgid "EPL Image Updating process started : Old Mod Date : "
 msgstr ""
 
-#: includes/importer.php:282
+#: includes/importer.php:278
 msgid "New Mod Date"
 msgstr ""
 
-#: includes/importer.php:286
+#: includes/importer.php:282
 msgid "Updated Images, Uploading"
 msgstr ""
 
-#: includes/importer.php:297
+#: includes/importer.php:293
 msgid "Old Mod date greater than new mod date, Attachment Count : "
 msgstr ""
 
-#: includes/importer.php:301
+#: includes/importer.php:297
 msgid "Old Mod date equal to new mod date, Attachment Count : "
 msgstr ""
 
-#: includes/importer.php:305
+#: includes/importer.php:301
 msgid "insert & restore deleted attachments"
 msgstr ""
 
-#: includes/importer.php:309
+#: includes/importer.php:305
 msgid "No new images, Skipping image update"
 msgstr ""
 
-#: includes/importer.php:313
+#: includes/importer.php:309
 msgid "New Images, Updating"
 msgstr ""
 
-#: includes/importer.php:354
+#: includes/importer.php:350
 msgid "EPL Image Processing Started : Old Mod Date : "
 msgstr ""
 
-#: includes/importer.php:354
+#: includes/importer.php:350
 msgid "New Mod Date : "
 msgstr ""
 
-#: includes/importer.php:354
+#: includes/importer.php:350
 msgid "Live Import : "
 msgstr ""
 
-#: includes/importer.php:358
+#: includes/importer.php:354
 msgid "EPL Import : Live import off, default WP All Import functions"
 msgstr ""
 
-#: includes/importer.php:364
+#: includes/importer.php:360
 msgid "Images unchanged, skipping image deletion"
 msgstr ""
 
-#: includes/importer.php:367
+#: includes/importer.php:363
 msgid "Images changes detected, deleting images"
 msgstr ""
 
-#: includes/importer.php:390
+#: includes/importer.php:386
 msgid "Record Skipped"
 msgstr ""
 
-#: includes/importer.php:401
+#: includes/importer.php:397
 msgid "Date modified, updating..."
 msgstr ""
 
-#: includes/importer.php:405
+#: includes/importer.php:401
 msgid "Modified Listing, updating..."
 msgstr ""
 
-#: includes/importer.php:409
+#: includes/importer.php:405
 msgid "Updating Field..."
 msgstr ""
 
-#: includes/importer.php:413
+#: includes/importer.php:409
 msgid "Listing Modified Time Unchanged, Skipping Record Update."
 msgstr ""
 
-#: includes/importer.php:417
+#: includes/importer.php:413
 msgid "Updating Fields:"
 msgstr ""
 
-#: includes/importer.php:421
+#: includes/importer.php:417
 msgid "Skipped, previously imported record found for:"
+msgstr ""
+
+#: includes/importer.php:433
+msgid "Deprecated version running"
+msgstr ""
+
+#: includes/importer.php:470
+msgid "Latest version running"
 msgstr ""
 
 #: includes/meta-boxes-compat.php:23

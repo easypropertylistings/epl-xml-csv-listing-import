@@ -119,39 +119,35 @@ function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 				        $fields = array_filter($fields);
 
 				        if(!empty($fields)) {
-							foreach($fields as $field) {
+						foreach($fields as $field) {
 
-								if ( pmai_is_epl_update_allowed($field['name'], $import_options['options']) ) {
+							if ( pmai_is_epl_update_allowed($field['name'], $import_options['options']) ) {
 
-									if($field['name'] == 'property_images_mod_date') {
-										$old_mod_date = get_post_meta($post_id,'property_images_mod_date',true);
-										update_post_meta($post_id,'property_images_mod_date_old', $old_mod_date);
-										$epl_wpimport->log( 'POST : '.$post_id.': - ' . __('EPL Field Updated:' , 'epl-wpimport') . '`property_images_mod_date_old`' . __('value' , 'epl-wpimport') . '`' . $old_mod_date . '`' );
-	                				}
+								if($field['name'] == 'property_images_mod_date') {
+									$old_mod_date = get_post_meta($post_id,'property_images_mod_date',true);
+									update_post_meta($post_id,'property_images_mod_date_old', $old_mod_date);
+									$epl_wpimport->log( 'POST : '.$post_id.': - ' . __('EPL Field Updated:' , 'epl-wpimport') . '`property_images_mod_date_old`' . __('value' , 'epl-wpimport') . '`' . $old_mod_date . '`' );
+                						}
 
-	                				if($live_import == 'on' && in_array( $field['name'], epl_wpimport_skip_fields() ) ){
+		                				if($live_import == 'on' && in_array( $field['name'], epl_wpimport_skip_fields() ) ){
 
-	                					$existing_value = get_post_meta($post_id,$field['name'],true);
+		                					$existing_value = get_post_meta($post_id,$field['name'],true);
 
-	                					if( !empty($existing_value) ){
-	                						continue;
-	                					}
-
-									}
-
-	                				// Field Import exclude empty fields
-	                				if ( !empty( $data[$field['name']] ) ) {
-
-										update_post_meta($post_id, $field['name'], $data[$field['name']]);
-
-										// Log
-										$epl_wpimport->log( '- ' . __('EPL Field Updated:' , 'epl-wpimport') . '`' . $field['name'] . '` value `' . $data[$field['name']] . '`' );
-									}
-
+		                					if( !empty($existing_value) ){
+		                						continue;
+		                					}
 								}
 
+		                				// Field Import exclude empty fields
+		                				if ( !empty( $data[$field['name']] ) ) {
 
+									update_post_meta($post_id, $field['name'], $data[$field['name']]);
+
+									// Log
+									$epl_wpimport->log( '- ' . __('EPL Field Updated:' , 'epl-wpimport') . '`' . $field['name'] . '` value `' . $data[$field['name']] . '`' );
+								}
 							}
+						}
 				        }
 				}
 			}
@@ -434,7 +430,7 @@ function epl_wpimport_is_post_to_update_depricated( $pid , $xml_node) {
 
 	global $epl_wpimport;
 	//add_action('pmxi_before_post_import', 'epl_wpimport_post_saved_notification', 10, 1);
-	$epl_wpimport->log( '<b>deprecated version running</b>' );
+	$epl_wpimport->log( '<strong>' . __('Deprecated version running' , 'epl-wpimport') . '</strong>' );
 	$live_import	=	function_exists('epl_get_option')  ?  epl_get_option('epl_wpimport_skip_update') : 'off';
 	if ( $live_import == 'on' && get_post_meta($pid,'property_mod_date',true) != '' ) {
 		/** only update posts if new data is available **/
@@ -471,7 +467,7 @@ function epl_wpimport_is_post_to_update( $continue_import,$pid , $xml_node,$impo
 
 	global $epl_wpimport;
 	//add_action('pmxi_before_post_import', 'epl_wpimport_post_saved_notification', 10, 1);
-	$epl_wpimport->log( '<b>latest version running</b>' );
+	$epl_wpimport->log( '<strong>' . __('Latest version running' , 'epl-wpimport') . '</strong>' );
 
 	$live_import	=	function_exists('epl_get_option')  ?  epl_get_option('epl_wpimport_skip_update') : 'off';
 	if ( $live_import == 'on' && get_post_meta($pid,'property_mod_date',true) != '' ) {
