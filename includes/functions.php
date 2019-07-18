@@ -119,15 +119,20 @@ add_action('pmxi_reimport','epl_wpimport_pmxi_reimport',10,2);
 function epl_wpimport_pmxi_custom_field_to_update( $field_to_update, $post_type, $options, $m_key ){
 
 	global $epl_wpimport;
+
+	if ( $field_to_update === false || !in_array($post_type, epl_get_core_post_types() ) ) {
+		return $field_to_update;
+	}
 	
-	if(in_array( $m_key, epl_wpimport_skip_fields() ) ){
+	if( in_array( $m_key, epl_wpimport_skip_fields() ) ){
 
 		$epl_wpimport->log( __( 'EPL IMPORTER' , 'epl-wpimport' ) . ': ' . sprintf( __('Skipping field : %s' , 'epl-wpimport'), $m_key) );
 		return false;
 	}
 
-	if ( $field_to_update === false )
+	if( !$options['is_update_epl'] ) {
 		return $field_to_update;
+	}
 
 	return pmai_is_epl_update_allowed($m_key, $options);
 }
@@ -151,14 +156,16 @@ function epl_wpimport_pmxi_custom_field_to_delete( $field_to_delete, $pid, $post
 		return false;
 	}
 
-	$live_import		= function_exists('epl_get_option')  ?  epl_get_option('epl_wpimport_skip_update') : 'off';
-
-	if($live_import == 'on' && in_array( $cur_meta_key, epl_wpimport_skip_fields() ) ){
+	if( in_array( $cur_meta_key, epl_wpimport_skip_fields() ) ){
 
 		return false;
 	}
 
 	if ( $field_to_delete === false ) return $field_to_delete;
+
+	if( !$options['is_update_epl'] ) {
+		return $field_to_delete;
+	}
 
 	return pmai_is_epl_update_allowed($cur_meta_key, $options);
 }
@@ -202,7 +209,7 @@ add_filter('pmxi_save_options','epl_wpimport_pmxi_save_options');
  */
 function pmai_is_epl_update_allowed( $cur_meta_key, $options ){
 	//epl_print_r($options,true);
-
+	
 	if ($options['update_all_data'] == 'yes') {
 
 		return apply_filters('epl_wpimport_is_epl_update_allowed', true, $cur_meta_key, $options);
