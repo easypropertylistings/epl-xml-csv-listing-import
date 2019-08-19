@@ -2,11 +2,11 @@
 /**
  * Importer Functions
  *
- * @package     EPL-IMPORTER-ADD-ON
- * @subpackage  Functions/Importer
- * @copyright   Copyright (c) 2019, Merv Barrett
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since       1.0
+ * @package    EPL-IMPORTER-ADD-ON
+ * @subpackage Functions/Importer
+ * @copyright  Copyright (c) 2019, Merv Barrett
+ * @license    http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since      1.0
  */
 
 // Exit if accessed directly.
@@ -34,8 +34,8 @@ function epl_wpimport_register_fields() {
 			if ( ! empty( $epl_meta_box['groups'] ) ) {
 				foreach ( $epl_meta_box['groups'] as $group ) {
 					$epl_wpimport->add_title( $group['label'], $group['label'] );
-							$fields = $group['fields'];
-							$fields = array_filter( $fields );
+					$fields = $group['fields'];
+					$fields = array_filter( $fields );
 					if ( ! empty( $fields ) ) {
 						foreach ( $fields as $field ) {
 
@@ -71,7 +71,7 @@ function epl_wpimport_register_fields() {
 									break;
 
 								default:
-									$type = in_array( $field['type'], array( 'text', 'hidden' ) ) ? 'text' : $field['type'];
+									$type = in_array( $field['type'], array( 'text', 'hidden' ), true ) ? 'text' : $field['type'];
 									$epl_wpimport->add_field( $field['name'], $field['label'], $type );
 									break;
 							}
@@ -100,14 +100,13 @@ add_action( 'init', 'epl_wpimport_register_fields' );
 /**
  * Import Function
  *
- * @param string $post_id Post ID.
- * @param string $data Data.
+ * @param string $post_id        Post ID.
+ * @param string $data           Data.
  * @param array  $import_options Options.
  *
  * @since 1.0
  */
 function epl_wpimport_import_function( $post_id, $data, $import_options ) {
-
 	global $epl_wpimport,$epl_ai_meta_fields;
 
 	$imported_metas = array();
@@ -123,8 +122,8 @@ function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 			if ( ! empty( $epl_meta_box['groups'] ) ) {
 				foreach ( $epl_meta_box['groups'] as $group ) {
 
-						$fields = $group['fields'];
-						$fields = array_filter( $fields );
+					$fields = $group['fields'];
+					$fields = array_filter( $fields );
 
 					if ( ! empty( $fields ) ) {
 						foreach ( $fields as $field ) {
@@ -135,10 +134,10 @@ function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 									$old_mod_date = get_post_meta( $post_id, 'property_images_mod_date', true );
 									update_post_meta( $post_id, 'property_images_mod_date_old', $old_mod_date );
 
-									$epl_wpimport->log( '- ' . __( 'Field Updated:', 'epl-wpimport' ) . '`property_images_mod_date_old`' . ' POST: ' . $post_id . ': - ' . __( 'Images Modified Date: ', 'epl-wpimport' ) . '`' . $old_mod_date . '`' );
+									$epl_wpimport->log( '- ' . __( 'Field Updated:', 'epl-wpimport' ) . '`property_images_mod_date_old`  POST: ' . $post_id . ': - ' . __( 'Images Modified Date: ', 'epl-wpimport' ) . '`' . $old_mod_date . '`' );
 								}
 
-								if ( ( isset( $field['import'] ) && $field['import'] == 'preserve' ) || in_array( $field['name'], epl_wpimport_skip_fields() ) ) {
+								if ( ( isset( $field['import'] ) && 'preserve' === $field['import'] ) || in_array( $field['name'], epl_wpimport_skip_fields(), true ) ) {
 
 									$epl_wpimport->log( '- ' . __( 'Field Skipped:', 'epl-wpimport' ) . '`' . $field['name'] . '` value `' . $data[ $field['name'] ] . '`' );
 
@@ -173,12 +172,11 @@ function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 /**
  * Notification that EPL Importer is Running Logging Output
  *
- *  @param string $post_id Post ID.
+ * @param string $post_id Post ID.
  *
  * @since 1.0
  */
 function epl_wpimport_log( $post_id ) {
-
 	global $epl_wpimport;
 
 	// Importer Title.
@@ -188,7 +186,7 @@ function epl_wpimport_log( $post_id ) {
 	$live_import = function_exists( 'epl_get_option' ) ? epl_get_option( 'epl_wpimport_skip_update' ) : 'off';
 
 	// Live Import Label.
-	$live_import_label = $live_import == 'on' ? __( 'Record Skipping Enabled', 'epl-wpimport' ) : __( 'Record Skipping Disabled', 'epl-wpimport' );
+	$live_import_label = 'on' === $live_import ? __( 'Record Skipping Enabled', 'epl-wpimport' ) : __( 'Record Skipping Disabled', 'epl-wpimport' );
 
 	// Log EPL All Importer Activation Status.
 	$epl_wpimport->log( $epl_wpimport_label . '<b>' . $live_import_label . '</b>' );
@@ -204,12 +202,11 @@ add_action( 'pmxi_before_post_import', 'epl_wpimport_log', 10, 1 );
  * @since 1.0
  */
 function epl_wpimport_log_pmxi_gallery_image( $post_id ) {
-
 	/**
 	* Parameters
-	* $pid 			– the ID of the post/page/Custom Post Type that was just created.
-	* $attid 		– the ID of the attachment
-	* $image_filepath 	– the full path to the file: C:\path\to\wordpress\wp-content\uploads\2010\05\filename.png
+	* $pid – the ID of the post/page/Custom Post Type that was just created.
+	* $attid – the ID of the attachment
+	* $image_filepath – the full path to the file: C:\path\to\wordpress\wp-content\uploads\2010\05\filename.png
 	*/
 
 	global $epl_wpimport;
@@ -220,8 +217,8 @@ function epl_wpimport_log_pmxi_gallery_image( $post_id ) {
 	// Live Import Status.
 	$live_import = function_exists( 'epl_get_option' ) ? epl_get_option( 'epl_wpimport_skip_update' ) : 'off';
 
-	// Live Import Label
-	$live_import_label = $live_import == 'on' ? __( 'Record Skipping Enabled for Images', 'epl-wpimport' ) : __( 'Record Skipping Disabled for Images', 'epl-wpimport' );
+	// Live Import Label.
+	$live_import_label = 'on' === $live_import ? __( 'Record Skipping Enabled for Images', 'epl-wpimport' ) : __( 'Record Skipping Disabled for Images', 'epl-wpimport' );
 
 	// Log EPL All Importer Activation Status.
 	$epl_wpimport->log( $epl_wpimport_label . '<b>' . $live_import_label . '</b>' );
@@ -231,10 +228,10 @@ add_action( 'pmxi_before_post_import', 'epl_wpimport_log_pmxi_gallery_image', 10
 /**
  * Update notification: Skipped
  *
- * @param string $vars Variables
+ * @param string $vars Variables.
  *
  * @return mixed
- * @since 1.0
+ * @since  1.0
  */
 function epl_wpimport_post_skipped_notification( $vars ) {
 	global $epl_wpimport;
@@ -248,21 +245,20 @@ function epl_wpimport_post_skipped_notification( $vars ) {
  * Image loop
  *
  * @param string $unique_id Meta key property_unique_id.
- * @param string $mod_time Modified date and time.
- * @param string $url Url.
- * @param string $id Image ID.
+ * @param string $mod_time  Modified date and time.
+ * @param string $url       Url.
+ * @param string $id        Image ID.
  *
  * @since 1.0
  */
 function epl_wpimport_img_loop( $unique_id, $mod_time, $url, $id ) {
-
 	$urls = array_unique( array_filter( explode( ',', $url ) ) );
 	$len  = count( $urls );
 	$i    = 0;
 	foreach ( $urls as $index => $img_src ) {
-		if ( $img_src != '' ) {
-			echo $url;
-			if ( $i == $len - 1 ) {
+		if ( ! empty( $img_src ) ) {
+			echo esc_url( $url );
+		 if ( $i === $len - 1 ) { //phpcs:ignore
 				// Last.
 			} else {
 				echo "\n";
@@ -275,15 +271,14 @@ function epl_wpimport_img_loop( $unique_id, $mod_time, $url, $id ) {
 /**
  * Skip image uploading if if images mod date is not newer
  *
- * @param string $default Default type.
+ * @param string $default     Default type.
  * @param object $post_object Post object.
- * @param object $xml_object XML object.
+ * @param object $xml_object  XML object.
  *
  * @return bool
- * @since 1.0
+ * @since  1.0
  */
 function epl_wpimport_is_image_to_update( $default, $post_object, $xml_object ) {
-
 	$live_import = function_exists( 'epl_get_option' ) ? epl_get_option( 'epl_wpimport_skip_update' ) : 'off';
 
 	if ( 'off' === $live_import ) {
@@ -291,37 +286,38 @@ function epl_wpimport_is_image_to_update( $default, $post_object, $xml_object ) 
 	}
 	global $epl_wpimport;
 
+	$prop_img_mod_date = get_post_meta( $post_object['ID'], 'property_images_mod_date', true );
 	// Only upload images which are recently modified.
-	if ( get_post_meta( $post_object['ID'], 'property_images_mod_date', true ) != '' ) {
+	if ( ! empty( $prop_img_mod_date ) ) {
 		$new_mod_date = strtotime(
 			epl_feedsync_format_date(
 				get_post_meta( $post_object['ID'], 'property_images_mod_date', true )
 			)
 		);
 
-			$old_mod_date = strtotime(
-				epl_feedsync_format_date(
-					get_post_meta( $post_object['ID'], 'property_images_mod_date_old', true )
-				)
-			);
+		$old_mod_date = strtotime(
+			epl_feedsync_format_date(
+				get_post_meta( $post_object['ID'], 'property_images_mod_date_old', true )
+			)
+		);
 
-			$epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . __( 'Image Updating process started: Old Modified Date: ', 'epl-wpimport' ) . $old_mod_date . ' - ' . __( 'New Modified Date:', 'epl-wpimport' ) . ' ' . $new_mod_date );
+		$epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . __( 'Image Updating process started: Old Modified Date: ', 'epl-wpimport' ) . $old_mod_date . ' - ' . __( 'New Modified Date:', 'epl-wpimport' ) . ' ' . $new_mod_date );
 
 		if ( $old_mod_date < $new_mod_date ) {
 			$epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . __( 'Updated Images, Uploading', 'epl-wpimport' ) . '...' );
 			return true;
 		} else {
 
-				$attachments = get_children(
-					array(
-						'post_parent' => $post_object['ID'],
-						'post_type'   => 'attachment',
-					)
-				);
-				$count       = count( $attachments );
+			$attachments = get_children(
+				array(
+					'post_parent' => $post_object['ID'],
+					'post_type'   => 'attachment',
+				)
+			);
+			$count       = count( $attachments );
 
 			// If attachment count is 0 then maybe all attachments are deleted for this listings due to faulty old mod date.
-			if ( absint( $count ) == 0 ) {
+			if ( 0 === absint( $count ) ) {
 				if ( $old_mod_date > $new_mod_date ) {
 
 					$epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . __( 'Old Modified date greater than new modified date. Attachment Count: ', 'epl-wpimport' ) . $count );
@@ -336,8 +332,8 @@ function epl_wpimport_is_image_to_update( $default, $post_object, $xml_object ) 
 				return true;
 			}
 
-				$epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . __( 'No new images, skipping image update', 'epl-wpimport' ) );
-				return false;
+			$epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . __( 'No new images, skipping image update', 'epl-wpimport' ) );
+			return false;
 		}
 	} else {
 		$epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . __( 'New Images, updating', 'epl-wpimport' ) );
@@ -349,19 +345,20 @@ add_filter( 'pmxi_is_images_to_update', 'epl_wpimport_is_image_to_update', 10, 3
 /**
  * Skip old image deletion if images mod date is not newer
  *
- * @param string $default Default type.
+ * @param string $default     Default type.
  * @param object $post_object Post object.
- * @param object $xml_object XML object.
+ * @param object $xml_object  XML object.
  *
  * @return bool
- * @since 1.0
+ * @since  1.0
  */
 function epl_wpimport_delete_images( $default, $post_object, $xml_object ) {
-
 	global $epl_wpimport;
 	$live_import = function_exists( 'epl_get_option' ) ? epl_get_option( 'epl_wpimport_skip_update' ) : 'off';
 
-	if ( get_post_meta( $post_object['ID'], 'property_images_mod_date', true ) != '' ) {
+	$prop_img_mod_date = get_post_meta( $post_object['ID'], 'property_images_mod_date', true );
+
+	if ( ! empty( $prop_img_mod_date ) ) {
 		$mod_date = strtotime(
 			epl_feedsync_format_date(
 				get_post_meta( $post_object['ID'], 'property_images_mod_date', true )
@@ -378,8 +375,8 @@ function epl_wpimport_delete_images( $default, $post_object, $xml_object ) {
 		} else {
 			$new_mod_date =
 			isset( $xml_object['images']['img'] ) ?
-				current( $xml_object['images']['img'][0]['modTime'] ) :
-				current( $xml_object['objects']['img'][0]['modTime'] );
+			current( $xml_object['images']['img'][0]['modTime'] ) :
+			current( $xml_object['objects']['img'][0]['modTime'] );
 		}
 	}
 
@@ -393,13 +390,13 @@ function epl_wpimport_delete_images( $default, $post_object, $xml_object ) {
 		return $default;
 	} else {
 		// possible delete.
-		if ( $mod_date == $new_mod_date ) {
+		if ( $mod_date === $new_mod_date ) {
 			// DO not delete.
 			$epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . __( 'Images unchanged, skipping image deletion', 'epl-wpimport' ) );
 			return false;
 		} else {
 			$epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . __( 'Images changes detected, deleting images', 'epl-wpimport' ) );
-			 return true;
+			return true;
 
 		}
 	}
@@ -412,12 +409,11 @@ add_filter( 'pmxi_delete_images', 'epl_wpimport_delete_images', 10, 3 );
  * Notification that EPL Importer is Running
  *
  * @param string      $notification Notification type.
- * @param bool|object $post_id Post ID.
+ * @param bool|object $post_id      Post ID.
  *
  * @since 1.0
  */
 function epl_wpimport_notification( $notification = 'skip', $post_id = false ) {
-
 	global $epl_wpimport;
 
 	// Importer Title.
@@ -464,20 +460,25 @@ function epl_wpimport_notification( $notification = 'skip', $post_id = false ) {
 /**
  * Only update post of mod date is newer
  *
- * @param string $pid Post unique ID.
+ * @param string $pid      Post unique ID.
  * @param array  $xml_node XML node.
  *
  * @return bool
- * @since 1.0
+ * @since  1.0
  */
 function epl_wpimport_is_post_to_update_depricated( $pid, $xml_node ) {
-
 	global $epl_wpimport;
-	// Attemt: add_action('pmxi_before_post_import', 'epl_wpimport_post_saved_notification', 10, 1);.
+
 	$epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . __( 'Deprecated version running', 'epl-wpimport' ) );
 	$live_import = function_exists( 'epl_get_option' ) ? epl_get_option( 'epl_wpimport_skip_update' ) : 'off';
-	if ( 'on' === $live_import && get_post_meta( $pid, 'property_mod_date', true ) != '' ) {
-		/** only update posts if new data is available */
+
+	$prop_mod_date = get_post_meta( $pid, 'property_mod_date', true );
+
+	if ( 'on' === $live_import && ! empty( $prop_mod_date ) ) {
+		/**
+*
+	* Only update posts if new data is available
+*/
 		$postmodtime   = epl_feedsync_format_date( get_post_meta( $pid, 'property_mod_date', true ) );
 		$updatemodtime = epl_feedsync_format_date( $xml_node['@attributes']['modTime'] );
 		$updatemodtime = apply_filters( 'epl_import_mod_time', $updatemodtime, $xml_node, $pid );
@@ -506,21 +507,23 @@ function epl_wpimport_is_post_to_update_depricated( $pid, $xml_node ) {
  * Only update post of mod date is newer for WP ALL Import Pro version > = 4.5.0
  *
  * @param string $continue_import Continue or not.
- * @param string $pid Post ID.
- * @param string $xml_node XML node.
- * @param string $import_id Import ID.
+ * @param string $pid             Post ID.
+ * @param string $xml_node        XML node.
+ * @param string $import_id       Import ID.
  *
  * @return bool
- * @since 1.0
+ * @since  1.0
  */
 function epl_wpimport_is_post_to_update( $continue_import, $pid, $xml_node, $import_id ) {
-
 	global $epl_wpimport;
-	// Atempt: add_action('pmxi_before_post_import', 'epl_wpimport_post_saved_notification', 10, 1);.
+
 	$epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . __( 'Latest version running', 'epl-wpimport' ) );
 
 	$live_import = function_exists( 'epl_get_option' ) ? epl_get_option( 'epl_wpimport_skip_update' ) : 'off';
-	if ( $live_import == 'on' && get_post_meta( $pid, 'property_mod_date', true ) != '' ) {
+
+	$prop_mod_date = get_post_meta( $pid, 'property_mod_date', true );
+
+	if ( 'on' === $live_import && ! empty( $prop_mod_date ) ) {
 		// Only update posts if new data is available.
 		$postmodtime   = epl_feedsync_format_date( get_post_meta( $pid, 'property_mod_date', true ) );
 		$updatemodtime = epl_feedsync_format_date( $xml_node['@attributes']['modTime'] );
@@ -555,13 +558,12 @@ if ( defined( 'PMXI_VERSION' ) && version_compare( PMXI_VERSION, '4.5.0', '<' ) 
  * Format Date function for EAC API
  *
  * @param string $date The date.
- * @param string $sep The date separator.
+ * @param string $sep  The date separator.
  *
  * @return false|string|void
- * @since 1.0.7
+ * @since  1.0.7
  */
 function epl_feedsync_format_date_eac( $date, $sep = '/' ) {
-
 	if ( empty( $date ) ) {
 		return;
 	}
