@@ -554,7 +554,7 @@ if ( defined( 'PMXI_VERSION' ) && version_compare( PMXI_VERSION, '4.5.0', '<' ) 
 /**
  * Format Date function for EAC API
  *
- * @param sring $date The date.
+ * @param string $date The date.
  * @param string $sep The date separator.
  *
  * @return false|string|void
