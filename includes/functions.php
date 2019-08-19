@@ -134,7 +134,7 @@ add_action( 'pmxi_reimport', 'epl_wpimport_pmxi_reimport', 10, 2 );
 /**
  * Filter to check which meta fields will be updated
  *
- * @param string $field_to_update
+ * @param string    $field_to_update
  * @param $post_type
  * @param $options
  * @param $m_key
@@ -177,6 +177,8 @@ add_filter( 'pmxi_custom_field_to_update', 'epl_wpimport_pmxi_custom_field_to_up
  * @since 2.0
  */
 function epl_wpimport_pmxi_custom_field_to_delete( $field_to_delete, $pid, $post_type, $options, $cur_meta_key ) {
+
+	// TODO: Correct undefined variables $m_key and $field_to_update.
 
 	if ( ! in_array( $m_key, epl_wpimport_get_meta_keys() ) ) {
 		return $field_to_update;
