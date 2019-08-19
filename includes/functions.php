@@ -9,7 +9,7 @@
  * @since       2.0
  */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -17,8 +17,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Get EPL meta fields
  *
+ * @return mixed|void
  * @since 2.0
- * @return [type] [description]
  */
 function epl_wpimport_get_meta_fields() {
 
@@ -36,9 +36,8 @@ function epl_wpimport_get_meta_fields() {
  * Custom EPL settings in import settings
  *
  * @since  2.0
- * @param  [type] $entry [description]
- * @param  [type] $post  [description]
- * @return [type]        [description]
+ * @param  array  $entry Import entry.
+ * @param  string $post  Post ID.
  */
 function epl_wpimport_pmxi_reimport( $entry, $post ) {
 
@@ -133,12 +132,13 @@ add_action( 'pmxi_reimport', 'epl_wpimport_pmxi_reimport', 10, 2 );
 /**
  * Filter to check which meta fields will be updated
  *
+ * @param string $field_to_update Meta field name.
+ * @param string $post_type Post type name.
+ * @param array  $options Options.
+ * @param string $m_key Meta key.
+ *
+ * @return bool|mixed|string|void
  * @since 2.0
- * @param  [type] $field_to_update [description]
- * @param  [type] $post_type       [description]
- * @param  [type] $options         [description]
- * @param  [type] $m_key           [description]
- * @return [type]                  [description]
  */
 function epl_wpimport_pmxi_custom_field_to_update( $field_to_update, $post_type, $options, $m_key ) {
 
@@ -146,11 +146,12 @@ function epl_wpimport_pmxi_custom_field_to_update( $field_to_update, $post_type,
 
 	if ( in_array( $m_key, epl_wpimport_skip_fields() ) ) {
 
-		$epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . sprintf( __( 'Skipping field : %s', 'epl-wpimport' ), $m_key ) );
+		/* Translators: %s is the meta field name. */
+        $epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . sprintf( __( 'Skipping field : %s', 'epl-wpimport' ), $m_key ) );
 		return false;
 	}
 
-	if ( $field_to_update === false ) {
+	if ( false === $field_to_update ) {
 		return $field_to_update;
 	}
 
@@ -161,29 +162,30 @@ add_filter( 'pmxi_custom_field_to_update', 'epl_wpimport_pmxi_custom_field_to_up
 /**
  * Filter to check which meta fields will get deleted
  *
+ * @param string $field_to_delete Meta field name to delete.
+ * @param string $pid Importer element ID.
+ * @param string $post_type Post type name.
+ * @param array  $options Options.
+ * @param string $cur_meta_key Meta key name.
+ *
+ * @return bool|mixed|string|void
  * @since 2.0
- * @param  [type] $field_to_delete [description]
- * @param  [type] $pid             [description]
- * @param  [type] $post_type       [description]
- * @param  [type] $options         [description]
- * @param  [type] $cur_meta_key    [description]
- * @return [type]                  [description]
  */
 function epl_wpimport_pmxi_custom_field_to_delete( $field_to_delete, $pid, $post_type, $options, $cur_meta_key ) {
 
-	/** dont let wp all import pro delete image mod date */
-	if ( $cur_meta_key == 'property_images_mod_date' || $cur_meta_key == 'property_images_mod_date_old' ) {
+	// Dont let wp all import pro delete image mod date.
+	if ( 'property_images_mod_date' === $cur_meta_key || 'property_images_mod_date_old' === $cur_meta_key ) {
 		return false;
 	}
 
 	$live_import = function_exists( 'epl_get_option' ) ? epl_get_option( 'epl_wpimport_skip_update' ) : 'off';
 
-	if ( $live_import == 'on' && in_array( $cur_meta_key, epl_wpimport_skip_fields() ) ) {
+	if ( 'on' === $live_import && in_array( $cur_meta_key, epl_wpimport_skip_fields() ) ) {
 
 		return false;
 	}
 
-	if ( $field_to_delete === false ) {
+	if ( false === $field_to_delete ) {
 		return $field_to_delete;
 	}
 
@@ -195,8 +197,8 @@ add_filter( 'pmxi_custom_field_to_delete', 'epl_wpimport_pmxi_custom_field_to_de
  * Save custom EPL settings for WP ALL Import
  *
  * @since 2.0
- * @param  [type] $post [description]
- * @return [type]       [description]
+ * @param  string $post Post ID.
+ * @return object
  */
 function epl_wpimport_pmxi_save_options( $post ) {
 
@@ -208,9 +210,9 @@ function epl_wpimport_pmxi_save_options( $post ) {
 		$post['epl_except_list']  = isset( $_POST['epl_except_list'] ) ? $_POST['epl_except_list'] : '';
 		$post['epl_list']         = isset( $_POST['epl_list'] ) ? $_POST['epl_list'] : '';
 
-		if ( $post['update_epl_logic'] == 'only' ) {
+		if ( 'only' === $post['update_epl_logic'] ) {
 			$post['epl_list'] = explode( ',', $post['epl_only_list'] );
-		} elseif ( $post['update_epl_logic'] == 'all_except' ) {
+		} elseif ( 'all_except' === $post['update_epl_logic'] ) {
 			$post['epl_list'] = explode( ',', $post['epl_except_list'] );
 		}
 	}
@@ -221,27 +223,27 @@ add_filter( 'pmxi_save_options', 'epl_wpimport_pmxi_save_options' );
 /**
  * Check if meta field update is allowed on not
  *
+ * @param string $cur_meta_key Meta key name.
+ * @param array  $options Options.
+ *
+ * @return mixed|void
  * @since 2.0
- * @param  [type] $cur_meta_key [description]
- * @param  [type] $options      [description]
- * @return [type]               [description]
  */
 function pmai_is_epl_update_allowed( $cur_meta_key, $options ) {
-	// epl_print_r($options,true);
 
-	if ( $options['update_all_data'] == 'yes' ) {
-
-		return apply_filters( 'epl_wpimport_is_epl_update_allowed', true, $cur_meta_key, $options );
-	}
-
-	if ( $options['update_all_data'] == 'no' and $options['is_update_epl'] and $options['update_epl_logic'] == 'full_update' ) {
+	if ( 'yes' === $options['update_all_data'] ) {
 
 		return apply_filters( 'epl_wpimport_is_epl_update_allowed', true, $cur_meta_key, $options );
 	}
 
-	if ( $options['update_all_data'] == 'no' and $options['is_update_epl'] and $options['update_epl_logic'] == 'only' ) {
+	if ( 'no' === $options['update_all_data'] && $options['is_update_epl'] && 'full_update' === $options['update_epl_logic'] ) {
 
-		if ( ! empty( $options['epl_list'] ) and is_array( $options['epl_list'] ) ) {
+		return apply_filters( 'epl_wpimport_is_epl_update_allowed', true, $cur_meta_key, $options );
+	}
+
+	if ( 'no' === $options['update_all_data'] && $options['is_update_epl'] && 'only' === $options['update_epl_logic'] ) {
+
+		if ( ! empty( $options['epl_list'] ) && is_array( $options['epl_list'] ) ) {
 
 			foreach ( $options['epl_list'] as $key => $epl_field ) {
 
@@ -257,10 +259,10 @@ function pmai_is_epl_update_allowed( $cur_meta_key, $options ) {
 		}
 	}
 
-	// Leave these epl alone, update all other epl
-	if ( $options['update_all_data'] == 'no' and $options['is_update_epl'] and $options['update_epl_logic'] == 'all_except' ) {
+	// Leave these epl alone, update all other epl.
+	if ( 'no' === $options['update_all_data'] && $options['is_update_epl'] && 'all_except' === $options['update_epl_logic'] ) {
 
-		if ( ! empty( $options['epl_list'] ) and is_array( $options['epl_list'] ) ) {
+		if ( ! empty( $options['epl_list'] ) && is_array( $options['epl_list'] ) ) {
 			foreach ( $options['epl_list'] as $key => $epl_field ) {
 
 				$parts_temp = explode( ' ', $epl_field );
@@ -282,8 +284,8 @@ function pmai_is_epl_update_allowed( $cur_meta_key, $options ) {
 /**
  * Don't update these fields
  *
+ * @return mixed|void
  * @since 2.0
- * @return [type] [description]
  */
 function epl_wpimport_skip_fields() {
 
