@@ -9,7 +9,7 @@
  * @since       1.0
  */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -17,6 +17,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Display options configured from admin panel
  *
+ * @param null|array $epl_fields Custom fields array.
+ *
+ * @return null
  * @since 1.0
  */
 function epl_wpimport_extensions_options_filter( $epl_fields = null ) {
