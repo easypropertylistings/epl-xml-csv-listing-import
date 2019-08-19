@@ -9,7 +9,7 @@
  * @since       2.0
  */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -17,8 +17,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Get EPL meta fields
  *
+ * @return mixed|void
  * @since 2.0
- * @return [type] [description]
  */
 function epl_wpimport_get_meta_fields() {
 
@@ -133,12 +133,13 @@ add_action( 'pmxi_reimport', 'epl_wpimport_pmxi_reimport', 10, 2 );
 /**
  * Filter to check which meta fields will be updated
  *
+ * @param string $field_to_update
+ * @param $post_type
+ * @param $options
+ * @param $m_key
+ *
+ * @return bool|mixed|void
  * @since 2.0
- * @param  [type] $field_to_update [description]
- * @param  [type] $post_type       [description]
- * @param  [type] $options         [description]
- * @param  [type] $m_key           [description]
- * @return [type]                  [description]
  */
 function epl_wpimport_pmxi_custom_field_to_update( $field_to_update, $post_type, $options, $m_key ) {
 
