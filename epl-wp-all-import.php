@@ -29,23 +29,25 @@
  * @version 2.0
  */
 
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit;
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
-	/*
+	/**
 	 * Main EPL_WP_All_Import_Add_On Class
 	 *
 	 * @since 1.0
 	 */
 	final class EPL_WP_All_Import_Add_On {
-		/*
+		/**
 		 * @var EPL_WP_All_Import_Add_On The one true EPL_WP_All_Import_Add_On
 		 * @since 1.0
 		 */
 		private static $instance;
 
-		/*
+		/**
 		 * Main EPL_WP_All_Import_Add_On Instance
 		 *
 		 * Insures that only one instance of EPL_WP_All_Import_Add_On exists in memory at any one time.
@@ -56,15 +58,15 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 		 * @staticvar array $instance
 		 * @uses EPL_WP_All_Import_Add_On::includes() Include the required files
 		 * @see EPL_TM()
-		 * @return The one true EPL_WP_All_Import_Add_On
+		 * @return object|EPL_WP_All_Import_Add_On The one true EPL_WP_All_Import_Add_On
 		 */
 		public static function instance() {
 			if ( ! isset( self::$instance ) && ! ( self::$instance instanceof EPL_WP_All_Import_Add_On ) ) {
-				self::$instance = new EPL_WP_All_Import_Add_On;
+				self::$instance = new EPL_WP_All_Import_Add_On();
 				self::$instance->hooks();
 				self::$instance->setup_constants();
 				self::$instance->load_textdomain();
-				if ( defined('EPL_RUNNING') ) {
+				if ( defined( 'EPL_RUNNING' ) ) {
 					self::$instance->includes();
 				}
 			}
@@ -79,26 +81,27 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 		 * @return void
 		 */
 		private function hooks() {
-			// activation
+			// activation.
 			add_action( 'admin_init', array( $this, 'activation' ) );
-			add_action( 'activated_plugin', array($this, 'epl_wpallimport_load_epl_core_first' ) );
+			add_action( 'activated_plugin', array( $this, 'epl_wpallimport_load_epl_core_first' ) );
 		}
 
 		/**
 		 * Activation function fires when the plugin is activated.
+		 *
 		 * @since 1.0
 		 * @access public
 		 *
 		 * @return void
 		 */
 		public function activation() {
-			if ( ! defined('EPL_RUNNING') ) {
+			if ( ! defined( 'EPL_RUNNING' ) ) {
 				// is this plugin active?
 				if ( is_plugin_active( plugin_basename( __FILE__ ) ) ) {
-			 		// unset activation notice
-			 		unset( $_GET[ 'activate' ] );
-			 		// display notice
-			 		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
+					// unset activation notice.
+					unset( $_GET['activate'] );
+					// display notice.
+					add_action( 'admin_notices', array( $this, 'admin_notices' ) );
 				}
 			}
 		}
@@ -107,15 +110,15 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 		 * Admin notices
 		 *
 		 * @since 1.0
-		*/
+		 */
 		public function admin_notices() {
-			if ( ! defined('EPL_RUNNING') ) {
+			if ( ! defined( 'EPL_RUNNING' ) ) {
 				echo '<div class="error"><p>';
 				_e( 'Please activate <b>Easy Property Listings</b> to enable all functions of the EPL Import Add-On', 'epl-wpimport' );
 				echo '</p></div>';
 			}
 		}
-		/*
+		/**
 		 * Setup plugin constants
 		 *
 		 * @access private
@@ -124,28 +127,28 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 		 */
 		private function setup_constants() {
 
-			// Plugin File
+			// Plugin File.
 			if ( ! defined( 'EPL_WPIMPORT_PLUGIN_FILE' ) ) {
 				define( 'EPL_WPIMPORT_PLUGIN_FILE', __FILE__ );
 			}
 
-			// Plugin Folder URL
+			// Plugin Folder URL.
 			if ( ! defined( 'EPL_WPIMPORT_PLUGIN_URL' ) ) {
 				define( 'EPL_WPIMPORT_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 			}
 
-			// Plugin Folder Path
+			// Plugin Folder Path.
 			if ( ! defined( 'EPL_WPIMPORT_PLUGIN_PATH' ) ) {
 				define( 'EPL_WPIMPORT_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 			}
 
-			// Plugin Sub-Directory Paths
+			// Plugin Sub-Directory Paths.
 			if ( ! defined( 'EPL_WPIMPORT_PLUGIN_PATH_INCLUDES' ) ) {
 				define( 'EPL_WPIMPORT_PLUGIN_PATH_INCLUDES', EPL_WPIMPORT_PLUGIN_PATH . 'includes/' );
 			}
 
 		}
-		/*
+		/**
 		 * Include required files
 		 *
 		 * @access private
@@ -159,7 +162,7 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 			require_once EPL_WPIMPORT_PLUGIN_PATH_INCLUDES . 'importer.php';
 		}
 
-		/*
+		/**
 		 * Force Easy Property Listings to load first on activation
 		 *
 		 * @access private
@@ -187,32 +190,32 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 		 * @return void
 		 */
 		public function load_textdomain() {
-			// Set filter for plugin's languages directory
+			// Set filter for plugin's languages directory.
 			$epl_lang_dir = EPL_WPIMPORT_PLUGIN_PATH . 'languages/';
 			$epl_lang_dir = apply_filters( 'epl_wpimport_languages_directory', $epl_lang_dir );
 
-			// Traditional WordPress plugin locale filter
-			$locale        = apply_filters( 'plugin_locale',  get_locale(), 'epl-wpimport' );
-			$mofile        = sprintf( '%1$s-%2$s.mo', 'epl', $locale );
+			// Traditional WordPress plugin locale filter.
+			$locale = apply_filters( 'plugin_locale', get_locale(), 'epl-wpimport' );
+			$mofile = sprintf( '%1$s-%2$s.mo', 'epl', $locale );
 
-			// Setup paths to current locale file
+			// Setup paths to current locale file.
 			$mofile_local  = $epl_lang_dir . $mofile;
 			$mofile_global = WP_LANG_DIR . '/epl-wpimport/' . $mofile;
 
 			if ( file_exists( $mofile_global ) ) {
-				// Look in global /wp-content/languages/epl-wpimport folder
+				// Look in global /wp-content/languages/epl-wpimport folder.
 				load_textdomain( 'epl-wpimport', $mofile_global );
 			} elseif ( file_exists( $mofile_local ) ) {
-				// Look in local /wp-content/plugins/easy-property-listings-xml-csv-import/languages/ folder
+				// Look in local /wp-content/plugins/easy-property-listings-xml-csv-import/languages/ folder.
 				load_textdomain( 'epl-wpimport', $mofile_local );
 			} else {
-				// Load the default language files
+				// Load the default language files.
 				load_plugin_textdomain( 'epl-wpimport', false, $epl_lang_dir );
 			}
 		}
 	}
-endif; // End if class_exists check
-/*
+endif; // End if class_exists check.
+/**
  * The main function responsible for returning the one true EPL_WP_All_Import_Add_On
  * Instance to functions everywhere.
  *
@@ -227,5 +230,5 @@ endif; // End if class_exists check
 function EPL_WPIMPORT() {
 	return EPL_WP_All_Import_Add_On::instance();
 }
-// Get EPL_WPIMPORT Running
+// Get EPL_WPIMPORT Running.
 add_action( 'plugins_loaded', 'EPL_WPIMPORT' );
