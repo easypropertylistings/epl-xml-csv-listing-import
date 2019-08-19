@@ -7,9 +7,6 @@
 # OS X metadata
 .DS_Store
 
-# ApiGen
-/epl-apidocs/
-
 # Windows junk
 Thumbs.db
 
