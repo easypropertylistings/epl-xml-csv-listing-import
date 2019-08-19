@@ -35,10 +35,11 @@ function epl_wpimport_get_meta_fields() {
 /**
  * Custom EPL settings in import settings
  *
+ * @param string $entry Entry.
+ * @param object $post Post.
+ *
+ * @return void
  * @since  2.0
- * @param  [type] $entry [description]
- * @param  [type] $post  [description]
- * @return [type]        [description]
  */
 function epl_wpimport_pmxi_reimport( $entry, $post ) {
 
@@ -166,13 +167,14 @@ add_filter( 'pmxi_custom_field_to_update', 'epl_wpimport_pmxi_custom_field_to_up
 /**
  * Filter to check which meta fields will get deleted
  *
+ * @param string $field_to_delete Meta key.
+ * @param string $pid WP All Import ID.
+ * @param string $post_type Post Type.
+ * @param array  $options Options.
+ * @param string $cur_meta_key Current meta key.
+ *
+ * @return bool|mixed|void
  * @since 2.0
- * @param  [type] $field_to_delete [description]
- * @param  [type] $pid             [description]
- * @param  [type] $post_type       [description]
- * @param  [type] $options         [description]
- * @param  [type] $cur_meta_key    [description]
- * @return [type]                  [description]
  */
 function epl_wpimport_pmxi_custom_field_to_delete( $field_to_delete, $pid, $post_type, $options, $cur_meta_key ) {
 
@@ -180,8 +182,8 @@ function epl_wpimport_pmxi_custom_field_to_delete( $field_to_delete, $pid, $post
 		return $field_to_update;
 	}
 
-	/** dont let wp all import pro delete image mod date */
-	if ( $cur_meta_key == 'property_images_mod_date' || $cur_meta_key == 'property_images_mod_date_old' ) {
+	// Don't let wp all import pro delete image mod date.
+	if ( 'property_images_mod_date' === $cur_meta_key || 'property_images_mod_date_old' === $cur_meta_key ) {
 		return false;
 	}
 
