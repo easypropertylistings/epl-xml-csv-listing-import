@@ -30,7 +30,9 @@
  */
 
 // Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 	/*
@@ -60,11 +62,11 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 		 */
 		public static function instance() {
 			if ( ! isset( self::$instance ) && ! ( self::$instance instanceof EPL_WP_All_Import_Add_On ) ) {
-				self::$instance = new EPL_WP_All_Import_Add_On;
+				self::$instance = new EPL_WP_All_Import_Add_On();
 				self::$instance->hooks();
 				self::$instance->setup_constants();
 				self::$instance->load_textdomain();
-				if ( defined('EPL_RUNNING') ) {
+				if ( defined( 'EPL_RUNNING' ) ) {
 					self::$instance->includes();
 				}
 			}
@@ -81,24 +83,25 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 		private function hooks() {
 			// activation
 			add_action( 'admin_init', array( $this, 'activation' ) );
-			add_action( 'activated_plugin', array($this, 'epl_wpallimport_load_epl_core_first' ) );
+			add_action( 'activated_plugin', array( $this, 'epl_wpallimport_load_epl_core_first' ) );
 		}
 
 		/**
 		 * Activation function fires when the plugin is activated.
+		 *
 		 * @since 1.0
 		 * @access public
 		 *
 		 * @return void
 		 */
 		public function activation() {
-			if ( ! defined('EPL_RUNNING') ) {
+			if ( ! defined( 'EPL_RUNNING' ) ) {
 				// is this plugin active?
 				if ( is_plugin_active( plugin_basename( __FILE__ ) ) ) {
-			 		// unset activation notice
-			 		unset( $_GET[ 'activate' ] );
-			 		// display notice
-			 		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
+					// unset activation notice
+					unset( $_GET['activate'] );
+					// display notice
+					add_action( 'admin_notices', array( $this, 'admin_notices' ) );
 				}
 			}
 		}
@@ -107,9 +110,9 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 		 * Admin notices
 		 *
 		 * @since 1.0
-		*/
+		 */
 		public function admin_notices() {
-			if ( ! defined('EPL_RUNNING') ) {
+			if ( ! defined( 'EPL_RUNNING' ) ) {
 				echo '<div class="error"><p>';
 				_e( 'Please activate <b>Easy Property Listings</b> to enable all functions of the EPL Import Add-On', 'epl-wpimport' );
 				echo '</p></div>';
@@ -192,8 +195,8 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 			$epl_lang_dir = apply_filters( 'epl_wpimport_languages_directory', $epl_lang_dir );
 
 			// Traditional WordPress plugin locale filter
-			$locale        = apply_filters( 'plugin_locale',  get_locale(), 'epl-wpimport' );
-			$mofile        = sprintf( '%1$s-%2$s.mo', 'epl', $locale );
+			$locale = apply_filters( 'plugin_locale', get_locale(), 'epl-wpimport' );
+			$mofile = sprintf( '%1$s-%2$s.mo', 'epl', $locale );
 
 			// Setup paths to current locale file
 			$mofile_local  = $epl_lang_dir . $mofile;
