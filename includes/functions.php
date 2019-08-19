@@ -157,7 +157,7 @@ function epl_wpimport_pmxi_custom_field_to_update( $field_to_update, $post_type,
 	if ( in_array( $m_key, epl_wpimport_skip_fields() ) ) {
 
 		/* Translators: %s is the meta key name. */
-	    $epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . sprintf( __( 'Skipping field : %s', 'epl-wpimport' ), $m_key ) );
+		$epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . sprintf( __( 'Skipping field : %s', 'epl-wpimport' ), $m_key ) );
 		return false;
 	}
 
