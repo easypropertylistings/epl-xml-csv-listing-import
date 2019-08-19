@@ -72,7 +72,7 @@ function epl_wpimport_pmxi_reimport( $entry, $post ) {
 		}
 	}
 	$update_epl_logic = $post['update_epl_logic'];
-	$update_epl_logic = $update_epl_logic == '' ? 'full_update' : $update_epl_logic;
+	$update_epl_logic = '' == $update_epl_logic ? 'full_update' : $update_epl_logic;
 
 	?>
 
@@ -134,10 +134,10 @@ add_action( 'pmxi_reimport', 'epl_wpimport_pmxi_reimport', 10, 2 );
 /**
  * Filter to check which meta fields will be updated
  *
- * @param string    $field_to_update
- * @param $post_type
- * @param $options
- * @param $m_key
+ * @param string $field_to_update Meta key to update.
+ * @param string $post_type Post type.
+ * @param array  $options Options.
+ * @param string $m_key Meta key.
  *
  * @return bool|mixed|void
  * @since 2.0
@@ -150,13 +150,14 @@ function epl_wpimport_pmxi_custom_field_to_update( $field_to_update, $post_type,
 		return $field_to_update;
 	}
 
-	if ( $field_to_update === false || ! in_array( $post_type, epl_get_core_post_types() ) ) {
+	if ( false === $field_to_update || ! in_array( $post_type, epl_get_core_post_types() ) ) {
 		return $field_to_update;
 	}
 
 	if ( in_array( $m_key, epl_wpimport_skip_fields() ) ) {
 
-		$epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . sprintf( __( 'Skipping field : %s', 'epl-wpimport' ), $m_key ) );
+		/* Translators: %s is the meta key name. */
+	    $epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . sprintf( __( 'Skipping field : %s', 'epl-wpimport' ), $m_key ) );
 		return false;
 	}
 
@@ -189,7 +190,7 @@ function epl_wpimport_pmxi_custom_field_to_delete( $field_to_delete, $pid, $post
 		return false;
 	}
 
-	if ( $field_to_update === false || ! in_array( $post_type, epl_get_core_post_types() ) ) {
+	if ( false === $field_to_update || ! in_array( $post_type, epl_get_core_post_types() ) ) {
 		return $field_to_update;
 	}
 
@@ -224,9 +225,9 @@ function epl_wpimport_pmxi_save_options( $post ) {
 		$post['epl_except_list']  = isset( $_POST['epl_except_list'] ) ? $_POST['epl_except_list'] : '';
 		$post['epl_list']         = isset( $_POST['epl_list'] ) ? $_POST['epl_list'] : '';
 
-		if ( $post['update_epl_logic'] == 'only' ) {
+		if ( 'only' === $post['update_epl_logic'] ) {
 			$post['epl_list'] = explode( ',', $post['epl_only_list'] );
-		} elseif ( $post['update_epl_logic'] == 'all_except' ) {
+		} elseif ( 'all_except' === $post['update_epl_logic'] ) {
 			$post['epl_list'] = explode( ',', $post['epl_except_list'] );
 		}
 	}
@@ -238,7 +239,7 @@ add_filter( 'pmxi_save_options', 'epl_wpimport_pmxi_save_options' );
  * Check if meta field update is allowed on not
  *
  * @param string $cur_meta_key Meta key.
- * @param array $options Options.
+ * @param array  $options Options.
  *
  * @return mixed|void
  * @since 2.0
