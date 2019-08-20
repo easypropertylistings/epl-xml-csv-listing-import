@@ -52,10 +52,9 @@ function epl_wpimport_register_fields() {
 								case 'decimal':
 								case 'number':
 								case 'checkbox':
-								case 'checkbox_single':
 									$epl_wpimport->add_field( $field['name'], $field['label'], 'text' );
 									break;
-
+								case 'checkbox_single':
 								case 'select':
 								case 'radio':
 									$opts = isset( $field['opts'] ) ? $field['opts'] : array();
