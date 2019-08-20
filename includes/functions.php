@@ -182,8 +182,6 @@ add_filter( 'pmxi_custom_field_to_update', 'epl_wpimport_pmxi_custom_field_to_up
  */
 function epl_wpimport_pmxi_custom_field_to_delete( $field_to_delete, $pid, $post_type, $options, $cur_meta_key ) {
 
-	// TODO: Correct undefined variables $m_key and $field_to_update.
-
 	if ( ! in_array( $cur_meta_key, epl_wpimport_get_meta_keys(), true ) ) {
 		return $field_to_delete;
 	}
