@@ -184,8 +184,8 @@ function epl_wpimport_pmxi_custom_field_to_delete( $field_to_delete, $pid, $post
 
 	// TODO: Correct undefined variables $m_key and $field_to_update.
 
-	if ( ! in_array( $m_key, epl_wpimport_get_meta_keys(), true ) ) {
-		return $field_to_update;
+	if ( ! in_array( $cur_meta_key, epl_wpimport_get_meta_keys(), true ) ) {
+		return $field_to_delete;
 	}
 
 	// Don't let wp all import pro delete image mod date.
@@ -193,8 +193,8 @@ function epl_wpimport_pmxi_custom_field_to_delete( $field_to_delete, $pid, $post
 		return false;
 	}
 
-	if ( false === $field_to_update || ! in_array( $post_type, epl_get_core_post_types(), true ) ) {
-		return $field_to_update;
+	if ( false === $field_to_delete || ! in_array( $post_type, epl_get_core_post_types(), true ) ) {
+		return $field_to_delete;
 	}
 
 	if ( in_array( $cur_meta_key, epl_wpimport_skip_fields(), true ) ) {
