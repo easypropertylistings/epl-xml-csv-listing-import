@@ -145,6 +145,20 @@ function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 								// Field Import exclude empty fields.
 								if ( ! empty( $data[ $field['name'] ] ) ) {
 
+									if ( 'file' === $field['type'] ) {
+										// If its a file type dont save whole array as meta data, only URL.
+										if ( is_array( $data[ $field['name'] ] ) ) {
+
+											if ( ! empty( $data[ $field['name'] ] ) ) {
+
+												$data[ $field['name'] ] = $data[ $field['name'] ]['image_url_or_path'];
+
+											} else {
+												$data[ $field['name'] ] = '';
+											}
+										}
+									}
+
 									update_post_meta( $post_id, $field['name'], $data[ $field['name'] ] );
 
 									// Log.
