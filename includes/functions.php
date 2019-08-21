@@ -73,15 +73,15 @@ function epl_wpimport_pmxi_reimport( $entry, $post ) {
 			}
 		}
 	}
-	$update_epl_logic = $post['update_epl_logic'];
+	$update_epl_logic = isset( $post['update_epl_logic'] ) ? $post['update_epl_logic'] : '';
 	$update_epl_logic = '' == $update_epl_logic ? 'full_update' : $update_epl_logic; //phpcs:ignore
-
+	$is_update_epl = isset( $post['is_update_epl'] ) ? $post['is_update_epl'] : '';
 	?>
 
 	<div class="input">
 		<input type="hidden" name="epl_list" value="0" />
 		<input type="hidden" name="is_update_epl" value="0" />
-		<input type="checkbox" id="is_update_epl_<?php echo esc_attr( $entry ); ?>" name="is_update_epl" value="1" <?php echo $post['is_update_epl'] ? 'checked="checked"' : ''; ?>  class="switcher"/>
+		<input type="checkbox" id="is_update_epl_<?php echo esc_attr( $entry ); ?>" name="is_update_epl" value="1" <?php echo $is_update_epl ? 'checked="checked"' : ''; ?>  class="switcher"/>
 		<label for="is_update_epl_<?php echo esc_attr( $entry ); ?>"><?php esc_html_e( 'Easy Property Listings Custom Fields', 'epl-wpimport' ); ?></label>
 		<div class="switcher-target-is_update_epl_<?php echo esc_attr( $entry ); ?>" style="padding-left:17px;">
 			<div class="input">
@@ -90,7 +90,7 @@ function epl_wpimport_pmxi_reimport( $entry, $post ) {
 			</div>
 
 			<div class="input">
-				<input type="radio" id="update_epl_logic_only_<?php echo esc_attr( $entry ); ?>" name="update_epl_logic" value="only" <?php echo ( 'only' === $post['update_epl_logic'] ) ? 'checked="checked"' : ''; ?> class="switcher"/>
+				<input type="radio" id="update_epl_logic_only_<?php echo esc_attr( $entry ); ?>" name="update_epl_logic" value="only" <?php echo ( 'only' === $update_epl_logic ) ? 'checked="checked"' : ''; ?> class="switcher"/>
 				<label for="update_epl_logic_only_<?php echo esc_attr( $entry ); ?>"><?php esc_html_e( 'Update only these EPL fields, leave the rest alone', 'epl-wpimport' ); ?></label>
 				<div class="switcher-target-update_epl_logic_only_<?php echo esc_attr( $entry ); ?> pmxi_choosen" style="padding-left:17px;">
 
@@ -103,14 +103,14 @@ function epl_wpimport_pmxi_reimport( $entry, $post ) {
 					</span>
 					<input class="choosen_input" value="
 					<?php
-					if ( ! empty( $post['epl_list'] ) && 'only' === $post['update_epl_logic'] ) {
+					if ( ! empty( $post['epl_list'] ) && 'only' === $update_epl_logic ) {
 						echo esc_attr( implode( ',', $post['epl_list'] ) );}
 					?>
 					" type="hidden" name="epl_only_list"/>
 				</div>
 			</div>
 			<div class="input">
-				<input type="radio" id="update_epl_logic_all_except_<?php echo esc_attr( $entry ); ?>" name="update_epl_logic" value="all_except" <?php echo ( 'all_except' === $post['update_epl_logic'] ) ? 'checked="checked"' : ''; ?> class="switcher"/>
+				<input type="radio" id="update_epl_logic_all_except_<?php echo esc_attr( $entry ); ?>" name="update_epl_logic" value="all_except" <?php echo ( 'all_except' === $update_epl_logic ) ? 'checked="checked"' : ''; ?> class="switcher"/>
 				<label for="update_epl_logic_all_except_<?php echo esc_attr( $entry ); ?>"><?php esc_html_e( 'Leave these EPL fields alone, update all other fields', 'epl-wpimport' ); ?></label>
 				<div class="switcher-target-update_epl_logic_all_except_<?php echo esc_attr( $entry ); ?> pmxi_choosen" style="padding-left:17px;">
 
