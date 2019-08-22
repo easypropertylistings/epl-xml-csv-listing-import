@@ -371,16 +371,12 @@ function epl_wpimport_delete_images( $default, $post_object, $xml_object ) {
 	$prop_img_mod_date = get_post_meta( $post_object['ID'], 'property_images_mod_date', true );
 
 	if ( ! empty( $prop_img_mod_date ) ) {
-		$mod_date = strtotime(
-			epl_feedsync_format_date(
-				get_post_meta( $post_object['ID'], 'property_images_mod_date', true )
-			)
-		);
+		$mod_date = strtotime( epl_feedsync_format_date( $prop_img_mod_date ) );
 	}
 
 	// Check if image mod time tag is present, use it.
-	if ( isset( $xml_object['feedsync_image_modtime'] ) ) {
-		$new_mod_date = $xml_object['feedsync_image_modtime'];
+	if ( isset( $xml_object['feedsyncImageModtime'] ) ) {
+		$new_mod_date = $xml_object['feedsyncImageModtime'];
 	} else {
 		if ( function_exists( 'EPL_MLS' ) ) {
 			$new_mod_date = $xml_object['images']['@attributes']['modTime'];
