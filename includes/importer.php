@@ -46,6 +46,7 @@ function epl_wpimport_register_fields() {
 									break;
 
 								case 'url':
+								case 'file':
 								case 'date':
 								case 'sold-date':
 								case 'auction-date':
