@@ -75,7 +75,7 @@ function epl_wpimport_pmxi_reimport( $entry, $post ) {
 	}
 	$update_epl_logic = isset( $post['update_epl_logic'] ) ? $post['update_epl_logic'] : '';
 	$update_epl_logic = '' == $update_epl_logic ? 'full_update' : $update_epl_logic; //phpcs:ignore
-	$is_update_epl = isset( $post['is_update_epl'] ) ? $post['is_update_epl'] : '';
+	$is_update_epl    = isset( $post['is_update_epl'] ) ? $post['is_update_epl'] : '';
 	?>
 
 	<div class="input">

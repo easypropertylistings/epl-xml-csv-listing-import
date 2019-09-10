@@ -102,7 +102,7 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 				// is this plugin active?
 				if ( is_plugin_active( plugin_basename( __FILE__ ) ) ) {
 					// unset activation notice.
-                    unset( $_GET['activate'] ); //phpcs:ignore
+					unset( $_GET['activate'] ); //phpcs:ignore
 					// display notice.
 					add_action( 'admin_notices', array( $this, 'admin_notices' ) );
 				}
@@ -177,7 +177,7 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 			if ( is_plugin_active( $epl_core_path ) ) {
 				$plugins = get_option( 'active_plugins' );
 				if ( $plugins ) {
-                    $key = array_search( $epl_core_path, $plugins ); //phpcs:ignore
+					$key = array_search( $epl_core_path, $plugins ); //phpcs:ignore
 					if ( $key ) {
 						array_splice( $plugins, $key, 1 );
 						array_unshift( $plugins, $epl_core_path );
