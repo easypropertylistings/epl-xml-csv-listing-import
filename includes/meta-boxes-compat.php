@@ -9,8 +9,10 @@
  * @since       1.0
  */
 
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit;
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Variables List required for meta boxes
@@ -20,6 +22,11 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 function epl_allimport_get_meta_fields() {
 	global $epl_settings;
 
+	if( ! function_exists( 'epl_get_property_status_opts' ) ) {
+		// Old EPL running, bail out.
+		return;
+	}
+	
 	$opts_property_status              = epl_get_property_status_opts();
 	$opts_property_authority           = epl_get_property_authority_opts();
 	$opts_property_exclusivity         = epl_get_property_exclusivity_opts();
@@ -31,7 +38,7 @@ function epl_allimport_get_meta_fields() {
 	$opts_property_com_property_extent = epl_get_property_com_property_extent_opts();
 
 	global $epl_allimport_meta_boxes;
-	
+
 	$epl_allimport_meta_boxes = array(
 
 		array(
@@ -113,11 +120,11 @@ function epl_allimport_get_meta_fields() {
 						),
 
 						array(
-							'name'      => 'property_list_date',
-							'label'     => __( 'Date Listed', 'easy-property-listings' ),
-							'type'      => 'date',
-							'maxlength' => '100',
-							'autocomplete'	=>	'off'
+							'name'         => 'property_list_date',
+							'label'        => __( 'Date Listed', 'easy-property-listings' ),
+							'type'         => 'date',
+							'maxlength'    => '100',
+							'autocomplete' => 'off',
 						),
 
 						array(
@@ -152,11 +159,11 @@ function epl_allimport_get_meta_fields() {
 						),
 
 						array(
-							'name'      => 'property_mod_date',
-							'label'     => __( 'XML Importer Mod Date', 'easy-property-listings' ),
-							'type'      => 'text',
-							'maxlength' => '60',
-							'autocomplete'	=>	'off'
+							'name'         => 'property_mod_date',
+							'label'        => __( 'XML Importer Mod Date', 'easy-property-listings' ),
+							'type'         => 'text',
+							'maxlength'    => '60',
+							'autocomplete' => 'off',
 						),
 
 						array(
@@ -933,11 +940,11 @@ function epl_allimport_get_meta_fields() {
 						),
 
 						array(
-							'name'      => 'property_auction',
-							'label'     => __( 'Auction Date', 'easy-property-listings' ),
-							'type'      => 'auction-date',
-							'maxlength' => '100',
-							'autocomplete'	=>	'off'
+							'name'         => 'property_auction',
+							'label'        => __( 'Auction Date', 'easy-property-listings' ),
+							'type'         => 'auction-date',
+							'maxlength'    => '100',
+							'autocomplete' => 'off',
 						),
 
 						array(
@@ -983,11 +990,11 @@ function epl_allimport_get_meta_fields() {
 						),
 
 						array(
-							'name'      => 'property_sold_date',
-							'label'     => __( 'Sale Date', 'easy-property-listings' ),
-							'type'      => 'sold-date',
-							'maxlength' => '100',
-							'autocomplete'	=>	'off'
+							'name'         => 'property_sold_date',
+							'label'        => __( 'Sale Date', 'easy-property-listings' ),
+							'type'         => 'sold-date',
+							'maxlength'    => '100',
+							'autocomplete' => 'off',
 						),
 
 						array(
@@ -1061,19 +1068,19 @@ function epl_allimport_get_meta_fields() {
 						),
 
 						array(
-							'name'      => 'property_date_available',
-							'label'     => __( 'Date Available', 'easy-property-listings' ),
-							'type'      => 'date',
-							'maxlength' => '100',
-							'autocomplete'	=>	'off'
+							'name'         => 'property_date_available',
+							'label'        => __( 'Date Available', 'easy-property-listings' ),
+							'type'         => 'date',
+							'maxlength'    => '100',
+							'autocomplete' => 'off',
 						),
 
 						array(
-							'name'      => 'property_date_leased',
-							'label'     => __( 'Leased Date', 'easy-property-listings' ),
-							'type'      => 'date',
-							'maxlength' => '100',
-							'autocomplete'	=>	'off'
+							'name'         => 'property_date_leased',
+							'label'        => __( 'Leased Date', 'easy-property-listings' ),
+							'type'         => 'date',
+							'maxlength'    => '100',
+							'autocomplete' => 'off',
 						),
 
 						array(
@@ -1212,11 +1219,11 @@ function epl_allimport_get_meta_fields() {
 						),
 
 						array(
-							'name'      => 'property_com_lease_end_date',
-							'label'     => __( 'Lease End Date', 'easy-property-listings' ),
-							'type'      => 'date',
-							'maxlength' => '100',
-							'autocomplete'	=>	'off'
+							'name'         => 'property_com_lease_end_date',
+							'label'        => __( 'Lease End Date', 'easy-property-listings' ),
+							'type'         => 'date',
+							'maxlength'    => '100',
+							'autocomplete' => 'off',
 						),
 
 						array(
@@ -1534,24 +1541,25 @@ function epl_allimport_get_meta_fields() {
 		),
 	);
 
-	if(!empty($epl_allimport_meta_boxes)) {
-		foreach($epl_allimport_meta_boxes as &$epl_meta_box) {
-			$meta_box_block_id = str_replace("-","_",$epl_meta_box['id']);
-			$epl_meta_box = apply_filters('epl_meta_box_block_'.$meta_box_block_id,$epl_meta_box);
-			if(!empty($epl_meta_box['groups'])) {
-				foreach($epl_meta_box['groups'] as &$group) {
-					$group = apply_filters('epl_meta_groups_'.$group['id'], $group);
-					if(!empty($group['fields'])) {
-						$group['fields'] = array_filter($group['fields']);
-						foreach($group['fields'] as &$fieldvalue) {
+	if ( ! empty( $epl_allimport_meta_boxes ) ) {
+		foreach ( $epl_allimport_meta_boxes as &$epl_meta_box ) {
+			$meta_box_block_id = str_replace( '-', '_', $epl_meta_box['id'] );
+			$epl_meta_box      = apply_filters( 'epl_meta_box_block_' . $meta_box_block_id, $epl_meta_box );
+			if ( ! empty( $epl_meta_box['groups'] ) ) {
+				foreach ( $epl_meta_box['groups'] as &$group ) {
+					$group = apply_filters( 'epl_meta_groups_' . $group['id'], $group );
+					if ( ! empty( $group['fields'] ) ) {
+						$group['fields'] = array_filter( $group['fields'] );
+						foreach ( $group['fields'] as &$fieldvalue ) {
 
-							$fieldvalue = apply_filters('epl_meta_'.$fieldvalue['name'], $fieldvalue);
+							$fieldvalue = apply_filters( 'epl_meta_' . $fieldvalue['name'], $fieldvalue );
 						}
 					}
-
 				}
 			}
 		}
-		return $epl_allimport_meta_boxes = apply_filters('epl_listing_meta_boxes', $epl_allimport_meta_boxes);
+
+		$epl_allimport_meta_boxes = apply_filters( 'epl_listing_meta_boxes', $epl_allimport_meta_boxes );
+		return $epl_allimport_meta_boxes;
 	}
 }
