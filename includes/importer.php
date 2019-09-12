@@ -122,20 +122,21 @@ function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 
 				        if(!empty($fields)) {
 							foreach($fields as $field) {
-
 								if ( pmai_is_epl_update_allowed($field['name'], $import_options['options']) ) {
 
 									if($field['name'] == 'property_images_mod_date') {
+
 										$old_mod_date = get_post_meta($post_id,'property_images_mod_date',true);
 										update_post_meta($post_id,'property_images_mod_date_old', $old_mod_date);
+
 										$epl_wpimport->log( '- ' . __('Field Updated:' , 'epl-wpimport') . '`property_images_mod_date_old`' . ' POST: ' . $post_id . ': - ' . __('Images Modified Date: ' , 'epl-wpimport') . '`' . $old_mod_date . '`' );
-	                						}
+            						}
 
-			                				if( ( isset($field['import']) && $field['import'] == 'preserve' ) || in_array( $field['name'], epl_wpimport_skip_fields() ) ){
+	                				if( ( isset($field['import']) && $field['import'] == 'preserve' ) || in_array( $field['name'], epl_wpimport_skip_fields() ) ){
 
-			                					$epl_wpimport->log( '- ' . __('Field Skipped:' , 'epl-wpimport') . '`' . $field['name'] . '` value `' . $data[$field['name']] . '`' );
+	                					$epl_wpimport->log( '- ' . __('Field Skipped:' , 'epl-wpimport') . '`' . $field['name'] . '` value `' . $data[$field['name']] . '`' );
 
-		                						continue;
+                						continue;
 									}
 
 	                				// Field Import exclude empty fields
