@@ -175,7 +175,7 @@ function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 		}
 
 		if ( ! empty( $imported_metas ) ) {
-			$epl_wpimport->log( '- ' . __( 'All EPL Fields Updated', 'epl-wpimport' ) );
+			$epl_wpimport->log( '- ' . __( 'EPL Fields Updated', 'epl-wpimport' ) );
 		} else {
 			$epl_wpimport->log( '- ' . __( 'Preserve EPL Fields', 'epl-wpimport' ) );
 		}
