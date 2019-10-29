@@ -526,7 +526,7 @@ function epl_wpimport_is_post_to_update_depricated( $pid, $xml_node ) {
 function epl_wpimport_is_post_to_update( $continue_import, $pid, $xml_node, $import_id ) {
 	global $epl_wpimport;
 
-	$epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . __( 'Latest version running', 'epl-wpimport' ) );
+	$epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . __( 'Active', 'epl-wpimport' ) );
 
 	$live_import = function_exists( 'epl_get_option' ) ? epl_get_option( 'epl_wpimport_skip_update' ) : 'off';
 
