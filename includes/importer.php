@@ -175,7 +175,7 @@ function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 		}
 
 		if ( ! empty( $imported_metas ) ) {
-			$epl_wpimport->log( '- ' . __( 'All EPL Fields Updated', 'epl-wpimport' ) );
+			$epl_wpimport->log( '- ' . __( 'EPL Fields Updated', 'epl-wpimport' ) );
 		} else {
 			$epl_wpimport->log( '- ' . __( 'Preserve EPL Fields', 'epl-wpimport' ) );
 		}
@@ -526,7 +526,7 @@ function epl_wpimport_is_post_to_update_depricated( $pid, $xml_node ) {
 function epl_wpimport_is_post_to_update( $continue_import, $pid, $xml_node, $import_id ) {
 	global $epl_wpimport;
 
-	$epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . __( 'Latest version running', 'epl-wpimport' ) );
+	$epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . __( 'Active', 'epl-wpimport' ) );
 
 	$live_import = function_exists( 'epl_get_option' ) ? epl_get_option( 'epl_wpimport_skip_update' ) : 'off';
 
