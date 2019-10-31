@@ -292,7 +292,7 @@ function epl_wpimport_img_loop( $unique_id, $mod_time, $url, $id ) {
  * @since  1.0
  */
 function epl_wpimport_is_image_to_update( $default, $post_object, $xml_object ) {
-	if( ! in_array( $post_object['post_object'], epl_get_core_post_types(), true ) ) {
+	if( ! in_array( $post_object['post_type'], epl_get_core_post_types(), true ) ) {
 		return $default;
 	}
 	$live_import = function_exists( 'epl_get_option' ) ? epl_get_option( 'epl_wpimport_skip_update' ) : 'off';
@@ -369,7 +369,7 @@ add_filter( 'pmxi_is_images_to_update', 'epl_wpimport_is_image_to_update', 10, 3
  * @since  1.0
  */
 function epl_wpimport_delete_images( $default, $post_object, $xml_object ) {
-	if( ! in_array( $post_object['post_object'], epl_get_core_post_types(), true ) ) {
+	if( ! in_array( $post_object['post_type'], epl_get_core_post_types(), true ) ) {
 		return $default;
 	}
 	global $epl_wpimport;
