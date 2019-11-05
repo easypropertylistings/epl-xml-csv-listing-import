@@ -394,7 +394,7 @@ function epl_wpimport_delete_images( $default, $post_object, $xml_object ) {
 			current( $xml_object['objects']['img'][0]['modTime'] );
 		}
 	}
-	$new_mod_date = apply_filters('epl_import_new_mod_date', $new_mod_date, $xml_object, $post_object );
+	$new_mod_date = apply_filters('epl_import_image_new_mod_date', $new_mod_date, $xml_object, $post_object );
 	$new_mod_date = strtotime( epl_feedsync_format_date( $new_mod_date ) );
 
 	$epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . __( 'Image Processing Started: Old Modified Date: ', 'epl-wpimport' ) . $mod_date . ' - ' . __( 'New Modified Date: ', 'epl-wpimport' ) . $new_mod_date . ' ' . __( 'Live Import: ', 'epl-wpimport' ) . $live_import );
