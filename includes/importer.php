@@ -367,6 +367,7 @@ add_filter( 'pmxi_is_images_to_update', 'epl_wpimport_is_image_to_update', 10, 3
  *
  * @return bool
  * @since  1.0
+ * @since 2.0.0 Added new filter epl_import_image_new_mod_date.
  */
 function epl_wpimport_delete_images( $default, $post_object, $xml_object ) {
 	if( ! in_array( $post_object['post_type'], epl_get_core_post_types(), true ) ) {
