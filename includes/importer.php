@@ -292,7 +292,7 @@ function epl_wpimport_img_loop( $unique_id, $mod_time, $url, $id ) {
  * @since  1.0
  */
 function epl_wpimport_is_image_to_update( $default, $post_object, $xml_object ) {
-	if( ! in_array( $post_object['post_object'], epl_get_core_post_types(), true ) ) {
+	if( ! in_array( $post_object['post_type'], epl_get_core_post_types(), true ) ) {
 		return $default;
 	}
 	$live_import = function_exists( 'epl_get_option' ) ? epl_get_option( 'epl_wpimport_skip_update' ) : 'off';
@@ -367,9 +367,10 @@ add_filter( 'pmxi_is_images_to_update', 'epl_wpimport_is_image_to_update', 10, 3
  *
  * @return bool
  * @since  1.0
+ * @since 2.0.0 Added new filter epl_import_image_new_mod_date.
  */
 function epl_wpimport_delete_images( $default, $post_object, $xml_object ) {
-	if( ! in_array( $post_object['post_object'], epl_get_core_post_types(), true ) ) {
+	if( ! in_array( $post_object['post_type'], epl_get_core_post_types(), true ) ) {
 		return $default;
 	}
 	global $epl_wpimport;
@@ -394,7 +395,7 @@ function epl_wpimport_delete_images( $default, $post_object, $xml_object ) {
 			current( $xml_object['objects']['img'][0]['modTime'] );
 		}
 	}
-
+	$new_mod_date = apply_filters('epl_import_image_new_mod_date', $new_mod_date, $xml_object, $post_object );
 	$new_mod_date = strtotime( epl_feedsync_format_date( $new_mod_date ) );
 
 	$epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . __( 'Image Processing Started: Old Modified Date: ', 'epl-wpimport' ) . $mod_date . ' - ' . __( 'New Modified Date: ', 'epl-wpimport' ) . $new_mod_date . ' ' . __( 'Live Import: ', 'epl-wpimport' ) . $live_import );
