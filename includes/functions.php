@@ -182,29 +182,15 @@ add_filter( 'pmxi_custom_field_to_update', 'epl_wpimport_pmxi_custom_field_to_up
  */
 function epl_wpimport_pmxi_custom_field_to_delete( $field_to_delete, $pid, $post_type, $options, $cur_meta_key ) {
 
-	if ( ! in_array( $cur_meta_key, epl_wpimport_get_meta_keys(), true ) ) {
+	if ( ! in_array( $post_type, epl_get_core_post_types(), true ) ) {
 		return $field_to_delete;
 	}
-
-	// Don't let wp all import pro delete image mod date.
-	if ( 'property_images_mod_date' === $cur_meta_key || 'property_images_mod_date_old' === $cur_meta_key ) {
-		return false;
+	
+	if ( in_array( $cur_meta_key, epl_wpimport_get_meta_keys(), true ) ) {
+		return false; // dont delete EPL fields
 	}
 
-	if ( false === $field_to_delete || ! in_array( $post_type, epl_get_core_post_types(), true ) ) {
-		return $field_to_delete;
-	}
-
-	if ( in_array( $cur_meta_key, epl_wpimport_skip_fields(), true ) ) {
-
-		return false;
-	}
-
-	if ( false === $field_to_delete ) {
-		return $field_to_delete;
-	}
-
-	return pmai_is_epl_update_allowed( $cur_meta_key, $options );
+	return $field_to_delete;
 }
 add_filter( 'pmxi_custom_field_to_delete', 'epl_wpimport_pmxi_custom_field_to_delete', 10, 5 );
 
