@@ -37,13 +37,12 @@ module.exports = function( grunt ) {
 					]
 				}
 			}
-		},
-
+		}
 	});
 
 	grunt.loadNpmTasks( 'grunt-wp-i18n' );
 
-	// Register tasks
+	// Register tasks.
 	grunt.registerTask( 'default', [
 		'makepot'
 	]);
