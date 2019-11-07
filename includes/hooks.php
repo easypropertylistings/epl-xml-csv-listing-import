@@ -30,11 +30,13 @@ function epl_wpimport_extensions_options_filter( $epl_fields = null ) {
 
 	$intro = '<p>' . __( '<strong>Getting Started</strong>: Once you have configured your imports using WP All Import, enable record skipping for fast efficient listing import.', 'epl-wpimport' ) . '</p>';
 
-	$intro .= '<p>' . __( 'When this setting is enabled and the import is run, the listings unique modified time is compared to the value in the imported data.
+	$intro .= '<p>' . __(
+		'When this setting is enabled and the import is run, the listings unique modified time is compared to the value in the imported data.
 		If the data is newer then the value in WordPress the listing will update.
-		This also performs a similar check with the modified image time allowing the data to update and not them images, greatly improving import performance.', 'epl-wpimport' ) . '</p>';
+		This also performs a similar check with the modified image time allowing the data to update and not them images, greatly improving import performance.', 'epl-wpimport'
+	) . '</p>';
 
-	$intro .= '<p>' .sprintf(
+	$intro .= '<p>' . sprintf(
 		/* Translators: %1$s and %2$s are links. */
 		__( 'Visit the <a href="%1$s">codex</a> for detailed instructions.', 'epl-wpimport' ),
 		esc_url( 'https://codex.easypropertylistings.com.au/category/343-wp-all-import-add-on' )
