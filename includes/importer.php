@@ -482,7 +482,7 @@ function epl_wpimport_notification( $notification = 'skip', $post_id = false ) {
  * @return bool
  * @since  1.0
  */
-function epl_wpimport_is_post_to_update_depricated( $pid, $xml_node ) {
+function epl_wpimport_is_post_to_update_depreciated( $pid, $xml_node ) {
 	global $epl_wpimport;
 
 	$epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . __( 'Deprecated version running', 'epl-wpimport' ) );
@@ -565,7 +565,7 @@ function epl_wpimport_is_post_to_update( $continue_import, $pid, $xml_node, $imp
 	return true;
 }
 if ( defined( 'PMXI_VERSION' ) && version_compare( PMXI_VERSION, '4.5.0', '<' ) ) {
-	add_filter( 'wp_all_import_is_post_to_update', 'epl_wpimport_is_post_to_update_depricated', 10, 2 );
+	add_filter( 'wp_all_import_is_post_to_update', 'epl_wpimport_is_post_to_update_depreciated', 10, 2 );
 } else {
 	add_filter( 'wp_all_import_is_post_to_update', 'epl_wpimport_is_post_to_update', 10, 4 );
 }
