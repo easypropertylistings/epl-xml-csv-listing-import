@@ -191,6 +191,11 @@ function epl_wpimport_pmxi_custom_field_to_delete( $field_to_delete, $pid, $post
 		return false; // dont delete EPL fields
 	}
 
+	// Don't let wp all import pro delete image mod date.
+	if ( 'property_images_mod_date_old' === $cur_meta_key ) {
+		return false;
+	}
+
 	return $field_to_delete;
 }
 add_filter( 'pmxi_custom_field_to_delete', 'epl_wpimport_pmxi_custom_field_to_delete', 10, 5 );
