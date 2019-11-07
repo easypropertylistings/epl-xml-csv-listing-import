@@ -179,6 +179,7 @@ add_filter( 'pmxi_custom_field_to_update', 'epl_wpimport_pmxi_custom_field_to_up
  *
  * @return bool|mixed|void
  * @since 2.0
+ * @since 2.0.0 Removed epl custom field deleting process.
  */
 function epl_wpimport_pmxi_custom_field_to_delete( $field_to_delete, $pid, $post_type, $options, $cur_meta_key ) {
 
