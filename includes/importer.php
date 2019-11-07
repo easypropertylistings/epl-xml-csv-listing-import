@@ -136,7 +136,7 @@ function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 									$epl_wpimport->log( '- ' . __( 'Field Updated:', 'epl-wpimport' ) . '`property_images_mod_date_old`  POST: ' . $post_id . ': - ' . __( 'Images Modified Date: ', 'epl-wpimport' ) . '`' . $old_mod_date . '`' );
 								}
 
-								if ( ( isset( $field['import'] ) && 'preserve' === $field['import'] ) || in_array( $field['name'], epl_wpimport_skip_fields(), true ) ) {
+								if ( epl_wpimport_is_field_skipped( $field ) ) {
 
 									$epl_wpimport->log( '- ' . __( 'Field Skipped:', 'epl-wpimport' ) . '`' . $field['name'] . '` value `' . $data[ $field['name'] ] . '`' );
 
