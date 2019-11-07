@@ -387,9 +387,9 @@ function epl_wpimport_get_meta_keys() {
 /**
  * Determine if a field needs to be skipped while importing.
  *
- * @param      <type> $field  The field
+ * @param      string $field  The field.
  *
- * @return     boolean  ( description_of_the_return_value )
+ * @return     boolean
  * @since      2.0.0
  */
 function epl_wpimport_is_field_skipped( $field ) {
