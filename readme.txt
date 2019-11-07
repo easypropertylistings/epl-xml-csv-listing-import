@@ -5,7 +5,7 @@ Contributors: mervb1
 Donate link: https://easypropertylistings.com.au/support-the-site/
 Tags: extension, easy property listings, wp all import, wp all import pro, csv, xml, xls, import, reaxml, jupix, BLM, MLS, real estate listings, property, rental, land, rural, business, commercial
 Requires at least: 3.3
-Tested up to: 5.2.2
+Tested up to: 5.2.4
 Stable Tag: 1.0.11
 License: GNU Version 2 or Any Later Version
 
@@ -34,7 +34,6 @@ Supported formats are CSV, XML and XLS files with full support for the Australia
 4. Configure your imports from Dashboard > All Import > New Import.
 5. Enable the Activate once initial import is set option from Dashboard > Easy Property Listings > Extensions > WP All Import Add-On
 
-
 == Screenshots ==
 
 1. Advanced Import Record Skipping Setting
@@ -44,10 +43,9 @@ Supported formats are CSV, XML and XLS files with full support for the Australia
 5. Extended log entry only updating listing if necessary saving space and time
 6. Recommend Import settings
 
-
 == Change log ==
 
-= 2.0.0 September 12, 2019 =
+= 2.0.0 November 7, 2019 =
 
 * New: Select and override importer fields.
 * New: Filter epl_wpimport_skip_fields allowing record skipping of specific fields when importer is set to update everything. This allows you to use the featured listing system in EPL with imported data and by default will not update property_featured, property_year_built, property_owner custom fields.
