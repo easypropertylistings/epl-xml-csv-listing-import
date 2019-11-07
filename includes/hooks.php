@@ -33,7 +33,7 @@ function epl_wpimport_extensions_options_filter( $epl_fields = null ) {
 	$intro .= '<p>' . __(
 		'When this setting is enabled and the import is run, the listings unique modified time is compared to the value in the imported data.
 		If the data is newer then the value in WordPress the listing will update.
-		This also performs a similar check with the modified image time allowing the data to update and not them images, greatly improving import performance.', 'epl-wpimport'
+		This also performs a similar check with the modified image time allowing the data to update and not the images, greatly improving import performance.', 'epl-wpimport'
 	) . '</p>';
 
 	$intro .= '<p>' . sprintf(
