@@ -1,984 +1,951 @@
-#, fuzzy
+# Copyright (C) 2019 Merv Barrett
+# This file is distributed under the same license as the Easy Property Listings Import CSV, XML WP All Import Add On package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Easy Property Listings XML CSV Import 1.0.11\n"
-"Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/easy-property-listings\n"
-"POT-Creation-Date: 2017-10-10 16:23+0800\n"
-"PO-Revision-Date: 2015-09-09 16:02+0800\n"
-"Last-Translator: Merv Barrett <suppport@realestateconnected.com.au>\n"
-"Language-Team: Real Estate Connected <suppport@realestateconnected.com.au>\n"
-"Language: en\n"
+"Project-Id-Version: Easy Property Listings Import CSV, XML WP All Import "
+"Add On 2.0.0\n"
+"Report-Msgid-Bugs-To: "
+"https://github.com/easypropertylistings/epl-xml-csv-listing-import/issues\n"
+"POT-Creation-Date: 2019-11-07 09:42:52+00:00\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.11\n"
+"PO-Revision-Date: 2019-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Merv Barrett <support@easypropertylistings.com.au>\n"
+"Language-Team: Real Estate Connected <support@realestateconnected.com.au>\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-KeywordsList: __;_e;_x;_ex;_n\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: node_modules\n"
+"X-Poedit-SearchPathExcluded-1: epl-apidocs\n"
+"X-Poedit-SearchPathExcluded-2: apigen\n"
+"X-Poedit-SearchPathExcluded-3: Gruntfile.js\n"
+"X-Poedit-SearchPathExcluded-4: apigen.neon\n"
+"X-Poedit-SearchPathExcluded-5: package.json\n"
+"X-Poedit-SearchPathExcluded-6: README.md\n"
+"X-Generator: grunt-wp-i18n 1.0.3\n"
 
-#: epl-wp-all-import.php:114
-msgid "Please activate <b>Easy Property Listings</b> to enable all functions of the EPL Import Add-On"
+#: includes/functions.php:85
+msgid "Easy Property Listings Custom Fields"
 msgstr ""
 
-#: includes/hooks.php:5
-msgid "WP All Import Add-On"
+#: includes/functions.php:89
+msgid "Update all EPL fields"
 msgstr ""
 
-#: includes/hooks.php:9
-msgid "Settings"
+#: includes/functions.php:94
+msgid "Update only these EPL fields, leave the rest alone"
 msgstr ""
 
-#: includes/hooks.php:10
-msgid "Importer Settings."
+#: includes/functions.php:114
+msgid "Leave these EPL fields alone, update all other fields"
 msgstr ""
 
-#: includes/hooks.php:15
-msgid "Activate once initial import is set"
-msgstr ""
-
-#: includes/hooks.php:18
-msgid "Enable (Skip record import based on modified time)"
-msgstr ""
-
-#: includes/hooks.php:19
-msgid "Disable (operates as per WP All Import Pro Default)"
-msgstr ""
-
-#: includes/importer.php:86
-msgid "EPL IMPORTER UPDATING FIELDS"
-msgstr ""
-
-#: includes/importer.php:104 includes/importer.php:114
-msgid "EPL Field Updated:"
-msgstr ""
-
-#: includes/importer.php:104
-msgid "value"
-msgstr ""
-
-#: includes/importer.php:121
-msgid "All EPL Fields Updated"
-msgstr ""
-
-#: includes/importer.php:131
-msgid "EPL IMPORTER ACTIVE"
-msgstr ""
-
-#: includes/importer.php:137
-msgid "Record Skipping Enabled"
-msgstr ""
-
-#: includes/importer.php:137
-msgid "Record Skipping Disabled"
-msgstr ""
-
-#: includes/importer.php:158 includes/importer.php:320
+#: includes/functions.php:163 includes/importer.php:117
+#: includes/importer.php:196 includes/importer.php:228
+#: includes/importer.php:252 includes/importer.php:320
+#: includes/importer.php:323 includes/importer.php:339
+#: includes/importer.php:343 includes/importer.php:347
+#: includes/importer.php:351 includes/importer.php:355
+#: includes/importer.php:401 includes/importer.php:405
+#: includes/importer.php:411 includes/importer.php:414
+#: includes/importer.php:436 includes/importer.php:488
+#: includes/importer.php:536
+#. Translators: %s is the meta key name.
 msgid "EPL IMPORTER"
 msgstr ""
 
-#: includes/importer.php:164
-msgid "IMAGES Record Skipping Enabled"
+#: includes/functions.php:163
+msgid "Skipping field : %s"
 msgstr ""
 
-#: includes/importer.php:164
-msgid "IMAGES Record Skipping Disabled"
+#: includes/hooks.php:28
+msgid "WP All Import Add-On"
 msgstr ""
 
-#: includes/importer.php:175
-msgid "EPL Importer Record Skipped"
+#: includes/hooks.php:31
+msgid ""
+"<strong>Getting Started</strong>: Once you have configured your imports "
+"using WP All Import, enable record skipping for fast efficient listing "
+"import."
 msgstr ""
 
-#: includes/importer.php:223
-msgid "EPL Image Updating process started : Old Mod Date : "
+#: includes/hooks.php:33
+msgid ""
+"When this setting is enabled and the import is run, the listings unique "
+"modified time is compared to the value in the imported data.\n"
+"\t\tIf the data is newer then the value in WordPress the listing will "
+"update.\n"
+"\t\tThis also performs a similar check with the modified image time "
+"allowing the data to update and not the images, greatly improving import "
+"performance."
 msgstr ""
 
-#: includes/importer.php:223
-msgid "New Mod Date"
+#: includes/hooks.php:41
+#. Translators: %1$s and %2$s are links.
+msgid "Visit the <a href=\"%1$s\">codex</a> for detailed instructions."
 msgstr ""
 
-#: includes/importer.php:227
-msgid "Updated Images, Uploading"
+#: includes/hooks.php:46
+msgid "Settings"
 msgstr ""
 
-#: includes/importer.php:238
-msgid "Old Mod date greater than new mod date, Attachment Count : "
+#: includes/hooks.php:47
+msgid "Importer Settings."
 msgstr ""
 
-#: includes/importer.php:242
-msgid "Old Mod date equal to new mod date, Attachment Count : "
+#: includes/hooks.php:58
+msgid "Activate once initial import is set"
 msgstr ""
 
-#: includes/importer.php:246
-msgid "insert & restore deleted attachments"
+#: includes/hooks.php:61
+msgid "Enable (Skip record import based on modified time)"
 msgstr ""
 
-#: includes/importer.php:250
-msgid "No new images, Skipping image update"
+#: includes/hooks.php:62
+msgid "Disable (operates as per WP All Import Pro Default)"
 msgstr ""
 
-#: includes/importer.php:254
-msgid "New Images, Updating"
+#: includes/importer.php:87
+msgid ""
+"Easy Property Listings Importer plugin recommends you install <a "
+"href='http://www.wpallimport.com/'>WP All Import Pro 4.2.6+</a>"
 msgstr ""
 
-#: includes/importer.php:291
-msgid "EPL Image Processing Started : Old Mod Date : "
+#: includes/importer.php:117
+msgid "UPDATING FIELDS"
 msgstr ""
 
-#: includes/importer.php:291
-msgid "New Mod Date : "
+#: includes/importer.php:136 includes/importer.php:166
+msgid "Field Updated:"
 msgstr ""
 
-#: includes/importer.php:291
-msgid "Live Import : "
+#: includes/importer.php:136
+msgid "Images Modified Date: "
 msgstr ""
 
-#: includes/importer.php:295
-msgid "EPL Import : Live import off, default WP All Import functions"
+#: includes/importer.php:141
+msgid "Field Skipped:"
 msgstr ""
 
-#: includes/importer.php:301
-msgid "Images unchanged, skipping image deletion"
+#: includes/importer.php:178
+msgid "EPL Fields Updated"
 msgstr ""
 
-#: includes/importer.php:304
-msgid "Images changes detected, deleting images"
+#: includes/importer.php:180
+msgid "Preserve EPL Fields"
 msgstr ""
 
-#: includes/importer.php:323
+#: includes/importer.php:202
+msgid "Record Skipping Enabled"
+msgstr ""
+
+#: includes/importer.php:202
+msgid "Record Skipping Disabled"
+msgstr ""
+
+#: includes/importer.php:234
+msgid "Record Skipping Enabled for Images"
+msgstr ""
+
+#: includes/importer.php:234
+msgid "Record Skipping Disabled for Images"
+msgstr ""
+
+#: includes/importer.php:252 includes/importer.php:438
 msgid "Record Skipped"
 msgstr ""
 
-#: includes/importer.php:334
+#: includes/importer.php:320
+msgid "Image Updating process started: Old Modified Date: "
+msgstr ""
+
+#: includes/importer.php:320
+msgid "New Modified Date:"
+msgstr ""
+
+#: includes/importer.php:323
+msgid "Updated Images, Uploading"
+msgstr ""
+
+#: includes/importer.php:339
+msgid "Old Modified date greater than new modified date. Attachment Count: "
+msgstr ""
+
+#: includes/importer.php:343
+msgid "Old Modified date equals new modified date. Attachment Count: "
+msgstr ""
+
+#: includes/importer.php:347
+msgid "Insert & restore deleted attachments"
+msgstr ""
+
+#: includes/importer.php:351
+msgid "No new images, skipping image update"
+msgstr ""
+
+#: includes/importer.php:355
+msgid "New Images, updating"
+msgstr ""
+
+#: includes/importer.php:401
+msgid "Image Processing Started: Old Modified Date: "
+msgstr ""
+
+#: includes/importer.php:401
+msgid "New Modified Date: "
+msgstr ""
+
+#: includes/importer.php:401
+msgid "Live Import: "
+msgstr ""
+
+#: includes/importer.php:405
+msgid "Live import off, default WP All Import functions"
+msgstr ""
+
+#: includes/importer.php:411
+msgid "Images unchanged, skipping image deletion"
+msgstr ""
+
+#: includes/importer.php:414
+msgid "Images changes detected, deleting images"
+msgstr ""
+
+#: includes/importer.php:449
 msgid "Date modified, updating..."
 msgstr ""
 
-#: includes/importer.php:338
+#: includes/importer.php:453
 msgid "Modified Listing, updating..."
 msgstr ""
 
-#: includes/importer.php:342
+#: includes/importer.php:457
 msgid "Updating Field..."
 msgstr ""
 
-#: includes/importer.php:346
+#: includes/importer.php:461
 msgid "Listing Modified Time Unchanged, Skipping Record Update."
 msgstr ""
 
-#: includes/importer.php:350
+#: includes/importer.php:465
 msgid "Updating Fields:"
 msgstr ""
 
-#: includes/importer.php:354
+#: includes/importer.php:469
 msgid "Skipped, previously imported record found for:"
 msgstr ""
 
-#: includes/meta-boxes.php:14
-msgid "Current"
+#: includes/importer.php:488
+msgid "Deprecated version running"
 msgstr ""
 
-#: includes/meta-boxes.php:15
-msgid "Withdrawn"
+#: includes/importer.php:536
+msgid "Active"
 msgstr ""
 
-#: includes/meta-boxes.php:16
-msgid "Off Market"
-msgstr ""
-
-#: includes/meta-boxes.php:18
-msgid "Sold"
-msgstr ""
-
-#: includes/meta-boxes.php:22
-msgid "Leased"
-msgstr ""
-
-#: includes/meta-boxes.php:28 includes/meta-boxes.php:38
-msgid "Exclusive"
-msgstr ""
-
-#: includes/meta-boxes.php:29 includes/meta-boxes.php:44
-msgid "Auction"
-msgstr ""
-
-#: includes/meta-boxes.php:30
-msgid "Multilist"
-msgstr ""
-
-#: includes/meta-boxes.php:31
-msgid "Conjunctional"
-msgstr ""
-
-#: includes/meta-boxes.php:32 includes/meta-boxes.php:39
-msgid "Open"
-msgstr ""
-
-#: includes/meta-boxes.php:33 includes/meta-boxes.php:47
-#: includes/meta-boxes.php:69
-msgid "Sale"
-msgstr ""
-
-#: includes/meta-boxes.php:34
-msgid "Set Sale"
-msgstr ""
-
-#: includes/meta-boxes.php:43
-msgid "For Sale"
-msgstr ""
-
-#: includes/meta-boxes.php:45
-msgid "Tender"
-msgstr ""
-
-#: includes/meta-boxes.php:46
-msgid "EOI"
-msgstr ""
-
-#: includes/meta-boxes.php:48
-msgid "Offers"
-msgstr ""
-
-#: includes/meta-boxes.php:52
-msgid "Square"
-msgstr ""
-
-#: includes/meta-boxes.php:53
-msgid "Square Meter"
-msgstr ""
-
-#: includes/meta-boxes.php:54
-msgid "Acre"
-msgstr ""
-
-#: includes/meta-boxes.php:55
-msgid "Hectare"
-msgstr ""
-
-#: includes/meta-boxes.php:56
-msgid "Square Feet"
-msgstr ""
-
-#: includes/meta-boxes.php:60
-msgid "Day"
-msgstr ""
-
-#: includes/meta-boxes.php:61
-msgid "Daily"
-msgstr ""
-
-#: includes/meta-boxes.php:62
-msgid "Week"
-msgstr ""
-
-#: includes/meta-boxes.php:63
-msgid "Weekly"
-msgstr ""
-
-#: includes/meta-boxes.php:64
-msgid "Month"
-msgstr ""
-
-#: includes/meta-boxes.php:65
-msgid "Monthly"
-msgstr ""
-
-#: includes/meta-boxes.php:70
-msgid "Lease"
-msgstr ""
-
-#: includes/meta-boxes.php:71
-msgid "Both"
-msgstr ""
-
-#: includes/meta-boxes.php:75
-msgid "Unknown"
-msgstr ""
-
-#: includes/meta-boxes.php:76
-msgid "Vacant"
-msgstr ""
-
-#: includes/meta-boxes.php:77
-msgid "Tenanted"
-msgstr ""
-
-#: includes/meta-boxes.php:81
-msgid "Whole"
-msgstr ""
-
-#: includes/meta-boxes.php:82
-msgid "Part"
-msgstr ""
-
-#: includes/meta-boxes.php:91
+#: includes/meta-boxes-compat.php:47
 msgid "Listing Details"
 msgstr ""
 
-#: includes/meta-boxes.php:103
+#: includes/meta-boxes-compat.php:59
 msgid "Heading"
 msgstr ""
 
-#: includes/meta-boxes.php:113
+#: includes/meta-boxes-compat.php:70
 msgid "Listing Agent(s)"
 msgstr ""
 
-#: includes/meta-boxes.php:117
+#: includes/meta-boxes-compat.php:74
 msgid "Office ID"
 msgstr ""
 
-#: includes/meta-boxes.php:124
+#: includes/meta-boxes-compat.php:82
 msgid "Listing Agent"
 msgstr ""
 
-#: includes/meta-boxes.php:131
+#: includes/meta-boxes-compat.php:85
+msgid "Search for primary agent."
+msgstr ""
+
+#: includes/meta-boxes-compat.php:91
 msgid "Second Listing Agent"
 msgstr ""
 
-#: includes/meta-boxes.php:134
+#: includes/meta-boxes-compat.php:94
 msgid "Search for secondary agent."
 msgstr ""
 
-#: includes/meta-boxes.php:139 includes/meta-boxes.php:142
+#: includes/meta-boxes-compat.php:100 includes/meta-boxes-compat.php:103
 msgid "Hide Author Box"
 msgstr ""
 
-#: includes/meta-boxes.php:151
+#: includes/meta-boxes-compat.php:113
 msgid "Listing Type"
 msgstr ""
 
-#: includes/meta-boxes.php:155
+#: includes/meta-boxes-compat.php:118
 msgid "Property Status"
 msgstr ""
 
-#: includes/meta-boxes.php:162
+#: includes/meta-boxes-compat.php:125
 msgid "Date Listed"
 msgstr ""
 
-#: includes/meta-boxes.php:169
+#: includes/meta-boxes-compat.php:133
 msgid "Authority"
 msgstr ""
 
-#: includes/meta-boxes.php:177
-msgid "House Category"
-msgstr ""
-
-#: includes/meta-boxes.php:185
-msgid "Rural Category"
-msgstr ""
-
-#: includes/meta-boxes.php:193
+#: includes/meta-boxes-compat.php:141
 msgid "Unique ID"
 msgstr ""
 
-#: includes/meta-boxes.php:200
+#: includes/meta-boxes-compat.php:148
+msgid "House Category"
+msgstr ""
+
+#: includes/meta-boxes-compat.php:156
+msgid "Rural Category"
+msgstr ""
+
+#: includes/meta-boxes-compat.php:164
 msgid "XML Importer Mod Date"
 msgstr ""
 
-#: includes/meta-boxes.php:214
+#: includes/meta-boxes-compat.php:172
+msgid "Image Modified Date"
+msgstr ""
+
+#: includes/meta-boxes-compat.php:179
+msgid "Floorplan Modified Date"
+msgstr ""
+
+#: includes/meta-boxes-compat.php:186
 msgid "Commercial Authority"
 msgstr ""
 
-#: includes/meta-boxes.php:222
+#: includes/meta-boxes-compat.php:194
 msgid "Exclusivity"
 msgstr ""
 
-#: includes/meta-boxes.php:230
+#: includes/meta-boxes-compat.php:202
 msgid "Commercial Listing Type"
 msgstr ""
 
-#: includes/meta-boxes.php:238
+#: includes/meta-boxes-compat.php:210
 msgid "Commercial Category"
 msgstr ""
 
-#: includes/meta-boxes.php:249
+#: includes/meta-boxes-compat.php:221
 msgid "Display Details"
 msgstr ""
 
-#: includes/meta-boxes.php:253
-msgid "Featured"
+#: includes/meta-boxes-compat.php:226
+msgid "Inspection Times"
 msgstr ""
 
-#: includes/meta-boxes.php:256 includes/meta-boxes.php:351
-#: includes/meta-boxes.php:361 includes/meta-boxes.php:370
-#: includes/meta-boxes.php:379 includes/meta-boxes.php:389
-#: includes/meta-boxes.php:433 includes/meta-boxes.php:459
-#: includes/meta-boxes.php:468 includes/meta-boxes.php:477
-#: includes/meta-boxes.php:486 includes/meta-boxes.php:495
-#: includes/meta-boxes.php:504 includes/meta-boxes.php:513
-#: includes/meta-boxes.php:522 includes/meta-boxes.php:531
-#: includes/meta-boxes.php:540 includes/meta-boxes.php:549
-#: includes/meta-boxes.php:557 includes/meta-boxes.php:566
-#: includes/meta-boxes.php:575 includes/meta-boxes.php:592
-#: includes/meta-boxes.php:601 includes/meta-boxes.php:610
-#: includes/meta-boxes.php:619 includes/meta-boxes.php:628
-#: includes/meta-boxes.php:637 includes/meta-boxes.php:654
-#: includes/meta-boxes.php:663 includes/meta-boxes.php:672
-#: includes/meta-boxes.php:681 includes/meta-boxes.php:690
-#: includes/meta-boxes.php:699 includes/meta-boxes.php:708
-#: includes/meta-boxes.php:717 includes/meta-boxes.php:726
-#: includes/meta-boxes.php:789 includes/meta-boxes.php:815
-#: includes/meta-boxes.php:861 includes/meta-boxes.php:908
-#: includes/meta-boxes.php:955 includes/meta-boxes.php:964
-#: includes/meta-boxes.php:973 includes/meta-boxes.php:1004
-#: includes/meta-boxes.php:1050 includes/meta-boxes.php:1073
-#: includes/meta-boxes.php:1082 includes/meta-boxes.php:1244
-#: includes/meta-boxes.php:1262 includes/meta-boxes.php:1351
+#: includes/meta-boxes-compat.php:233
+msgid "Featured Listing"
+msgstr ""
+
+#: includes/meta-boxes-compat.php:236 includes/meta-boxes-compat.php:329
+#: includes/meta-boxes-compat.php:339 includes/meta-boxes-compat.php:348
+#: includes/meta-boxes-compat.php:357 includes/meta-boxes-compat.php:367
+#: includes/meta-boxes-compat.php:423 includes/meta-boxes-compat.php:449
+#: includes/meta-boxes-compat.php:458 includes/meta-boxes-compat.php:467
+#: includes/meta-boxes-compat.php:476 includes/meta-boxes-compat.php:485
+#: includes/meta-boxes-compat.php:494 includes/meta-boxes-compat.php:503
+#: includes/meta-boxes-compat.php:512 includes/meta-boxes-compat.php:521
+#: includes/meta-boxes-compat.php:530 includes/meta-boxes-compat.php:539
+#: includes/meta-boxes-compat.php:547 includes/meta-boxes-compat.php:556
+#: includes/meta-boxes-compat.php:565 includes/meta-boxes-compat.php:582
+#: includes/meta-boxes-compat.php:591 includes/meta-boxes-compat.php:600
+#: includes/meta-boxes-compat.php:609 includes/meta-boxes-compat.php:618
+#: includes/meta-boxes-compat.php:627 includes/meta-boxes-compat.php:644
+#: includes/meta-boxes-compat.php:653 includes/meta-boxes-compat.php:662
+#: includes/meta-boxes-compat.php:671 includes/meta-boxes-compat.php:680
+#: includes/meta-boxes-compat.php:689 includes/meta-boxes-compat.php:698
+#: includes/meta-boxes-compat.php:707 includes/meta-boxes-compat.php:716
+#: includes/meta-boxes-compat.php:786 includes/meta-boxes-compat.php:814
+#: includes/meta-boxes-compat.php:860 includes/meta-boxes-compat.php:907
+#: includes/meta-boxes-compat.php:970 includes/meta-boxes-compat.php:979
+#: includes/meta-boxes-compat.php:988 includes/meta-boxes-compat.php:1020
+#: includes/meta-boxes-compat.php:1081 includes/meta-boxes-compat.php:1113
+#: includes/meta-boxes-compat.php:1122 includes/meta-boxes-compat.php:1286
+#: includes/meta-boxes-compat.php:1304 includes/meta-boxes-compat.php:1392
 msgid "Yes"
 msgstr ""
 
-#: includes/meta-boxes.php:262
-msgid "Inspection Times ( one per line )"
-msgstr ""
-
-#: includes/meta-boxes.php:273
+#: includes/meta-boxes-compat.php:247
 msgid "Listing Features"
 msgstr ""
 
-#: includes/meta-boxes.php:281
+#: includes/meta-boxes-compat.php:256
 msgid "House Features"
 msgstr ""
 
-#: includes/meta-boxes.php:285
+#: includes/meta-boxes-compat.php:260
 msgid "Bedrooms"
 msgstr ""
 
-#: includes/meta-boxes.php:292
+#: includes/meta-boxes-compat.php:268
 msgid "Bathrooms"
 msgstr ""
 
-#: includes/meta-boxes.php:299
-msgid "Rooms"
-msgstr ""
-
-#: includes/meta-boxes.php:306
-msgid "Ensuite"
-msgstr ""
-
-#: includes/meta-boxes.php:313
+#: includes/meta-boxes-compat.php:275
 msgid "Toilet"
 msgstr ""
 
-#: includes/meta-boxes.php:320
+#: includes/meta-boxes-compat.php:282
+msgid "Ensuite"
+msgstr ""
+
+#: includes/meta-boxes-compat.php:289
 msgid "Garage"
 msgstr ""
 
-#: includes/meta-boxes.php:327
+#: includes/meta-boxes-compat.php:296
 msgid "Carport"
 msgstr ""
 
-#: includes/meta-boxes.php:334
-msgid "Open Spaces"
+#: includes/meta-boxes-compat.php:303
+msgid "Open Parking Spaces"
 msgstr ""
 
-#: includes/meta-boxes.php:341
+#: includes/meta-boxes-compat.php:310
+msgid "Rooms"
+msgstr ""
+
+#: includes/meta-boxes-compat.php:317
 msgid "Year Built"
 msgstr ""
 
-#: includes/meta-boxes.php:348
+#: includes/meta-boxes-compat.php:326
 msgid "New Construction"
 msgstr ""
 
-#: includes/meta-boxes.php:358
+#: includes/meta-boxes-compat.php:336
 msgid "Pool"
 msgstr ""
 
-#: includes/meta-boxes.php:367
+#: includes/meta-boxes-compat.php:345
 msgid "Air Conditioning"
 msgstr ""
 
-#: includes/meta-boxes.php:376
+#: includes/meta-boxes-compat.php:354
 msgid "Security System"
 msgstr ""
 
-#: includes/meta-boxes.php:385
+#: includes/meta-boxes-compat.php:363
 msgid "Pet Friendly"
 msgstr ""
 
-#: includes/meta-boxes.php:398 includes/meta-boxes.php:736
+#: includes/meta-boxes-compat.php:376 includes/meta-boxes-compat.php:726
 msgid "Land Details"
 msgstr ""
 
-#: includes/meta-boxes.php:402 includes/meta-boxes.php:748
+#: includes/meta-boxes-compat.php:380 includes/meta-boxes-compat.php:738
 msgid "Land Area"
 msgstr ""
 
-#: includes/meta-boxes.php:409 includes/meta-boxes.php:755
+#: includes/meta-boxes-compat.php:388 includes/meta-boxes-compat.php:745
 msgid "Land Unit"
 msgstr ""
 
-#: includes/meta-boxes.php:416 includes/meta-boxes.php:762
+#: includes/meta-boxes-compat.php:396 includes/meta-boxes-compat.php:752
 msgid "Building Area"
 msgstr ""
 
-#: includes/meta-boxes.php:423 includes/meta-boxes.php:770
+#: includes/meta-boxes-compat.php:404 includes/meta-boxes-compat.php:760
 msgid "Building Unit"
 msgstr ""
 
-#: includes/meta-boxes.php:430 includes/meta-boxes.php:786
+#: includes/meta-boxes-compat.php:412 includes/meta-boxes-compat.php:768
+msgid "Energy Rating"
+msgstr ""
+
+#: includes/meta-boxes-compat.php:420 includes/meta-boxes-compat.php:783
 msgid "Fully Fenced"
 msgstr ""
 
-#: includes/meta-boxes.php:443
+#: includes/meta-boxes-compat.php:433
 msgid "Additional Features"
 msgstr ""
 
-#: includes/meta-boxes.php:451
+#: includes/meta-boxes-compat.php:441
 msgid "Internal"
 msgstr ""
 
-#: includes/meta-boxes.php:456
+#: includes/meta-boxes-compat.php:446
 msgid "Remote Garage"
 msgstr ""
 
-#: includes/meta-boxes.php:465
+#: includes/meta-boxes-compat.php:455
 msgid "Secure Parking"
 msgstr ""
 
-#: includes/meta-boxes.php:474
+#: includes/meta-boxes-compat.php:464
 msgid "Study"
 msgstr ""
 
-#: includes/meta-boxes.php:483
+#: includes/meta-boxes-compat.php:473
 msgid "Dishwasher"
 msgstr ""
 
-#: includes/meta-boxes.php:492
+#: includes/meta-boxes-compat.php:482
 msgid "Built In Robes"
 msgstr ""
 
-#: includes/meta-boxes.php:501
+#: includes/meta-boxes-compat.php:491
 msgid "Gym"
 msgstr ""
 
-#: includes/meta-boxes.php:510
+#: includes/meta-boxes-compat.php:500
 msgid "Workshop"
 msgstr ""
 
-#: includes/meta-boxes.php:519
+#: includes/meta-boxes-compat.php:509
 msgid "Rumpus Room"
 msgstr ""
 
-#: includes/meta-boxes.php:528
+#: includes/meta-boxes-compat.php:518
 msgid "Floor Boards"
 msgstr ""
 
-#: includes/meta-boxes.php:537
+#: includes/meta-boxes-compat.php:527
 msgid "Broadband"
 msgstr ""
 
-#: includes/meta-boxes.php:546
+#: includes/meta-boxes-compat.php:536
 msgid "Pay TV"
 msgstr ""
 
-#: includes/meta-boxes.php:554
+#: includes/meta-boxes-compat.php:544
 msgid "Vacuum System"
 msgstr ""
 
-#: includes/meta-boxes.php:563
+#: includes/meta-boxes-compat.php:553
 msgid "Intercom"
 msgstr ""
 
-#: includes/meta-boxes.php:572
+#: includes/meta-boxes-compat.php:562
 msgid "Spa"
 msgstr ""
 
-#: includes/meta-boxes.php:584
+#: includes/meta-boxes-compat.php:574
 msgid "External"
 msgstr ""
 
-#: includes/meta-boxes.php:589
+#: includes/meta-boxes-compat.php:579
 msgid "Tennis Court"
 msgstr ""
 
-#: includes/meta-boxes.php:598
+#: includes/meta-boxes-compat.php:588
 msgid "Balcony"
 msgstr ""
 
-#: includes/meta-boxes.php:607
+#: includes/meta-boxes-compat.php:597
 msgid "Deck"
 msgstr ""
 
-#: includes/meta-boxes.php:616
+#: includes/meta-boxes-compat.php:606
 msgid "Courtyard"
 msgstr ""
 
-#: includes/meta-boxes.php:625
+#: includes/meta-boxes-compat.php:615
 msgid "Outdoor Entertaining"
 msgstr ""
 
-#: includes/meta-boxes.php:634
+#: includes/meta-boxes-compat.php:624
 msgid "Shed"
 msgstr ""
 
-#: includes/meta-boxes.php:646
+#: includes/meta-boxes-compat.php:636
 msgid "Heating & Cooling"
 msgstr ""
 
-#: includes/meta-boxes.php:651
+#: includes/meta-boxes-compat.php:641
 msgid "Ducted Heating"
 msgstr ""
 
-#: includes/meta-boxes.php:660
+#: includes/meta-boxes-compat.php:650
 msgid "Ducted Cooling"
 msgstr ""
 
-#: includes/meta-boxes.php:669
+#: includes/meta-boxes-compat.php:659
 msgid "Split System Heating"
 msgstr ""
 
-#: includes/meta-boxes.php:678
+#: includes/meta-boxes-compat.php:668
 msgid "Hydronic Heating"
 msgstr ""
 
-#: includes/meta-boxes.php:687
+#: includes/meta-boxes-compat.php:677
 msgid "Split System Aircon"
 msgstr ""
 
-#: includes/meta-boxes.php:696
+#: includes/meta-boxes-compat.php:686
 msgid "Gas Heating"
 msgstr ""
 
-#: includes/meta-boxes.php:705
+#: includes/meta-boxes-compat.php:695
 msgid "Reverse Cycle Aircon"
 msgstr ""
 
-#: includes/meta-boxes.php:714
+#: includes/meta-boxes-compat.php:704
 msgid "Evaporative Cooling"
 msgstr ""
 
-#: includes/meta-boxes.php:723
+#: includes/meta-boxes-compat.php:713
 msgid "Open Fire Place"
 msgstr ""
 
-#: includes/meta-boxes.php:778
+#: includes/meta-boxes-compat.php:775
 msgid "Land Category"
 msgstr ""
 
-#: includes/meta-boxes.php:800
+#: includes/meta-boxes-compat.php:797
 msgid "Property Address"
 msgstr ""
 
-#: includes/meta-boxes.php:812
+#: includes/meta-boxes-compat.php:811
 msgid "Display Street Address?"
 msgstr ""
 
-#: includes/meta-boxes.php:821
+#: includes/meta-boxes-compat.php:820
 msgid "Lot"
 msgstr ""
 
-#: includes/meta-boxes.php:829
+#: includes/meta-boxes-compat.php:828
 msgid "Unit"
 msgstr ""
 
-#: includes/meta-boxes.php:837
+#: includes/meta-boxes-compat.php:836
 msgid "Street Number"
 msgstr ""
 
-#: includes/meta-boxes.php:844
+#: includes/meta-boxes-compat.php:843
 msgid "Street Name"
 msgstr ""
 
-#: includes/meta-boxes.php:858
+#: includes/meta-boxes-compat.php:857
 msgid "Display"
 msgstr ""
 
-#: includes/meta-boxes.php:890
+#: includes/meta-boxes-compat.php:889
 msgid "Country"
 msgstr ""
 
-#: includes/meta-boxes.php:897
+#: includes/meta-boxes-compat.php:896
 msgid "Coordinates"
 msgstr ""
 
-#: includes/meta-boxes.php:899
+#: includes/meta-boxes-compat.php:898
 msgid "Drag the pin to manually set listing coordinates"
 msgstr ""
 
-#: includes/meta-boxes.php:905
+#: includes/meta-boxes-compat.php:904
 msgid "Hide Map"
 msgstr ""
 
-#: includes/meta-boxes.php:919
+#: includes/meta-boxes-compat.php:918
 msgid "Pricing"
 msgstr ""
 
-#: includes/meta-boxes.php:931
+#: includes/meta-boxes-compat.php:931 includes/meta-boxes-compat.php:1043
+msgid "Global Price"
+msgstr ""
+
+#: includes/meta-boxes-compat.php:938 includes/meta-boxes-compat.php:1050
+msgid "Currency"
+msgstr ""
+
+#: includes/meta-boxes-compat.php:945
 msgid "Search Price"
 msgstr ""
 
-#: includes/meta-boxes.php:938
+#: includes/meta-boxes-compat.php:952
 msgid "Price Text"
 msgstr ""
 
-#: includes/meta-boxes.php:945
+#: includes/meta-boxes-compat.php:959
 msgid "Auction Date"
 msgstr ""
 
-#: includes/meta-boxes.php:952
+#: includes/meta-boxes-compat.php:967
 msgid "Display Price?"
 msgstr ""
 
-#: includes/meta-boxes.php:970
+#: includes/meta-boxes-compat.php:985
 msgid "House and Land Package"
 msgstr ""
 
-#: includes/meta-boxes.php:983
+#: includes/meta-boxes-compat.php:998
 msgid "Sale Details"
 msgstr ""
 
-#: includes/meta-boxes.php:987
+#: includes/meta-boxes-compat.php:1002
 msgid "Sale Price"
 msgstr ""
 
-#: includes/meta-boxes.php:994
+#: includes/meta-boxes-compat.php:1009
 msgid "Sale Date"
 msgstr ""
 
-#: includes/meta-boxes.php:1001
+#: includes/meta-boxes-compat.php:1017
 msgid "Display Sale Price"
 msgstr ""
 
-#: includes/meta-boxes.php:1014
+#: includes/meta-boxes-compat.php:1030
 msgid "Rental Pricing"
 msgstr ""
 
-#: includes/meta-boxes.php:1026
+#: includes/meta-boxes-compat.php:1057
 msgid "Rent Amount"
 msgstr ""
 
-#: includes/meta-boxes.php:1033
+#: includes/meta-boxes-compat.php:1064
 msgid "Rent Period"
 msgstr ""
 
-#: includes/meta-boxes.php:1040
+#: includes/meta-boxes-compat.php:1071
 msgid "Rent Text"
 msgstr ""
 
-#: includes/meta-boxes.php:1047
+#: includes/meta-boxes-compat.php:1078
 msgid "Display Rent?"
 msgstr ""
 
-#: includes/meta-boxes.php:1063
+#: includes/meta-boxes-compat.php:1094
 msgid "Date Available"
 msgstr ""
 
-#: includes/meta-boxes.php:1070
+#: includes/meta-boxes-compat.php:1102
+msgid "Leased Date"
+msgstr ""
+
+#: includes/meta-boxes-compat.php:1110
 msgid "Furnished"
 msgstr ""
 
-#: includes/meta-boxes.php:1079
+#: includes/meta-boxes-compat.php:1119
 msgid "Holiday Rental"
 msgstr ""
 
-#: includes/meta-boxes.php:1093
+#: includes/meta-boxes-compat.php:1133
 msgid "Rural Features"
 msgstr ""
 
-#: includes/meta-boxes.php:1105
+#: includes/meta-boxes-compat.php:1145
 msgid "Fencing"
 msgstr ""
 
-#: includes/meta-boxes.php:1112
+#: includes/meta-boxes-compat.php:1152
 msgid "Annual Rainfall"
 msgstr ""
 
-#: includes/meta-boxes.php:1119
+#: includes/meta-boxes-compat.php:1159
 msgid "Soil Types"
 msgstr ""
 
-#: includes/meta-boxes.php:1126
+#: includes/meta-boxes-compat.php:1166
 msgid "Improvements"
 msgstr ""
 
-#: includes/meta-boxes.php:1133
+#: includes/meta-boxes-compat.php:1173
 msgid "Council Rates"
 msgstr ""
 
-#: includes/meta-boxes.php:1140
+#: includes/meta-boxes-compat.php:1180
 msgid "Irrigation"
 msgstr ""
 
-#: includes/meta-boxes.php:1147
+#: includes/meta-boxes-compat.php:1187
 msgid "Carrying Capacity"
 msgstr ""
 
-#: includes/meta-boxes.php:1154
+#: includes/meta-boxes-compat.php:1194
 msgid "Services"
 msgstr ""
 
-#: includes/meta-boxes.php:1165
+#: includes/meta-boxes-compat.php:1205
 msgid "Leasing"
 msgstr ""
 
-#: includes/meta-boxes.php:1177
+#: includes/meta-boxes-compat.php:1217
 msgid "Commercial Rent"
 msgstr ""
 
-#: includes/meta-boxes.php:1180
+#: includes/meta-boxes-compat.php:1220
 msgid "Price Text in Pricing box over-rides displayed price"
 msgstr ""
 
-#: includes/meta-boxes.php:1184
+#: includes/meta-boxes-compat.php:1221
+msgid "Select Display Price to show."
+msgstr ""
+
+#: includes/meta-boxes-compat.php:1225
 msgid "Lease Period"
 msgstr ""
 
-#: includes/meta-boxes.php:1190
+#: includes/meta-boxes-compat.php:1231
 msgid "Rent Range Min"
 msgstr ""
 
-#: includes/meta-boxes.php:1197
+#: includes/meta-boxes-compat.php:1238
 msgid "Rent Range Max"
 msgstr ""
 
-#: includes/meta-boxes.php:1204
+#: includes/meta-boxes-compat.php:1245
 msgid "Lease End Date"
 msgstr ""
 
-#: includes/meta-boxes.php:1211
+#: includes/meta-boxes-compat.php:1253
 msgid "Property Extent"
 msgstr ""
 
-#: includes/meta-boxes.php:1225
+#: includes/meta-boxes-compat.php:1267
 msgid "Tenant Status"
 msgstr ""
 
-#: includes/meta-boxes.php:1233
+#: includes/meta-boxes-compat.php:1275
 msgid "Commercial Outgoings"
 msgstr ""
 
-#: includes/meta-boxes.php:1241
+#: includes/meta-boxes-compat.php:1283
 msgid "Plus Outgoings"
 msgstr ""
 
-#: includes/meta-boxes.php:1251
+#: includes/meta-boxes-compat.php:1293
 msgid "Takings"
 msgstr ""
 
-#: includes/meta-boxes.php:1259
+#: includes/meta-boxes-compat.php:1301
 msgid "Franchise"
 msgstr ""
 
-#: includes/meta-boxes.php:1269
+#: includes/meta-boxes-compat.php:1311
 msgid "Return"
 msgstr ""
 
-#: includes/meta-boxes.php:1276
+#: includes/meta-boxes-compat.php:1318
 msgid "Terms"
 msgstr ""
 
-#: includes/meta-boxes.php:1286
+#: includes/meta-boxes-compat.php:1328
 msgid "Commercial Features"
 msgstr ""
 
-#: includes/meta-boxes.php:1298
+#: includes/meta-boxes-compat.php:1340
 msgid "Further Options"
 msgstr ""
 
-#: includes/meta-boxes.php:1305
+#: includes/meta-boxes-compat.php:1347
 msgid "Zone"
 msgstr ""
 
-#: includes/meta-boxes.php:1312
+#: includes/meta-boxes-compat.php:1354
 msgid "Car Spaces"
 msgstr ""
 
-#: includes/meta-boxes.php:1320
+#: includes/meta-boxes-compat.php:1361
 msgid "Highlight 1"
 msgstr ""
 
-#: includes/meta-boxes.php:1327
+#: includes/meta-boxes-compat.php:1368
 msgid "Highlight 2"
 msgstr ""
 
-#: includes/meta-boxes.php:1334
+#: includes/meta-boxes-compat.php:1375
 msgid "Highlight 3"
 msgstr ""
 
-#: includes/meta-boxes.php:1341
+#: includes/meta-boxes-compat.php:1382
 msgid "Parking Comments"
 msgstr ""
 
-#: includes/meta-boxes.php:1348
+#: includes/meta-boxes-compat.php:1389
 msgid "Is Multiple"
 msgstr ""
 
-#: includes/meta-boxes.php:1361
-msgid "Business Categories"
-msgstr ""
-
-#: includes/meta-boxes.php:1373
-msgid "Business Category"
-msgstr ""
-
-#: includes/meta-boxes.php:1383
-msgid "Business Sub Category"
-msgstr ""
-
-#: includes/meta-boxes.php:1394
-msgid "Business Category 2"
-msgstr ""
-
-#: includes/meta-boxes.php:1404
-msgid "Business Sub Category 2"
-msgstr ""
-
-#: includes/meta-boxes.php:1415
-msgid "Business Category 3"
-msgstr ""
-
-#: includes/meta-boxes.php:1425
-msgid "Business Sub Category 3"
-msgstr ""
-
-#: includes/meta-boxes.php:1440
+#: includes/meta-boxes-compat.php:1402
 msgid "Files and Links"
 msgstr ""
 
-#: includes/meta-boxes.php:1452
+#: includes/meta-boxes-compat.php:1414
 msgid "Video URL"
 msgstr ""
 
-#: includes/meta-boxes.php:1458
-msgid "Floorplan"
-msgstr ""
-
-#: includes/meta-boxes.php:1463
-msgid "Floorplan 2"
-msgstr ""
-
-#: includes/meta-boxes.php:1469
+#: includes/meta-boxes-compat.php:1420
 msgid "External Link"
 msgstr ""
 
-#: includes/meta-boxes.php:1475
+#: includes/meta-boxes-compat.php:1427 includes/meta-boxes-compat.php:1442
+#: includes/meta-boxes-compat.php:1457 includes/meta-boxes-compat.php:1499
+#: includes/meta-boxes-compat.php:1514 includes/meta-boxes-compat.php:1530
+msgid "Title"
+msgstr ""
+
+#: includes/meta-boxes-compat.php:1435
 msgid "External Link 2"
 msgstr ""
 
-#: includes/meta-boxes.php:1480
+#: includes/meta-boxes-compat.php:1450
 msgid "External Link 3"
 msgstr ""
 
-#: includes/meta-boxes.php:1487
+#: includes/meta-boxes-compat.php:1465
 msgid "Mini Website URL"
 msgstr ""
 
-#: includes/meta-boxes.php:1493
+#: includes/meta-boxes-compat.php:1471
 msgid "Mini Website URL 2"
 msgstr ""
 
-#: includes/meta-boxes.php:1499
+#: includes/meta-boxes-compat.php:1477
 msgid "Mini Website URL 3"
 msgstr ""
 
-#: includes/meta-boxes.php:1510
+#: includes/meta-boxes-compat.php:1492
+msgid "Floorplan"
+msgstr ""
+
+#: includes/meta-boxes-compat.php:1507
+msgid "Floorplan 2"
+msgstr ""
+
+#: includes/meta-boxes-compat.php:1522
+msgid "Energy Certificate"
+msgstr ""
+
+#: includes/meta-boxes-compat.php:1543
 msgid "Linked Contact"
 msgstr ""
 
-#: includes/meta-boxes.php:1522
+#: includes/meta-boxes-compat.php:1555
 msgid "Contact ID"
 msgstr ""
 
-#: includes/meta-boxes.php:1524
+#: includes/meta-boxes-compat.php:1557
 msgid "Search for contact and update to save."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Easy Property Listings Import CSV, XML WP All Import Add On"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Import CSV and XML into Easy Property Listings with this WP All Import "
+"Add-on"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Merv Barrett"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://www.realestateconnected.com.au/"
 msgstr ""

@@ -5,8 +5,8 @@ Contributors: mervb1
 Donate link: https://easypropertylistings.com.au/support-the-site/
 Tags: extension, easy property listings, wp all import, wp all import pro, csv, xml, xls, import, reaxml, jupix, BLM, MLS, real estate listings, property, rental, land, rural, business, commercial
 Requires at least: 3.3
-Tested up to: 4.9
-Stable Tag: 1.0.10
+Tested up to: 5.2.4
+Stable Tag: 1.0.11
 License: GNU Version 2 or Any Later Version
 
 Import listings into Easy Property Listings with this WP All Import add-on for WordPress. Created for maximum performance.
@@ -34,7 +34,6 @@ Supported formats are CSV, XML and XLS files with full support for the Australia
 4. Configure your imports from Dashboard > All Import > New Import.
 5. Enable the Activate once initial import is set option from Dashboard > Easy Property Listings > Extensions > WP All Import Add-On
 
-
 == Screenshots ==
 
 1. Advanced Import Record Skipping Setting
@@ -44,8 +43,19 @@ Supported formats are CSV, XML and XLS files with full support for the Australia
 5. Extended log entry only updating listing if necessary saving space and time
 6. Recommend Import settings
 
-
 == Change log ==
+
+= 2.0.0 November 7, 2019 =
+
+* New: Select and specifically override Easy Property Listings Custom Fields. You can now update all, update specific fields, or leave some alone.
+* New: Filter epl_wpimport_skip_fields allowing record skipping of specific fields when importer is set to update everything. This allows you to use the featured listing system in EPL with imported data and by default will not update property_featured, property_year_built, property_owner custom fields.
+* New: Modified date/time filter epl_import_mod_time added allowing support for other data formats.
+* New: Better logging output so you know specifically what is happening to all EPL fields during import.
+* Tweak: WP All Import rapid-addon updated to 1.1.1
+* Tweak: Revised log messaging.
+* Tweak: Updated fallback meta fields to EPL 3.4.11.
+* Fix: Bold formatting issue in log.
+* Fix: Security improvements.
 
 = 1.0.11 October 10, 2017 =
 
