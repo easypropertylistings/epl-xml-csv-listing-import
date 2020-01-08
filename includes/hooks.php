@@ -59,7 +59,7 @@ function epl_wpimport_extensions_options_filter( $epl_fields = null ) {
 				'type'    => 'radio',
 				'opts'    => array(
 					'on'  => __( 'Enable (Skip record import based on modified time)', 'epl-wpimport' ),
-					'off' => __( 'Disable (operates as per WP All Import Pro Default)', 'epl-wpimport' ),
+					'off' => __( 'Disable (Operates as per WP All Import Pro default)', 'epl-wpimport' ),
 				),
 				'default' => 'off',
 			),
