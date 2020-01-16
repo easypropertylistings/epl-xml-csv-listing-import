@@ -268,19 +268,21 @@ function pmai_is_epl_update_allowed( $cur_meta_key, $options ) {
 
 	// Leave these epl alone, update all other epl.
 	if ( 'no' === $options['update_all_data'] && $options['is_update_epl'] && 'all_except' === $options['update_epl_logic'] ) {
-
+		$ignore_list = array();
 		if ( ! empty( $options['epl_list'] ) && is_array( $options['epl_list'] ) ) {
 			foreach ( $options['epl_list'] as $key => $epl_field ) {
 
 				$parts_temp = explode( ' ', $epl_field );
 				$field_name = trim( array_shift( $parts_temp ), '[]' );
-
-				if ( $cur_meta_key === $field_name ) {
-					return apply_filters( 'pmai_is_epl_update_allowed', false, $cur_meta_key, $options );
-				} else {
-					return apply_filters( 'pmai_is_epl_update_allowed', true, $cur_meta_key, $options );
-				}
+				$ignore_list[] = $field_name;
+				
 			}
+		}
+
+		if ( in_array( $cur_meta_key, $ignore_list ) ) {
+			return apply_filters( 'pmai_is_epl_update_allowed', false, $cur_meta_key, $options );
+		} else {
+			return apply_filters( 'pmai_is_epl_update_allowed', true, $cur_meta_key, $options );
 		}
 	}
 
