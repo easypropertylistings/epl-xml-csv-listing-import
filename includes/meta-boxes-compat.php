@@ -6,7 +6,7 @@
  * @subpackage  Functions/Admin
  * @copyright   Copyright (c) 2019, Merv Barrett
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since       1.0
+ * @since       1.0.0
  */
 
 // Exit if accessed directly.
@@ -17,7 +17,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Variables List required for meta boxes
  *
- * @since 1.0
+ * @since 1.0.0
+ * @since 2.0.0 Updated to EPL Core 3.4.11
  */
 function epl_allimport_get_meta_fields() {
 	global $epl_settings;
@@ -26,7 +27,7 @@ function epl_allimport_get_meta_fields() {
 		// Old EPL running, bail out.
 		return;
 	}
-	
+
 	$opts_property_status              = epl_get_property_status_opts();
 	$opts_property_authority           = epl_get_property_authority_opts();
 	$opts_property_exclusivity         = epl_get_property_exclusivity_opts();
@@ -120,11 +121,11 @@ function epl_allimport_get_meta_fields() {
 						),
 
 						array(
-							'name'         => 'property_list_date',
-							'label'        => __( 'Date Listed', 'easy-property-listings' ),
-							'type'         => 'date',
-							'maxlength'    => '100',
-							'autocomplete' => 'off',
+							'name'      => 'property_list_date',
+							'label'     => __( 'Date Listed', 'easy-property-listings' ),
+							'type'      => 'date',
+							'maxlength' => '100',
+							'autocomplete'	=>	'off'
 						),
 
 						array(
@@ -159,16 +160,23 @@ function epl_allimport_get_meta_fields() {
 						),
 
 						array(
-							'name'         => 'property_mod_date',
-							'label'        => __( 'XML Importer Mod Date', 'easy-property-listings' ),
-							'type'         => 'text',
-							'maxlength'    => '60',
-							'autocomplete' => 'off',
+							'name'      => 'property_mod_date',
+							'label'     => __( 'XML Importer Mod Date', 'easy-property-listings' ),
+							'type'      => 'text',
+							'maxlength' => '60',
+							'autocomplete'	=>	'off'
 						),
 
 						array(
 							'name'      => 'property_images_mod_date',
 							'label'     => __( 'Image Modified Date', 'easy-property-listings' ),
+							'type'      => 'hidden',
+							'maxlength' => '60',
+						),
+
+						array(
+							'name'      => 'property_floorplan_mod_date',
+							'label'     => __( 'Floorplan Modified Date', 'easy-property-listings' ),
 							'type'      => 'hidden',
 							'maxlength' => '60',
 						),
@@ -926,6 +934,13 @@ function epl_allimport_get_meta_fields() {
 						),
 
 						array(
+							'name'      => 'property_price_currency',
+							'label'     => __( 'Currency', 'easy-property-listings' ),
+							'type'      => 'hidden',
+							'maxlength' => '10'
+						),
+
+						array(
 							'name'      => 'property_price',
 							'label'     => __( 'Search Price', 'easy-property-listings' ),
 							'type'      => apply_filters( 'epl_price_number_format', 'decimal' ),
@@ -940,11 +955,11 @@ function epl_allimport_get_meta_fields() {
 						),
 
 						array(
-							'name'         => 'property_auction',
-							'label'        => __( 'Auction Date', 'easy-property-listings' ),
-							'type'         => 'auction-date',
-							'maxlength'    => '100',
-							'autocomplete' => 'off',
+							'name'      => 'property_auction',
+							'label'     => __( 'Auction Date', 'easy-property-listings' ),
+							'type'      => 'auction-date',
+							'maxlength' => '100',
+							'autocomplete'	=>	'off'
 						),
 
 						array(
@@ -990,11 +1005,11 @@ function epl_allimport_get_meta_fields() {
 						),
 
 						array(
-							'name'         => 'property_sold_date',
-							'label'        => __( 'Sale Date', 'easy-property-listings' ),
-							'type'         => 'sold-date',
-							'maxlength'    => '100',
-							'autocomplete' => 'off',
+							'name'      => 'property_sold_date',
+							'label'     => __( 'Sale Date', 'easy-property-listings' ),
+							'type'      => 'sold-date',
+							'maxlength' => '100',
+							'autocomplete'	=>	'off'
 						),
 
 						array(
@@ -1028,6 +1043,13 @@ function epl_allimport_get_meta_fields() {
 							'label'     => __( 'Global Price', 'easy-property-listings' ),
 							'type'      => 'hidden',
 							'maxlength' => '50',
+						),
+
+						array(
+							'name'      => 'property_rent_currency',
+							'label'     => __( 'Currency', 'easy-property-listings' ),
+							'type'      => 'hidden',
+							'maxlength' => '10'
 						),
 
 						array(
@@ -1068,19 +1090,19 @@ function epl_allimport_get_meta_fields() {
 						),
 
 						array(
-							'name'         => 'property_date_available',
-							'label'        => __( 'Date Available', 'easy-property-listings' ),
-							'type'         => 'date',
-							'maxlength'    => '100',
-							'autocomplete' => 'off',
+							'name'      => 'property_date_available',
+							'label'     => __( 'Date Available', 'easy-property-listings' ),
+							'type'      => 'date',
+							'maxlength' => '100',
+							'autocomplete'	=>	'off'
 						),
 
 						array(
-							'name'         => 'property_date_leased',
-							'label'        => __( 'Leased Date', 'easy-property-listings' ),
-							'type'         => 'date',
-							'maxlength'    => '100',
-							'autocomplete' => 'off',
+							'name'      => 'property_date_leased',
+							'label'     => __( 'Leased Date', 'easy-property-listings' ),
+							'type'      => 'date',
+							'maxlength' => '100',
+							'autocomplete'	=>	'off'
 						),
 
 						array(
@@ -1219,11 +1241,11 @@ function epl_allimport_get_meta_fields() {
 						),
 
 						array(
-							'name'         => 'property_com_lease_end_date',
-							'label'        => __( 'Lease End Date', 'easy-property-listings' ),
-							'type'         => 'date',
-							'maxlength'    => '100',
-							'autocomplete' => 'off',
+							'name'      => 'property_com_lease_end_date',
+							'label'     => __( 'Lease End Date', 'easy-property-listings' ),
+							'type'      => 'date',
+							'maxlength' => '100',
+							'autocomplete'	=>	'off'
 						),
 
 						array(

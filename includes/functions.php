@@ -179,32 +179,24 @@ add_filter( 'pmxi_custom_field_to_update', 'epl_wpimport_pmxi_custom_field_to_up
  *
  * @return bool|mixed|void
  * @since 2.0
+ * @since 2.0.0 Removed epl custom field deleting process.
  */
 function epl_wpimport_pmxi_custom_field_to_delete( $field_to_delete, $pid, $post_type, $options, $cur_meta_key ) {
 
-	if ( ! in_array( $cur_meta_key, epl_wpimport_get_meta_keys(), true ) ) {
+	if ( ! in_array( $post_type, epl_get_core_post_types(), true ) ) {
 		return $field_to_delete;
+	}
+
+	if ( in_array( $cur_meta_key, epl_wpimport_get_meta_keys(), true ) ) {
+		return false; // Do not delete EPL fields.
 	}
 
 	// Don't let wp all import pro delete image mod date.
-	if ( 'property_images_mod_date' === $cur_meta_key || 'property_images_mod_date_old' === $cur_meta_key ) {
+	if ( 'property_images_mod_date_old' === $cur_meta_key ) {
 		return false;
 	}
 
-	if ( false === $field_to_delete || ! in_array( $post_type, epl_get_core_post_types(), true ) ) {
-		return $field_to_delete;
-	}
-
-	if ( in_array( $cur_meta_key, epl_wpimport_skip_fields(), true ) ) {
-
-		return false;
-	}
-
-	if ( false === $field_to_delete ) {
-		return $field_to_delete;
-	}
-
-	return pmai_is_epl_update_allowed( $cur_meta_key, $options );
+	return $field_to_delete;
 }
 add_filter( 'pmxi_custom_field_to_delete', 'epl_wpimport_pmxi_custom_field_to_delete', 10, 5 );
 
@@ -298,10 +290,29 @@ function pmai_is_epl_update_allowed( $cur_meta_key, $options ) {
 /**
  * Don't update these fields
  *
+ * This function further filters default skip list using 'epl_wpimport_skip_fields'.
+ * Removing default fields using this filter will bypass 'import'   =>  'preserve' check in meta field
+ *
  * @return mixed|void
  * @since 2.0
  */
 function epl_wpimport_skip_fields() {
+
+	$fields = epl_wpimport_default_skip_fields_list();
+
+	return apply_filters( 'epl_wpimport_skip_fields', $fields );
+}
+
+/**
+ * List of fields to be skipped while importing : Default List.
+ *
+ * More fields can be added using 'epl_wpimport_default_skip_fields_list' filter.
+ * This list is furthered filtered by  'epl_wpimport_skip_fields'.
+ *
+ * @return mixed|void
+ * @since 2.0
+ */
+function epl_wpimport_default_skip_fields_list() {
 
 	$fields = array(
 		'property_featured',
@@ -309,7 +320,7 @@ function epl_wpimport_skip_fields() {
 		'property_owner',
 	);
 
-	return apply_filters( 'epl_wpimport_skip_fields', $fields );
+	return apply_filters( 'epl_wpimport_default_skip_fields_list', $fields );
 }
 
 /**
@@ -372,4 +383,30 @@ function epl_wpimport_get_meta_keys() {
 		}
 	}
 	return $meta_keys;
+}
+/**
+ * Determine if a field needs to be skipped while importing.
+ *
+ * @param      string $field  The field.
+ *
+ * @return     boolean
+ * @since      2.0.0
+ */
+function epl_wpimport_is_field_skipped( $field ) {
+
+	$default_list  = epl_wpimport_default_skip_fields_list();
+	$filtered_list = epl_wpimport_skip_fields();
+	$array_diff    = array_diff( $default_list, $filtered_list );
+
+	if ( in_array( $field['name'], $array_diff, true ) ) {
+		return false;
+	}
+
+	if ( ( isset( $field['import'] ) && 'preserve' === $field['import'] ) ||
+		in_array( $field['name'], $filtered_list, true )
+	) {
+		return true;
+	}
+
+	return false;
 }
