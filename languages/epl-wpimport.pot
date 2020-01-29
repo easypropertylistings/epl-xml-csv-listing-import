@@ -6,7 +6,7 @@ msgstr ""
 "Add On 2.0.0\n"
 "Report-Msgid-Bugs-To: "
 "https://github.com/easypropertylistings/epl-xml-csv-listing-import/issues\n"
-"POT-Creation-Date: 2020-01-22 04:06:23+00:00\n"
+"POT-Creation-Date: 2020-01-29 05:09:10+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -26,6 +26,12 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-5: package.json\n"
 "X-Poedit-SearchPathExcluded-6: README.md\n"
 "X-Generator: grunt-wp-i18n 1.0.3\n"
+
+#: epl-wp-all-import.php:120
+msgid ""
+"Please activate <b>Easy Property Listings</b> to enable all functions of "
+"the Easy Property Listings Import CSV, XML WP All Import Add On"
+msgstr ""
 
 #: includes/functions.php:85
 msgid "Easy Property Listings Custom Fields"

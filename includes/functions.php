@@ -275,7 +275,6 @@ function pmai_is_epl_update_allowed( $cur_meta_key, $options ) {
 				$parts_temp = explode( ' ', $epl_field );
 				$field_name = trim( array_shift( $parts_temp ), '[]' );
 				$ignore_list[] = $field_name;
-				
 			}
 		}
 
