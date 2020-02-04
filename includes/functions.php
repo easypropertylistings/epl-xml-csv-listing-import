@@ -272,8 +272,8 @@ function pmai_is_epl_update_allowed( $cur_meta_key, $options ) {
 		if ( ! empty( $options['epl_list'] ) && is_array( $options['epl_list'] ) ) {
 			foreach ( $options['epl_list'] as $key => $epl_field ) {
 
-				$parts_temp = explode( ' ', $epl_field );
-				$field_name = trim( array_shift( $parts_temp ), '[]' );
+				$parts_temp    = explode( ' ', $epl_field );
+				$field_name    = trim( array_shift( $parts_temp ), '[]' );
 				$ignore_list[] = $field_name;
 			}
 		}
