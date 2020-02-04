@@ -3,9 +3,9 @@ Author URI: http://www.realestateconnected.com.au/
 Plugin URI: https://wordpress.org/plugins/easy-property-listings-xml-csv-import/
 Contributors: mervb1
 Donate link: https://easypropertylistings.com.au/support-the-site/
-Tags: extension, easy property listings, wp all import, wp all import pro, csv, xml, xls, import, reaxml, jupix, BLM, MLS, real estate listings, property, rental, land, rural, business, commercial
+Tags: real estate, easy property listings, wp all import, csv, xml, xls, import, reaxml, jupix, BLM, MLS
 Requires at least: 3.3
-Tested up to: 5.2.4
+Tested up to: 5.3.2
 Stable Tag: 1.0.11
 License: GNU Version 2 or Any Later Version
 
@@ -19,12 +19,11 @@ Our goal with this add-on is not to just be able to import listings into Easy Pr
 
 Supported formats are CSV, XML and XLS files with full support for the Australian REAXML format when using the [FeedSync Pre-Processor](https://easypropertylistings.com.au/extensions/feedsync/?utm_source=readme&utm_medium=description_tab&utm_content=feedsync&utm_campaign=wordpressorg_import_feedsync) and Jupix UK formats. We have implemented an image and date/time skipping to minimise image imports so they are only updated when changed. We are seeing a 78% speed improvement using this plugin.
 
-* Requires Easy Property Listings 2.3 or newer.
+* Requires Easy Property Listings 3.4 or newer.
 * Requires WP All Import.
 
 > <strong>Support</strong><br>
 > Need help configuring your imports? Not a problem, head over to the [Support Pricing](https://easypropertylistings.com.au/support-ticket/pricing/?utm_source=readme&utm_medium=description_tab&utm_content=support_pricing&utm_campaign=wordpressorg_import) page and purchase a plan or installation service.
-
 
 == Installation ==
 
@@ -45,7 +44,7 @@ Supported formats are CSV, XML and XLS files with full support for the Australia
 
 == Change log ==
 
-= 2.0.0 November 7, 2019 =
+= 2.0.0 February 5, 2020 =
 
 * New: Select and specifically override Easy Property Listings Custom Fields. You can now update all, update specific fields, or leave some alone.
 * New: Filter epl_wpimport_skip_fields allowing record skipping of specific fields when importer is set to update everything. This allows you to use the featured listing system in EPL with imported data and by default will not update property_featured, property_year_built, property_owner custom fields.

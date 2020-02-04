@@ -23,7 +23,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Easy Property Listings. If not, see <http://www.gnu.org/licenses/>.
  *
- * @package  EPL-Import
+ * @package  EPL-IMPORTER-ADD-ON
  * @category Importer
  * @author   Merv Barrett
  * @version  2.0.0
@@ -60,7 +60,7 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 		 * @static
 		 * @staticvar array $instance
 		 * @uses      EPL_WP_All_Import_Add_On::includes() Include the required files
-		 * @see       EPL_TM()
+		 * @see       epl_wpimport()
 		 * @return    object|EPL_WP_All_Import_Add_On The one true EPL_WP_All_Import_Add_On
 		 */
 		public static function instance() {
@@ -84,7 +84,7 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 		 * @return void
 		 */
 		private function hooks() {
-			// activation.
+			// Activation.
 			add_action( 'admin_init', array( $this, 'activation' ) );
 			add_action( 'activated_plugin', array( $this, 'epl_wpallimport_load_epl_core_first' ) );
 		}
@@ -99,11 +99,11 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 		 */
 		public function activation() {
 			if ( ! defined( 'EPL_RUNNING' ) ) {
-				// is this plugin active?
+				// Is this plugin active?
 				if ( is_plugin_active( plugin_basename( __FILE__ ) ) ) {
-					// unset activation notice.
+					// Unset activation notice.
 					unset( $_GET['activate'] ); //phpcs:ignore
-					// display notice.
+					// Display notice.
 					add_action( 'admin_notices', array( $this, 'admin_notices' ) );
 				}
 			}
