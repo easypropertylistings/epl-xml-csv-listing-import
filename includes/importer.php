@@ -84,7 +84,7 @@ function epl_wpimport_register_fields() {
 		$epl_wpimport->set_import_function( 'epl_wpimport_import_function' );
 
 		// Display a dismiss able notice warning the user to install WP All Import to use the add-on.
-		$epl_wpimport->admin_notice( __( "Easy Property Listings Importer plugin recommends you install <a href='http://www.wpallimport.com/'>WP All Import Pro 4.2.6+</a>", 'epl-wpimport' ) );
+		$epl_wpimport->admin_notice( __( "Easy Property Listings Importer plugin recommends you install <a href='http://www.wpallimport.com/'>WP All Import Pro</a>", 'epl-wpimport' ) );
 
 		// The add-on will run for all themes/post types if no arguments are passed to run().
 		$epl_wpimport->run(
