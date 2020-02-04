@@ -167,6 +167,8 @@ function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 								}
 
 								$imported_metas[] = $field['name'];
+							} else {
+								$epl_wpimport->log( '- ' . __( 'Field Skipped:', 'epl-wpimport' ) . '`' . $field['name'] . '` value `' . $data[ $field['name'] ] . '`' );
 							}
 						}
 					}
@@ -295,6 +297,11 @@ function epl_wpimport_is_image_to_update( $default, $post_object, $xml_object ) 
 	if ( ! in_array( $post_object['post_type'], epl_get_core_post_types(), true ) ) {
 		return $default;
 	}
+
+	if ( empty( $post_object['ID'] ) ) {
+		return $default;
+	}
+
 	$live_import = function_exists( 'epl_get_option' ) ? epl_get_option( 'epl_wpimport_skip_update' ) : 'off';
 
 	if ( 'off' === $live_import ) {
