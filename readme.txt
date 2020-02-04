@@ -51,8 +51,9 @@ Supported formats are CSV, XML and XLS files with full support for the Australia
 * New: Modified date/time filter epl_import_mod_time added allowing support for other data formats.
 * New: Better logging output so you know specifically what is happening to all EPL fields during import.
 * New: Support for custom meat fields to use 'import' => 'preserve' which will automatically enable record skipping of custom added meta fields.
-* Tweak: WP All Import rapid-addon updated to 1.1.1
-* Tweak: Revised log messaging.
+* New: Image filter epl_import_image_new_mod_date enabling image record skipping process for custom feeds.
+* Tweak: WP All Import rapid-addon updated to 1.1.1 version.
+* Tweak: Revised log messaging for better clarity on exactly what is happing during the import process.
 * Tweak: Updated fallback meta fields to EPL 3.4.11.
 * Fix: Bold formatting issue in log.
 * Fix: Security improvements.
