@@ -19,7 +19,7 @@ Our goal with this add-on is not to just be able to import listings into Easy Pr
 
 Supported formats are CSV, XML and XLS files with full support for the Australian REAXML format when using the [FeedSync Pre-Processor](https://easypropertylistings.com.au/extensions/feedsync/?utm_source=readme&utm_medium=description_tab&utm_content=feedsync&utm_campaign=wordpressorg_import_feedsync) and Jupix UK formats. We have implemented an image and date/time skipping to minimise image imports so they are only updated when changed. We are seeing a 78% speed improvement using this plugin.
 
-* Requires Easy Property Listings 3.4 or newer.
+* Requires Easy Property Listings plugin for WordPress.
 * Requires WP All Import.
 
 > <strong>Support</strong><br>
@@ -54,7 +54,7 @@ Supported formats are CSV, XML and XLS files with full support for the Australia
 * New: Image filter epl_import_image_new_mod_date enabling image record skipping process for custom feeds.
 * Tweak: WP All Import rapid-addon updated to 1.1.1 version.
 * Tweak: Revised log messaging for better clarity on exactly what is happing during the import process.
-* Tweak: Updated fallback meta fields to EPL 3.4.11.
+* Tweak: Updated fallback meta fields to EPL 3.4.21.
 * Fix: Bold formatting issue in log.
 * Fix: Security improvements.
 
