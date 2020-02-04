@@ -4,9 +4,9 @@
  *
  * @package     EPL-IMPORTER-ADD-ON
  * @subpackage  Functions/Global
- * @copyright   Copyright (c) 2019, Merv Barrett
+ * @copyright   Copyright (c) 2020, Merv Barrett
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since       2.0
+ * @since       2.0.0
  */
 
 // Exit if accessed directly.
@@ -129,7 +129,7 @@ function epl_wpimport_pmxi_reimport( $entry, $post ) {
 				</div>
 			</div>
 		</div>
-	</div> 
+	</div>
 	<?php
 }
 add_action( 'pmxi_reimport', 'epl_wpimport_pmxi_reimport', 10, 2 );
