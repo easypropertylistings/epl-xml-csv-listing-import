@@ -362,7 +362,7 @@ add_filter( 'wp_all_import_existing_meta_keys', 'epl_wp_all_import_existing_meta
  */
 function epl_wpimport_get_meta_keys() {
 
-	global $epl_ai_meta_fields;
+	$epl_ai_meta_fields = epl_wpimport_get_meta_fields();
 	$meta_keys = array();
 	if ( ! empty( $epl_ai_meta_fields ) ) {
 
