@@ -42,6 +42,7 @@ function epl_wpimport_get_meta_fields() {
  *
  * @return void
  * @since  2.0
+ * @since 2.0.1 Removed global $epl_ai_meta_fields
  */
 function epl_wpimport_pmxi_reimport( $entry, $post ) {
 
@@ -144,6 +145,7 @@ add_action( 'pmxi_reimport', 'epl_wpimport_pmxi_reimport', 10, 2 );
  *
  * @return bool|mixed|void
  * @since 2.0
+ * @since 2.0.1 Removed global $epl_ai_meta_fields
  */
 function epl_wpimport_pmxi_custom_field_to_update( $field_to_update, $post_type, $options, $m_key ) {
 
@@ -359,10 +361,11 @@ add_filter( 'wp_all_import_existing_meta_keys', 'epl_wp_all_import_existing_meta
  *
  * @return array
  * @since  2.0
+ * @since 2.0.1 Removed global $epl_ai_meta_fields
  */
 function epl_wpimport_get_meta_keys() {
 
-	global $epl_ai_meta_fields;
+	$epl_ai_meta_fields = epl_wpimport_get_meta_fields();
 	$meta_keys = array();
 	if ( ! empty( $epl_ai_meta_fields ) ) {
 
