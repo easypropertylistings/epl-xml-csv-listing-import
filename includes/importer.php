@@ -18,6 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Register Importer Fields
  *
  * @since 1.0
+ * @since 2.0.1 Removed global $epl_ai_meta_fields
  */
 function epl_wpimport_register_fields() {
 
@@ -102,6 +103,7 @@ add_action( 'init', 'epl_wpimport_register_fields' );
  * @param array  $import_options Options.
  *
  * @since 1.0
+ * @since 2.0.1 Removed global $epl_ai_meta_fields
  */
 function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 	global $epl_wpimport;
