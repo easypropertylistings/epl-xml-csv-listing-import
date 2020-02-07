@@ -3,7 +3,7 @@
  * Plugin Name: Easy Property Listings Import CSV, XML WP All Import Add On
  * Plugin URL: https://wordpress.org/plugins/easy-property-listings-xml-csv-import/
  * Description: Import CSV and XML into Easy Property Listings with this WP All Import Add-on
- * Version: 2.0.0
+ * Version: 2.0.1
  * Text Domain: epl-wpimport
  * Author: Merv Barrett
  * Author URI: http://www.realestateconnected.com.au/
@@ -46,7 +46,7 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 		 * Instance of this class.
 		 *
 		 * @var   EPL_WP_All_Import_Add_On The one true EPL_WP_All_Import_Add_On
-		 * @since 1.0
+		 * @since 1.0.0
 		 */
 		private static $instance;
 
@@ -56,7 +56,7 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 		 * Insures that only one instance of EPL_WP_All_Import_Add_On exists in memory at any one time.
 		 * Also prevents needing to define globals all over the place.
 		 *
-		 * @since     1.0
+		 * @since     1.0.0
 		 * @static
 		 * @staticvar array $instance
 		 * @uses      EPL_WP_All_Import_Add_On::includes() Include the required files
@@ -79,7 +79,7 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 		/**
 		 * Setup the default hooks and actions
 		 *
-		 * @since 1.0
+		 * @since 1.0.0
 		 *
 		 * @return void
 		 */
@@ -92,7 +92,7 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 		/**
 		 * Activation function fires when the plugin is activated.
 		 *
-		 * @since  1.0
+		 * @since  1.0.0
 		 * @access public
 		 *
 		 * @return void
@@ -112,7 +112,7 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 		/**
 		 * Admin notices
 		 *
-		 * @since 1.0
+		 * @since 1.0.0
 		 */
 		public function admin_notices() {
 			if ( ! defined( 'EPL_RUNNING' ) ) {
@@ -125,7 +125,7 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 		 * Setup plugin constants
 		 *
 		 * @access private
-		 * @since  1.0
+		 * @since  1.0.0
 		 * @return void
 		 */
 		private function setup_constants() {
@@ -155,7 +155,7 @@ if ( ! class_exists( 'EPL_WP_All_Import_Add_On' ) ) :
 		 * Include required files
 		 *
 		 * @access private
-		 * @since  1.0
+		 * @since  1.0.0
 		 * @return void
 		 */
 		private function includes() {
@@ -227,9 +227,9 @@ endif; // End if class_exists check.
  * Use this function like you would a global variable, except without needing
  * to declare the global.
  *
- * Example: <?php $epl = EPL_WPIMPORT(); ?>
+ * Example: <?php $epl = epl_wpimport(); ?>
  *
- * @since  1.0
+ * @since  1.0.0
  * @return object The one true EPL_WP_All_Import_Add_On Instance
  */
 function epl_wpimport() {
