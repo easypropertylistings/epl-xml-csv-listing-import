@@ -14,17 +14,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-global $epl_ai_meta_fields;
-
-$epl_ai_meta_fields = epl_wpimport_get_meta_fields();
-
 /**
  * Register Importer Fields
  *
  * @since 1.0
  */
 function epl_wpimport_register_fields() {
-	global $epl_ai_meta_fields, $epl_wpimport;
+
+	global $epl_wpimport;
+	$epl_ai_meta_fields = epl_wpimport_get_meta_fields();
 
 	// Initialize EPL WP All Import Pro add-on.
 	$epl_wpimport = new RapidAddon( 'Easy Property Listings Custom Fields', 'epl_wpimport_addon' );
@@ -106,8 +104,9 @@ add_action( 'init', 'epl_wpimport_register_fields' );
  * @since 1.0
  */
 function epl_wpimport_import_function( $post_id, $data, $import_options ) {
-	global $epl_wpimport,$epl_ai_meta_fields;
+	global $epl_wpimport;
 
+	$epl_ai_meta_fields = epl_wpimport_get_meta_fields();
 	$imported_metas = array();
 
 	$live_import = function_exists( 'epl_get_option' ) ? epl_get_option( 'epl_wpimport_skip_update' ) : 'off';
