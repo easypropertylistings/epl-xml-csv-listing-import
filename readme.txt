@@ -46,6 +46,7 @@ Supported formats are CSV, XML and XLS files with full support for the Australia
 
 = 2.0.1 February 7, 2020 =
 
+* Tweak: Removed global loading field meta.
 * Tweak: Altered code loading to prevent conflict with PilotPress plugin.
 
 = 2.0.0 February 5, 2020 =
