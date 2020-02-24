@@ -3,10 +3,10 @@ Author URI: http://www.realestateconnected.com.au/
 Plugin URI: https://wordpress.org/plugins/easy-property-listings-xml-csv-import/
 Contributors: mervb1
 Donate link: https://easypropertylistings.com.au/support-the-site/
-Tags: extension, easy property listings, wp all import, wp all import pro, csv, xml, xls, import, reaxml, jupix, BLM, MLS, real estate listings, property, rental, land, rural, business, commercial
+Tags: real estate, easy property listings, wp all import, csv, xml, xls, import, reaxml, jupix, BLM, MLS
 Requires at least: 3.3
-Tested up to: 4.9
-Stable Tag: 1.0.10
+Tested up to: 5.3.2
+Stable Tag: 2.0.1
 License: GNU Version 2 or Any Later Version
 
 Import listings into Easy Property Listings with this WP All Import add-on for WordPress. Created for maximum performance.
@@ -19,12 +19,11 @@ Our goal with this add-on is not to just be able to import listings into Easy Pr
 
 Supported formats are CSV, XML and XLS files with full support for the Australian REAXML format when using the [FeedSync Pre-Processor](https://easypropertylistings.com.au/extensions/feedsync/?utm_source=readme&utm_medium=description_tab&utm_content=feedsync&utm_campaign=wordpressorg_import_feedsync) and Jupix UK formats. We have implemented an image and date/time skipping to minimise image imports so they are only updated when changed. We are seeing a 78% speed improvement using this plugin.
 
-* Requires Easy Property Listings 2.3 or newer.
+* Requires Easy Property Listings plugin for WordPress.
 * Requires WP All Import.
 
 > <strong>Support</strong><br>
 > Need help configuring your imports? Not a problem, head over to the [Support Pricing](https://easypropertylistings.com.au/support-ticket/pricing/?utm_source=readme&utm_medium=description_tab&utm_content=support_pricing&utm_campaign=wordpressorg_import) page and purchase a plan or installation service.
-
 
 == Installation ==
 
@@ -33,7 +32,6 @@ Supported formats are CSV, XML and XLS files with full support for the Australia
 3. Import the pre-configured scripts for WP All Import -> Dashboard > All Import > Settings > Templates.
 4. Configure your imports from Dashboard > All Import > New Import.
 5. Enable the Activate once initial import is set option from Dashboard > Easy Property Listings > Extensions > WP All Import Add-On
-
 
 == Screenshots ==
 
@@ -44,8 +42,26 @@ Supported formats are CSV, XML and XLS files with full support for the Australia
 5. Extended log entry only updating listing if necessary saving space and time
 6. Recommend Import settings
 
-
 == Change log ==
+
+= 2.0.1 February 7, 2020 =
+
+* Tweak: Removed global loading field meta.
+* Tweak: Altered code loading to prevent conflict with PilotPress plugin.
+
+= 2.0.0 February 5, 2020 =
+
+* New: Select and specifically override Easy Property Listings Custom Fields. You can now update all, update specific fields, or leave some alone.
+* New: Filter epl_wpimport_default_skip_fields_list allowing record skipping of specific fields when importer is set to update everything. This allows you to use the featured listing system in EPL with imported data and by default will not update property_featured, property_year_built, property_owner custom fields. Add more to the epl_wpimport_default_skip_fields_list array as required.
+* New: Modified date/time filter epl_import_mod_time added allowing support for other data formats.
+* New: Better logging output so you know specifically what is happening to all EPL fields during import.
+* New: Support for custom meat fields to use 'import' => 'preserve' which will automatically enable record skipping of custom added meta fields.
+* New: Image filter epl_import_image_new_mod_date enabling image record skipping process for custom feeds.
+* Tweak: WP All Import rapid-addon updated to 1.1.1 version.
+* Tweak: Revised log messaging for better clarity on exactly what is happing during the import process.
+* Tweak: Updated fallback meta fields to EPL 3.4.21.
+* Fix: Bold formatting issue in log.
+* Fix: Security improvements.
 
 = 1.0.11 October 10, 2017 =
 
