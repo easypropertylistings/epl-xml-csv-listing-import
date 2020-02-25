@@ -104,6 +104,7 @@ add_action( 'init', 'epl_wpimport_register_fields' );
  *
  * @since 1.0
  * @since 2.0.1 Removed global $epl_ai_meta_fields
+ * @since 2.0.2 Fix : Fields can be updated with empty values( '', false, 0)
  */
 function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 	global $epl_wpimport;
@@ -144,28 +145,25 @@ function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 									continue;
 								}
 
-								// Field Import exclude empty fields.
-								if ( ! empty( $data[ $field['name'] ] ) ) {
+								// Field Import.
+								if ( 'file' === $field['type'] ) {
+									// If its a file type dont save whole array as meta data, only URL.
+									if ( is_array( $data[ $field['name'] ] ) ) {
 
-									if ( 'file' === $field['type'] ) {
-										// If its a file type dont save whole array as meta data, only URL.
-										if ( is_array( $data[ $field['name'] ] ) ) {
+										if ( ! empty( $data[ $field['name'] ] ) ) {
 
-											if ( ! empty( $data[ $field['name'] ] ) ) {
+											$data[ $field['name'] ] = $data[ $field['name'] ]['image_url_or_path'];
 
-												$data[ $field['name'] ] = $data[ $field['name'] ]['image_url_or_path'];
-
-											} else {
-												$data[ $field['name'] ] = '';
-											}
+										} else {
+											$data[ $field['name'] ] = '';
 										}
 									}
-
-									update_post_meta( $post_id, $field['name'], $data[ $field['name'] ] );
-
-									// Log.
-									$epl_wpimport->log( '- ' . __( 'Field Updated:', 'epl-wpimport' ) . '`' . $field['name'] . '` value `' . $data[ $field['name'] ] . '`' );
 								}
+
+								update_post_meta( $post_id, $field['name'], $data[ $field['name'] ] );
+
+								// Log.
+								$epl_wpimport->log( '- ' . __( 'Field Updated:', 'epl-wpimport' ) . '`' . $field['name'] . '` value `' . $data[ $field['name'] ] . '`' );
 
 								$imported_metas[] = $field['name'];
 							} else {
