@@ -44,6 +44,10 @@ Supported formats are CSV, XML and XLS files with full support for the Australia
 
 == Change log ==
 
+= 2.0.2 February 26, 2020 =
+
+* Fix: Fields with empty values '', false, 0 can be updated.
+
 = 2.0.1 February 7, 2020 =
 
 * Tweak: Removed global loading field meta.
