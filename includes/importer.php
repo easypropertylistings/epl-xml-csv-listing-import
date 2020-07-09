@@ -292,6 +292,7 @@ function epl_wpimport_img_loop( $unique_id, $mod_time, $url, $id ) {
  *
  * @return bool
  * @since  1.0
+ * @since  2.0.2 Updated code for WP All Import Pro >= 4.6.1 with compatiblity for lower versions
  */
 function epl_wpimport_is_image_to_update( $default, $post_object, $xml_object ) {
 	if ( ! in_array( $post_object['post_type'], epl_get_core_post_types(), true ) ) {
@@ -313,27 +314,42 @@ function epl_wpimport_is_image_to_update( $default, $post_object, $xml_object ) 
 	// Only upload images which are recently modified.
 	if ( ! empty( $prop_img_mod_date ) ) {
 
-		// Check if image mod time tag is present, use it.
-		if ( isset( $xml_object['feedsyncImageModtime'] ) ) {
-			$new_mod_date = $xml_object['feedsyncImageModtime'];
-		} else {
-			if ( function_exists( 'EPL_MLS' ) ) {
-				$new_mod_date = $xml_object['images']['@attributes']['modTime'];
-			} else {
-				$new_mod_date =
-				isset( $xml_object['images']['img'] ) ?
-				current( $xml_object['images']['img'][0]['modTime'] ) :
-				current( $xml_object['objects']['img'][0]['modTime'] );
-			}
-		}
-		$new_mod_date = apply_filters( 'epl_import_image_new_mod_date', $new_mod_date, $xml_object, $post_object );
-		$new_mod_date = strtotime( epl_feedsync_format_date( $new_mod_date ) );
+		if ( defined( 'PMXI_VERSION' ) && version_compare( PMXI_VERSION, '4.6.1', '<' ) ) :
+			$new_mod_date = strtotime(
+				epl_feedsync_format_date(
+					get_post_meta( $post_object['ID'], 'property_images_mod_date', true )
+				)
+			);
 
-		$old_mod_date = strtotime(
-			epl_feedsync_format_date(
-				$prop_img_mod_date
-			)
-		);
+			$old_mod_date = strtotime(
+				epl_feedsync_format_date(
+					get_post_meta( $post_object['ID'], 'property_images_mod_date_old', true )
+				)
+			);
+		else :
+			// Check if image mod time tag is present, use it.
+			if ( isset( $xml_object['feedsyncImageModtime'] ) ) {
+				$new_mod_date = $xml_object['feedsyncImageModtime'];
+			} else {
+				if ( function_exists( 'EPL_MLS' ) ) {
+					$new_mod_date = $xml_object['images']['@attributes']['modTime'];
+				} else {
+					$new_mod_date =
+					isset( $xml_object['images']['img'] ) ?
+					current( $xml_object['images']['img'][0]['modTime'] ) :
+					current( $xml_object['objects']['img'][0]['modTime'] );
+				}
+			}
+			$new_mod_date = apply_filters( 'epl_import_image_new_mod_date', $new_mod_date, $xml_object, $post_object );
+			$new_mod_date = strtotime( epl_feedsync_format_date( $new_mod_date ) );
+
+			$old_mod_date = strtotime(
+				epl_feedsync_format_date(
+					$prop_img_mod_date
+				)
+			);
+
+		endif;
 
 		$epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . __( 'Image Updating process started: Old Modified Date: ', 'epl-wpimport' ) . $old_mod_date . ' - ' . __( 'New Modified Date:', 'epl-wpimport' ) . ' ' . $new_mod_date );
 
