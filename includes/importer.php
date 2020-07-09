@@ -163,7 +163,8 @@ function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 								update_post_meta( $post_id, $field['name'], $data[ $field['name'] ] );
 
 								// Log.
-								$epl_wpimport->log( '- ' . __( 'Field Updated:', 'epl-wpimport' ) . '`' . $field['name'] . '` value `' . $data[ $field['name'] ] . '`' );
+								$log_value = is_array( $data[ $field['name'] ] ) ? serialize( $data[ $field['name'] ] ) : $data[ $field['name'] ];
+								$epl_wpimport->log( '- ' . __( 'Field Updated:', 'epl-wpimport' ) . '`' . $field['name'] . '` value `' . $log_value . '`' );
 
 								$imported_metas[] = $field['name'];
 							} else {
@@ -311,15 +312,26 @@ function epl_wpimport_is_image_to_update( $default, $post_object, $xml_object ) 
 	$prop_img_mod_date = get_post_meta( $post_object['ID'], 'property_images_mod_date', true );
 	// Only upload images which are recently modified.
 	if ( ! empty( $prop_img_mod_date ) ) {
-		$new_mod_date = strtotime(
-			epl_feedsync_format_date(
-				get_post_meta( $post_object['ID'], 'property_images_mod_date', true )
-			)
-		);
+
+		// Check if image mod time tag is present, use it.
+		if ( isset( $xml_object['feedsyncImageModtime'] ) ) {
+			$new_mod_date = $xml_object['feedsyncImageModtime'];
+		} else {
+			if ( function_exists( 'EPL_MLS' ) ) {
+				$new_mod_date = $xml_object['images']['@attributes']['modTime'];
+			} else {
+				$new_mod_date =
+				isset( $xml_object['images']['img'] ) ?
+				current( $xml_object['images']['img'][0]['modTime'] ) :
+				current( $xml_object['objects']['img'][0]['modTime'] );
+			}
+		}
+		$new_mod_date = apply_filters( 'epl_import_image_new_mod_date', $new_mod_date, $xml_object, $post_object );
+		$new_mod_date = strtotime( epl_feedsync_format_date( $new_mod_date ) );
 
 		$old_mod_date = strtotime(
 			epl_feedsync_format_date(
-				get_post_meta( $post_object['ID'], 'property_images_mod_date_old', true )
+				$prop_img_mod_date
 			)
 		);
 
