@@ -114,6 +114,11 @@ function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 
 	$live_import = function_exists( 'epl_get_option' ) ? epl_get_option( 'epl_wpimport_skip_update' ) : 'off';
 
+	if ( 'yes' !== $import_options['options']['update_all_data'] && '1' !== $import_options['options']['is_update_epl'] ) {
+		$epl_wpimport->log( '- ' . __( 'Preserve EPL Fields', 'epl-wpimport' ) );
+		return;
+	}
+
 	if ( ! empty( $epl_ai_meta_fields ) ) {
 
 		$epl_wpimport->log( '<b>' . __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . __( 'UPDATING FIELDS', 'epl-wpimport' ) . '</b>' );
