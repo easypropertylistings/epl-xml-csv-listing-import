@@ -47,7 +47,7 @@ Supported formats are CSV, XML and XLS files with full support for the Australia
 = 2.0.3 July 10, 2020 =
 
 * Fix: Updated image processing code for WP All Import Pro >= 4.6.1 with compatibility for lower versions.
-* Fix: Fields are now correctly skipping when they are unchecked to update.
+* Fix: Fields are now correctly skipping when they are unchecked to update and record skipping is disabled.
 
 = 2.0.2 February 26, 2020 =
 
