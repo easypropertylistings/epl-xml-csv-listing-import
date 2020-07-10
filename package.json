@@ -1,6 +1,6 @@
 {
   "name": "easy-property-listings-xml-csv-import",
-  "version": "2.0.0",
+  "version": "2.0.3",
   "description": "Import CSV and XML into Easy Property Listings with this WP All Import Add-on",
   "main": "Gruntfile.js",
   "dependencies": {
