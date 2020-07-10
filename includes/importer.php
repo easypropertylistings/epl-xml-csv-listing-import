@@ -104,7 +104,8 @@ add_action( 'init', 'epl_wpimport_register_fields' );
  *
  * @since 1.0
  * @since 2.0.1 Removed global $epl_ai_meta_fields
- * @since 2.0.2 Fix : Fields can be updated with empty values( '', false, 0)
+ * @since 2.0.2 Fix: Fields can be updated with empty values( '', false, 0)
+ * @since 2.0.3 Fix: Fields are now correctly skipping when they are unchecked to update.
  */
 function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 	global $epl_wpimport;
@@ -297,7 +298,7 @@ function epl_wpimport_img_loop( $unique_id, $mod_time, $url, $id ) {
  *
  * @return bool
  * @since  1.0
- * @since  2.0.2 Updated code for WP All Import Pro >= 4.6.1 with compatiblity for lower versions
+ * @since  2.0.3 Updated code for WP All Import Pro >= 4.6.1 with compatibility for lower versions.
  */
 function epl_wpimport_is_image_to_update( $default, $post_object, $xml_object ) {
 	if ( ! in_array( $post_object['post_type'], epl_get_core_post_types(), true ) ) {
