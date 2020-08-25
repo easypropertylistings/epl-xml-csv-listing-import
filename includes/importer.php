@@ -104,7 +104,8 @@ add_action( 'init', 'epl_wpimport_register_fields' );
  *
  * @since 1.0
  * @since 2.0.1 Removed global $epl_ai_meta_fields
- * @since 2.0.2 Fix : Fields can be updated with empty values( '', false, 0)
+ * @since 2.0.2 Fix: Fields can be updated with empty values( '', false, 0)
+ * @since 2.0.3 Fix: Fields are now correctly skipping when they are unchecked to update.
  */
 function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 	global $epl_wpimport;
@@ -113,6 +114,11 @@ function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 	$imported_metas = array();
 
 	$live_import = function_exists( 'epl_get_option' ) ? epl_get_option( 'epl_wpimport_skip_update' ) : 'off';
+
+	if ( 'yes' !== $import_options['options']['update_all_data'] && '1' !== $import_options['options']['is_update_epl'] ) {
+		$epl_wpimport->log( '- ' . __( 'Preserve EPL Fields', 'epl-wpimport' ) );
+		return;
+	}
 
 	if ( ! empty( $epl_ai_meta_fields ) ) {
 
@@ -163,7 +169,8 @@ function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 								update_post_meta( $post_id, $field['name'], $data[ $field['name'] ] );
 
 								// Log.
-								$epl_wpimport->log( '- ' . __( 'Field Updated:', 'epl-wpimport' ) . '`' . $field['name'] . '` value `' . $data[ $field['name'] ] . '`' );
+								$log_value = is_array( $data[ $field['name'] ] ) ? serialize( $data[ $field['name'] ] ) : $data[ $field['name'] ];
+								$epl_wpimport->log( '- ' . __( 'Field Updated:', 'epl-wpimport' ) . '`' . $field['name'] . '` value `' . $log_value . '`' );
 
 								$imported_metas[] = $field['name'];
 							} else {
@@ -291,6 +298,7 @@ function epl_wpimport_img_loop( $unique_id, $mod_time, $url, $id ) {
  *
  * @return bool
  * @since  1.0
+ * @since  2.0.3 Updated code for WP All Import Pro >= 4.6.1 with compatibility for lower versions.
  */
 function epl_wpimport_is_image_to_update( $default, $post_object, $xml_object ) {
 	if ( ! in_array( $post_object['post_type'], epl_get_core_post_types(), true ) ) {
@@ -311,17 +319,43 @@ function epl_wpimport_is_image_to_update( $default, $post_object, $xml_object ) 
 	$prop_img_mod_date = get_post_meta( $post_object['ID'], 'property_images_mod_date', true );
 	// Only upload images which are recently modified.
 	if ( ! empty( $prop_img_mod_date ) ) {
-		$new_mod_date = strtotime(
-			epl_feedsync_format_date(
-				get_post_meta( $post_object['ID'], 'property_images_mod_date', true )
-			)
-		);
 
-		$old_mod_date = strtotime(
-			epl_feedsync_format_date(
-				get_post_meta( $post_object['ID'], 'property_images_mod_date_old', true )
-			)
-		);
+		if ( defined( 'PMXI_VERSION' ) && version_compare( PMXI_VERSION, '4.6.1', '<' ) ) :
+			$new_mod_date = strtotime(
+				epl_feedsync_format_date(
+					get_post_meta( $post_object['ID'], 'property_images_mod_date', true )
+				)
+			);
+
+			$old_mod_date = strtotime(
+				epl_feedsync_format_date(
+					get_post_meta( $post_object['ID'], 'property_images_mod_date_old', true )
+				)
+			);
+		else :
+			// Check if image mod time tag is present, use it.
+			if ( isset( $xml_object['feedsyncImageModtime'] ) ) {
+				$new_mod_date = $xml_object['feedsyncImageModtime'];
+			} else {
+				if ( function_exists( 'EPL_MLS' ) ) {
+					$new_mod_date = $xml_object['images']['@attributes']['modTime'];
+				} else {
+					$new_mod_date =
+					isset( $xml_object['images']['img'] ) ?
+					current( $xml_object['images']['img'][0]['modTime'] ) :
+					current( $xml_object['objects']['img'][0]['modTime'] );
+				}
+			}
+			$new_mod_date = apply_filters( 'epl_import_image_new_mod_date', $new_mod_date, $xml_object, $post_object );
+			$new_mod_date = strtotime( epl_feedsync_format_date( $new_mod_date ) );
+
+			$old_mod_date = strtotime(
+				epl_feedsync_format_date(
+					$prop_img_mod_date
+				)
+			);
+
+		endif;
 
 		$epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . __( 'Image Updating process started: Old Modified Date: ', 'epl-wpimport' ) . $old_mod_date . ' - ' . __( 'New Modified Date:', 'epl-wpimport' ) . ' ' . $new_mod_date );
 
