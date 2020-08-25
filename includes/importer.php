@@ -88,7 +88,7 @@ function epl_wpimport_register_fields() {
 		// The add-on will run for all themes/post types if no arguments are passed to run().
 		$epl_wpimport->run(
 			array(
-				'post_types' => epl_get_core_post_types(),
+				'post_types' => epl_wpimport_allowed_post_types(),
 			)
 		);
 	}
@@ -301,7 +301,7 @@ function epl_wpimport_img_loop( $unique_id, $mod_time, $url, $id ) {
  * @since  2.0.3 Updated code for WP All Import Pro >= 4.6.1 with compatibility for lower versions.
  */
 function epl_wpimport_is_image_to_update( $default, $post_object, $xml_object ) {
-	if ( ! in_array( $post_object['post_type'], epl_get_core_post_types(), true ) ) {
+	if ( ! in_array( $post_object['post_type'], epl_wpimport_allowed_post_types(), true ) ) {
 		return $default;
 	}
 
@@ -410,7 +410,7 @@ add_filter( 'pmxi_is_images_to_update', 'epl_wpimport_is_image_to_update', 10, 3
  * @since 2.0.0 Added new filter epl_import_image_new_mod_date.
  */
 function epl_wpimport_delete_images( $default, $post_object, $xml_object ) {
-	if ( ! in_array( $post_object['post_type'], epl_get_core_post_types(), true ) ) {
+	if ( ! in_array( $post_object['post_type'], epl_wpimport_allowed_post_types(), true ) ) {
 		return $default;
 	}
 	global $epl_wpimport;
