@@ -33,7 +33,7 @@ function epl_wpimport_register_fields() {
 			if ( ! empty( $epl_meta_box['groups'] ) ) {
 				foreach ( $epl_meta_box['groups'] as $group ) {
 					$epl_wpimport->add_title( $group['label'], $group['label'] );
-					$fields = $group['fields'];
+					$fields = (array) $group['fields'];
 					$fields = array_filter( $fields );
 					if ( ! empty( $fields ) ) {
 						foreach ( $fields as $field ) {
