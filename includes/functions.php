@@ -35,6 +35,19 @@ function epl_wpimport_get_meta_fields() {
 }
 
 /**
+ * check if post type is allowed in epl all import.
+ *
+ * @param      string $field  The field.
+ *
+ * @return     boolean
+ * @since      2.0.4
+ */
+function epl_wpimport_allowed_post_types() {
+    $post_types = epl_get_core_post_types();
+    return apply_filters( 'epl_wpimport_allowed_post_types', $post_types );
+}
+
+/**
  * Custom EPL settings in import settings
  *
  * @param string $entry Entry.
@@ -46,7 +59,7 @@ function epl_wpimport_get_meta_fields() {
  */
 function epl_wpimport_pmxi_reimport( $entry, $post ) {
 
-	if ( ! in_array( $entry, epl_get_core_post_types(), true ) ) {
+	if ( ! in_array( $entry, epl_wpimport_allowed_post_types(), true ) ) {
 		return;
 	}
 
@@ -155,7 +168,7 @@ function epl_wpimport_pmxi_custom_field_to_update( $field_to_update, $post_type,
 		return $field_to_update;
 	}
 
-	if ( false === $field_to_update || ! in_array( $post_type, epl_get_core_post_types(), true ) ) {
+	if ( false === $field_to_update || ! in_array( $post_type, epl_wpimport_allowed_post_types(), true ) ) {
 		return $field_to_update;
 	}
 
@@ -185,7 +198,7 @@ add_filter( 'pmxi_custom_field_to_update', 'epl_wpimport_pmxi_custom_field_to_up
  */
 function epl_wpimport_pmxi_custom_field_to_delete( $field_to_delete, $pid, $post_type, $options, $cur_meta_key ) {
 
-	if ( ! in_array( $post_type, epl_get_core_post_types(), true ) ) {
+	if ( ! in_array( $post_type, epl_wpimport_allowed_post_types(), true ) ) {
 		return $field_to_delete;
 	}
 
@@ -336,7 +349,7 @@ function epl_wpimport_default_skip_fields_list() {
  */
 function epl_wp_all_import_existing_meta_keys( $existing_meta_keys, $custom_type ) {
 
-	if ( in_array( $custom_type, epl_get_core_post_types(), true ) ) {
+	if ( in_array( $custom_type, epl_wpimport_allowed_post_types(), true ) ) {
 
 		$hide_fields = epl_wpimport_get_meta_keys();
 
