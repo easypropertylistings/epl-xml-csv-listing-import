@@ -35,16 +35,14 @@ function epl_wpimport_get_meta_fields() {
 }
 
 /**
- * check if post type is allowed in epl all import.
- *
- * @param      string $field  The field.
+ * Check if post type is allowed in epl all import.
  *
  * @return     boolean
  * @since      2.0.4
  */
 function epl_wpimport_allowed_post_types() {
-    $post_types = epl_get_core_post_types();
-    return apply_filters( 'epl_wpimport_allowed_post_types', $post_types );
+	$post_types = epl_get_core_post_types();
+	return apply_filters( 'epl_wpimport_allowed_post_types', $post_types );
 }
 
 /**
@@ -55,7 +53,8 @@ function epl_wpimport_allowed_post_types() {
  *
  * @return void
  * @since  2.0
- * @since 2.0.1 Removed global $epl_ai_meta_fields
+ * @since  2.0.1 Removed global $epl_ai_meta_fields
+ * @since  2.0.4 Added check if post type is allowed in epl all import.
  */
 function epl_wpimport_pmxi_reimport( $entry, $post ) {
 
@@ -159,6 +158,7 @@ add_action( 'pmxi_reimport', 'epl_wpimport_pmxi_reimport', 10, 2 );
  * @return bool|mixed|void
  * @since 2.0
  * @since 2.0.1 Removed global $epl_ai_meta_fields
+ * @since 2.0.4 Added check if post type is allowed in epl all import.
  */
 function epl_wpimport_pmxi_custom_field_to_update( $field_to_update, $post_type, $options, $m_key ) {
 
@@ -195,6 +195,7 @@ add_filter( 'pmxi_custom_field_to_update', 'epl_wpimport_pmxi_custom_field_to_up
  * @return bool|mixed|void
  * @since 2.0
  * @since 2.0.0 Removed epl custom field deleting process.
+ * @since 2.0.4 Added check if post type is allowed in epl all import.
  */
 function epl_wpimport_pmxi_custom_field_to_delete( $field_to_delete, $pid, $post_type, $options, $cur_meta_key ) {
 
@@ -346,6 +347,8 @@ function epl_wpimport_default_skip_fields_list() {
  * @param string $custom_type Field type.
  *
  * @return array
+ *
+ * @since  2.0.4 Added check if post type is allowed in epl all import.
  */
 function epl_wp_all_import_existing_meta_keys( $existing_meta_keys, $custom_type ) {
 
@@ -374,12 +377,12 @@ add_filter( 'wp_all_import_existing_meta_keys', 'epl_wp_all_import_existing_meta
  *
  * @return array
  * @since  2.0
- * @since 2.0.1 Removed global $epl_ai_meta_fields
+ * @since  2.0.1 Removed global $epl_ai_meta_fields
  */
 function epl_wpimport_get_meta_keys() {
 
 	$epl_ai_meta_fields = epl_wpimport_get_meta_fields();
-	$meta_keys = array();
+	$meta_keys          = array();
 	if ( ! empty( $epl_ai_meta_fields ) ) {
 
 		foreach ( $epl_ai_meta_fields as $epl_meta_box ) {
