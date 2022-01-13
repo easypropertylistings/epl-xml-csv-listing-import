@@ -5,7 +5,7 @@ Contributors: mervb1
 Donate link: https://easypropertylistings.com.au/support-the-site/
 Tags: real estate, easy property listings, wp all import, csv, xml, xls, import, reaxml, jupix, BLM, MLS
 Requires at least: 3.3
-Tested up to: 5.8
+Tested up to: 5.8.3
 Stable Tag: 2.0.3
 License: GNU Version 2 or Any Later Version
 
@@ -43,6 +43,10 @@ Supported formats are CSV, XML and XLS files with full support for the Australia
 6. Recommend Import settings
 
 == Change log ==
+
+= 2.0.4 January 13, 2022 =
+
+* Fix: Check if post type is allowed in epl all import.
 
 = 2.0.3 July 10, 2020 =
 
