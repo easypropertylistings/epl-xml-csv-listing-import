@@ -28,8 +28,21 @@ function epl_wpimport_register_fields() {
 	// Initialize EPL WP All Import Pro add-on.
 	$epl_wpimport = new RapidAddon( 'Easy Property Listings Custom Fields', 'epl_wpimport_addon' );
 
+        // Retrieve import object.
+        $import_object = new PMXI_Import_Record();
+        $current_importer_object = $import_object->getById( $_GET['id'] );
+        $post_type_to_import = $current_importer_object->options['custom_type'];
+        
 	if ( ! empty( $epl_ai_meta_fields ) ) {
+
 		foreach ( $epl_ai_meta_fields as $epl_meta_box ) {
+                        
+                        $meta_box_post_types = $epl_meta_box['post_type'];
+
+                        if( !in_array( $post_type_to_import, $meta_box_post_types ) ) {
+                                continue;
+                        }
+
 			if ( ! empty( $epl_meta_box['groups'] ) ) {
 				foreach ( $epl_meta_box['groups'] as $group ) {
 					$epl_wpimport->add_title( $group['label'], $group['label'] );
