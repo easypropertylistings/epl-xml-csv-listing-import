@@ -1,16 +1,16 @@
-# Copyright (C) 2020 Merv Barrett
+# Copyright (C) 2022 Merv Barrett
 # This file is distributed under the same license as the Easy Property Listings Import CSV, XML WP All Import Add On package.
 msgid ""
 msgstr ""
 "Project-Id-Version: Easy Property Listings Import CSV, XML WP All Import "
-"Add On 2.0.3\n"
+"Add On 2.0.5\n"
 "Report-Msgid-Bugs-To: "
 "https://github.com/easypropertylistings/epl-xml-csv-listing-import/issues\n"
-"POT-Creation-Date: 2020-07-10 01:55:05+00:00\n"
+"POT-Creation-Date: 2022-02-23 01:33:17+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2020-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2022-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Merv Barrett <support@easypropertylistings.com.au>\n"
 "Language-Team: Real Estate Connected <support@realestateconnected.com.au>\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
@@ -33,37 +33,37 @@ msgid ""
 "the Easy Property Listings Import CSV, XML WP All Import Add On"
 msgstr ""
 
-#: includes/functions.php:86
+#: includes/functions.php:98
 msgid "Easy Property Listings Custom Fields"
 msgstr ""
 
-#: includes/functions.php:90
+#: includes/functions.php:102
 msgid "Update all EPL fields"
 msgstr ""
 
-#: includes/functions.php:95
+#: includes/functions.php:107
 msgid "Update only these EPL fields, leave the rest alone"
 msgstr ""
 
-#: includes/functions.php:115
+#: includes/functions.php:127
 msgid "Leave these EPL fields alone, update all other fields"
 msgstr ""
 
-#: includes/functions.php:165 includes/importer.php:125
-#: includes/importer.php:204 includes/importer.php:236
-#: includes/importer.php:260 includes/importer.php:360
-#: includes/importer.php:363 includes/importer.php:379
-#: includes/importer.php:383 includes/importer.php:387
-#: includes/importer.php:391 includes/importer.php:395
-#: includes/importer.php:441 includes/importer.php:445
-#: includes/importer.php:451 includes/importer.php:454
-#: includes/importer.php:476 includes/importer.php:528
-#: includes/importer.php:576
+#: includes/functions.php:178 includes/importer.php:138
+#: includes/importer.php:217 includes/importer.php:249
+#: includes/importer.php:273 includes/importer.php:373
+#: includes/importer.php:376 includes/importer.php:392
+#: includes/importer.php:396 includes/importer.php:400
+#: includes/importer.php:404 includes/importer.php:408
+#: includes/importer.php:454 includes/importer.php:458
+#: includes/importer.php:464 includes/importer.php:467
+#: includes/importer.php:489 includes/importer.php:541
+#: includes/importer.php:589
 #. Translators: %s is the meta key name.
 msgid "EPL IMPORTER"
 msgstr ""
 
-#: includes/functions.php:165
+#: includes/functions.php:178
 msgid "Skipping field : %s"
 msgstr ""
 
@@ -114,141 +114,141 @@ msgstr ""
 msgid "Disable (Operates as per WP All Import Pro default)"
 msgstr ""
 
-#: includes/importer.php:86
+#: includes/importer.php:99
 msgid ""
 "Easy Property Listings Importer plugin recommends you install <a "
 "href='http://www.wpallimport.com/'>WP All Import Pro</a>"
 msgstr ""
 
-#: includes/importer.php:119 includes/importer.php:188
+#: includes/importer.php:132 includes/importer.php:201
 msgid "Preserve EPL Fields"
 msgstr ""
 
-#: includes/importer.php:125
+#: includes/importer.php:138
 msgid "UPDATING FIELDS"
 msgstr ""
 
-#: includes/importer.php:144 includes/importer.php:173
+#: includes/importer.php:157 includes/importer.php:186
 msgid "Field Updated:"
 msgstr ""
 
-#: includes/importer.php:144
+#: includes/importer.php:157
 msgid "Images Modified Date: "
 msgstr ""
 
-#: includes/importer.php:149 includes/importer.php:177
+#: includes/importer.php:162 includes/importer.php:190
 msgid "Field Skipped:"
 msgstr ""
 
-#: includes/importer.php:186
+#: includes/importer.php:199
 msgid "EPL Fields Updated"
 msgstr ""
 
-#: includes/importer.php:210
+#: includes/importer.php:223
 msgid "Record Skipping Enabled"
 msgstr ""
 
-#: includes/importer.php:210
+#: includes/importer.php:223
 msgid "Record Skipping Disabled"
 msgstr ""
 
-#: includes/importer.php:242
+#: includes/importer.php:255
 msgid "Record Skipping Enabled for Images"
 msgstr ""
 
-#: includes/importer.php:242
+#: includes/importer.php:255
 msgid "Record Skipping Disabled for Images"
 msgstr ""
 
-#: includes/importer.php:260 includes/importer.php:478
+#: includes/importer.php:273 includes/importer.php:491
 msgid "Record Skipped"
 msgstr ""
 
-#: includes/importer.php:360
+#: includes/importer.php:373
 msgid "Image Updating process started: Old Modified Date: "
 msgstr ""
 
-#: includes/importer.php:360
+#: includes/importer.php:373
 msgid "New Modified Date:"
 msgstr ""
 
-#: includes/importer.php:363
+#: includes/importer.php:376
 msgid "Updated Images, Uploading"
 msgstr ""
 
-#: includes/importer.php:379
+#: includes/importer.php:392
 msgid "Old Modified date greater than new modified date. Attachment Count: "
 msgstr ""
 
-#: includes/importer.php:383
+#: includes/importer.php:396
 msgid "Old Modified date equals new modified date. Attachment Count: "
 msgstr ""
 
-#: includes/importer.php:387
+#: includes/importer.php:400
 msgid "Insert & restore deleted attachments"
 msgstr ""
 
-#: includes/importer.php:391
+#: includes/importer.php:404
 msgid "No new images, skipping image update"
 msgstr ""
 
-#: includes/importer.php:395
+#: includes/importer.php:408
 msgid "New Images, updating"
 msgstr ""
 
-#: includes/importer.php:441
+#: includes/importer.php:454
 msgid "Image Processing Started: Old Modified Date: "
 msgstr ""
 
-#: includes/importer.php:441
+#: includes/importer.php:454
 msgid "New Modified Date: "
 msgstr ""
 
-#: includes/importer.php:441
+#: includes/importer.php:454
 msgid "Live Import: "
 msgstr ""
 
-#: includes/importer.php:445
+#: includes/importer.php:458
 msgid "Live import off, default WP All Import functions"
 msgstr ""
 
-#: includes/importer.php:451
+#: includes/importer.php:464
 msgid "Images unchanged, skipping image deletion"
 msgstr ""
 
-#: includes/importer.php:454
+#: includes/importer.php:467
 msgid "Images changes detected, deleting images"
 msgstr ""
 
-#: includes/importer.php:489
+#: includes/importer.php:502
 msgid "Date modified, updating..."
 msgstr ""
 
-#: includes/importer.php:493
+#: includes/importer.php:506
 msgid "Modified Listing, updating..."
 msgstr ""
 
-#: includes/importer.php:497
+#: includes/importer.php:510
 msgid "Updating Field..."
 msgstr ""
 
-#: includes/importer.php:501
+#: includes/importer.php:514
 msgid "Listing Modified Time Unchanged, Skipping Record Update."
 msgstr ""
 
-#: includes/importer.php:505
+#: includes/importer.php:518
 msgid "Updating Fields:"
 msgstr ""
 
-#: includes/importer.php:509
+#: includes/importer.php:522
 msgid "Skipped, previously imported record found for:"
 msgstr ""
 
-#: includes/importer.php:528
+#: includes/importer.php:541
 msgid "Deprecated version running"
 msgstr ""
 
-#: includes/importer.php:576
+#: includes/importer.php:589
 msgid "Active"
 msgstr ""
 
@@ -953,5 +953,5 @@ msgid "Merv Barrett"
 msgstr ""
 
 #. Author URI of the plugin/theme
-msgid "http://www.realestateconnected.com.au/"
+msgid "https://www.realestateconnected.com.au/"
 msgstr ""
