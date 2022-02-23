@@ -29,10 +29,10 @@ function epl_wpimport_register_fields() {
 	// Initialize EPL WP All Import Pro add-on.
 	$epl_wpimport = new RapidAddon( 'Easy Property Listings Custom Fields', 'epl_wpimport_addon' );
 
-		// Retrieve import object.
-		$import_object           = new PMXI_Import_Record();
-		$current_importer_object = $import_object->getById( $_GET['id'] );
-		$post_type_to_import     = $current_importer_object->options['custom_type'];
+	// Retrieve import object.
+	$import_object           = new PMXI_Import_Record(); // TODO: Triggers fatal.
+	$current_importer_object = $import_object->getById( $_GET['id'] );
+	$post_type_to_import     = $current_importer_object->options['custom_type'];
 
 	if ( ! empty( $epl_ai_meta_fields ) ) {
 
