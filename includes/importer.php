@@ -319,7 +319,7 @@ function epl_wpimport_img_loop( $unique_id, $mod_time, $url, $id ) {
 	foreach ( $urls as $index => $img_src ) {
 		if ( ! empty( $img_src ) ) {
 			echo esc_url( $url );
-		 if ( $i === $len - 1 ) { //phpcs:ignore
+			if ( $i === $len - 1 ) { //phpcs:ignore
 				// Last.
 			} else {
 				echo "\n";
