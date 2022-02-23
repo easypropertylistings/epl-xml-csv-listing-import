@@ -29,31 +29,33 @@ function epl_wpimport_register_fields() {
 	// Initialize EPL WP All Import Pro add-on.
 	$epl_wpimport            = new RapidAddon( 'Easy Property Listings Custom Fields', 'epl_wpimport_addon' );
 		$post_type_to_import = '';
-
-		$admin_screen   = ! empty( $_GET['page'] ) ? sanitize_text_field( $_GET['page'] ) : '';
+                
+                //phpcs:ignore
+		$admin_screen   = ! empty( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
 		$import_page_id = ! empty( $_GET['id'] ) ? intval( $_GET['id'] ) : 0;
 
-	if ( 'pmxi-admin-manage' == $admin_screen && $import_page_id > 0 ) {
+	if ( 'pmxi-admin-manage' === $admin_screen && $import_page_id > 0 ) {
 
 		if ( class_exists( 'PMXI_Import_Record' ) ) {
 			// PMXI_Import_Record gives info of a saved import.
 			try {
 				// Retrieve import object.
 				$import_object           = new PMXI_Import_Record();
-				$current_importer_object = $import_object->getById( $_GET['id'] );
+				$current_importer_object = $import_object->getById( $import_page_id );
 				$post_type_to_import     = $current_importer_object->options['custom_type'];
 
 			} catch ( Exception $e ) {
 
 			}
 		}
-	} elseif ( 'pmxi-admin-import' == $admin_screen && class_exists( 'PMXI_Handler' ) ) {
+	} elseif ( 'pmxi-admin-import' === $admin_screen && class_exists( 'PMXI_Handler' ) ) {
 		// PMXI_Handler gives data from all import pro session.
 			$pxmi_session     = new PMXI_Handler();
-			$pxmi_action      = ! empty( $_GET['action'] ) ? sanitize_text_field( $_GET['action'] ) : '';
+                         //phpcs:ignore
+			$pxmi_action      = ! empty( $_GET['action'] ) ? sanitize_text_field( wp_unslash( $_GET['action'] ) ) : '';
 			$pxmi_custom_type = $pxmi_session->get( 'custom_type' );
 
-		if ( 'template' == $pxmi_action && ! empty( $pxmi_custom_type ) ) {
+		if ( 'template' === $pxmi_action && ! empty( $pxmi_custom_type ) ) {
 				$post_type_to_import = $pxmi_custom_type;
 		}
 	}
@@ -64,7 +66,7 @@ function epl_wpimport_register_fields() {
 
 						$meta_box_post_types = $epl_meta_box['post_type'];
 
-			if ( ! empty( $post_type_to_import ) && ! in_array( $post_type_to_import, $meta_box_post_types ) ) {
+			if ( ! empty( $post_type_to_import ) && ! in_array( $post_type_to_import, $meta_box_post_types, true ) ) {
 					continue;
 			}
 
