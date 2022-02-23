@@ -45,7 +45,7 @@ function epl_wpimport_register_fields() {
 				$post_type_to_import     = $current_importer_object->options['custom_type'];
 
 			} catch ( Exception $e ) {
-
+                                // don't do anything if there is an exception.
 			}
 		}
 	} elseif ( 'pmxi-admin-import' === $admin_screen && class_exists( 'PMXI_Handler' ) ) {
