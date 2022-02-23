@@ -27,12 +27,10 @@ function epl_wpimport_register_fields() {
 	$epl_ai_meta_fields = epl_wpimport_get_meta_fields();
 
 	// Initialize EPL WP All Import Pro add-on.
-	$epl_wpimport            = new RapidAddon( 'Easy Property Listings Custom Fields', 'epl_wpimport_addon' );
-		$post_type_to_import = '';
-                
-                //phpcs:ignore
-		$admin_screen   = ! empty( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
-		$import_page_id = ! empty( $_GET['id'] ) ? intval( $_GET['id'] ) : 0;
+	$epl_wpimport        = new RapidAddon( 'Easy Property Listings Custom Fields', 'epl_wpimport_addon' );
+	$post_type_to_import = '';
+	$admin_screen        = ! empty( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore
+	$import_page_id      = ! empty( $_GET['id'] ) ? intval( $_GET['id'] ) : 0; //phpcs:ignore
 
 	if ( 'pmxi-admin-manage' === $admin_screen && $import_page_id > 0 ) {
 
@@ -45,12 +43,12 @@ function epl_wpimport_register_fields() {
 				$post_type_to_import     = $current_importer_object->options['custom_type'];
 
 			} catch ( Exception $e ) {
-                                // don't do anything if there is an exception.
+				// Don't do anything if there is an exception.
 			}
 		}
 	} elseif ( 'pmxi-admin-import' === $admin_screen && class_exists( 'PMXI_Handler' ) ) {
-		// PMXI_Handler gives data from all import pro session.
-			$pxmi_session     = new PMXI_Handler();
+			// PMXI_Handler gives data from all import pro session.
+			$pxmi_session = new PMXI_Handler();
                          //phpcs:ignore
 			$pxmi_action      = ! empty( $_GET['action'] ) ? sanitize_text_field( wp_unslash( $_GET['action'] ) ) : '';
 			$pxmi_custom_type = $pxmi_session->get( 'custom_type' );
@@ -64,7 +62,7 @@ function epl_wpimport_register_fields() {
 
 		foreach ( $epl_ai_meta_fields as $epl_meta_box ) {
 
-						$meta_box_post_types = $epl_meta_box['post_type'];
+			$meta_box_post_types = $epl_meta_box['post_type'];
 
 			if ( ! empty( $post_type_to_import ) && ! in_array( $post_type_to_import, $meta_box_post_types, true ) ) {
 					continue;
@@ -122,7 +120,7 @@ function epl_wpimport_register_fields() {
 		// Register Import Function.
 		$epl_wpimport->set_import_function( 'epl_wpimport_import_function' );
 
-		// Display a dismiss able notice warning the user to install WP All Import to use the add-on.
+		// Display dismissable notice warning the user to install WP All Import to use the add-on.
 		$epl_wpimport->admin_notice( __( "Easy Property Listings Importer plugin recommends you install <a href='http://www.wpallimport.com/'>WP All Import Pro</a>", 'epl-wpimport' ) );
 
 		// The add-on will run for all themes/post types if no arguments are passed to run().
