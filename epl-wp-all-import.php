@@ -6,7 +6,7 @@
  * Version: 2.0.5
  * Text Domain: epl-wpimport
  * Author: Merv Barrett
- * Author URI: http://www.realestateconnected.com.au/
+ * Author URI: https://www.realestateconnected.com.au/
  * Contributors: mervb
  *
  * Easy Property Listings Import CSV, XML WP All Import Add On, is free
@@ -26,7 +26,7 @@
  * @package  EPL-IMPORTER-ADD-ON
  * @category Importer
  * @author   Merv Barrett
- * @version  2.0.4
+ * @version  2.0.5
  */
 
 // Exit if accessed directly.
