@@ -5,8 +5,8 @@ Contributors: mervb1
 Donate link: https://easypropertylistings.com.au/support-the-site/
 Tags: real estate, easy property listings, wp all import, csv, xml, xls, import, reaxml, jupix, BLM, MLS
 Requires at least: 3.3
-Tested up to: 5.9
-Stable Tag: 2.0.6
+Tested up to: 5.9.1
+Stable Tag: 2.0.5
 License: GNU Version 2 or Any Later Version
 
 Import listings into Easy Property Listings with this WP All Import add-on for WordPress. Created for maximum performance.
@@ -31,7 +31,7 @@ Supported formats are CSV, XML and XLS files with full support for the Australia
 2. Download [Import Scripts](https://easypropertylistings.com.au/extensions/import-into-easy-property-listings/?utm_source=readme&utm_medium=description_tab&utm_content=import_scripts&utm_campaign=wordpressorg_import) from Easy Property Listings.
 3. Import the pre-configured scripts for WP All Import -> Dashboard > All Import > Settings > Templates.
 4. Configure your imports from Dashboard > All Import > New Import.
-5. Enable the Activate once initial import is set option from Dashboard > Easy Property Listings > Extensions > WP All Import Add-On
+5. Enable: Activate once initial import is set option from Dashboard > Easy Property Listings > Extensions > WP All Import Add-On
 
 == Screenshots ==
 
