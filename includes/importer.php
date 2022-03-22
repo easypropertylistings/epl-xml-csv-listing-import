@@ -157,8 +157,11 @@ add_action( 'init', 'epl_wpimport_register_fields' );
  * @since 2.0.3 Fix: Fields are now correctly skipping when they are unchecked to update.
  */
 function epl_wpimport_import_function( $post_id, $data, $import_options ) {
-	global $epl_wpimport;
 
+        global $epl_wpimport;
+
+        $post_type_to_import     = $import_options['options']['custom_type'];
+        
 	$epl_ai_meta_fields = epl_wpimport_get_meta_fields();
 	$imported_metas     = array();
 
@@ -174,6 +177,23 @@ function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 		$epl_wpimport->log( '<b>' . __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . __( 'UPDATING FIELDS', 'epl-wpimport' ) . '</b>' );
 
 		foreach ( $epl_ai_meta_fields as $epl_meta_box ) {
+
+                        $meta_box_post_types = $epl_meta_box['post_type'];
+
+                        $is_core_post_type = in_array( $post_type_to_import, epl_get_core_post_types(), true ) ? true : false;
+                
+                        $skip_continue = true;
+                
+                        $core_post_types_in_mb = array_intersect($meta_box_post_types, epl_get_core_post_types() );
+                
+                        if( $is_core_post_type && !empty( $core_post_types_in_mb ) ) {
+                                
+                                $skip_continue = false;
+                        }
+                
+                        if ( $skip_continue && ! empty( $post_type_to_import ) && ! in_array( $post_type_to_import, $meta_box_post_types, true ) ) {
+                                continue;
+                        }
 
 			if ( ! empty( $epl_meta_box['groups'] ) ) {
 				foreach ( $epl_meta_box['groups'] as $group ) {
