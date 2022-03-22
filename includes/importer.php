@@ -64,8 +64,19 @@ function epl_wpimport_register_fields() {
 
 			$meta_box_post_types = $epl_meta_box['post_type'];
 
-			if ( ! empty( $post_type_to_import ) && ! in_array( $post_type_to_import, $meta_box_post_types, true ) ) {
-					continue;
+                        $is_core_post_type = in_array( $post_type_to_import, epl_get_core_post_types(), true ) ? true : false;
+
+                        $skip_continue = true;
+
+                        $core_post_types_in_mb = array_intersect($meta_box_post_types, epl_get_core_post_types() );
+
+                        if( $is_core_post_type && !empty( $core_post_types_in_mb ) ) {
+                               
+                                $skip_continue = false;
+                        }
+
+			if ( $skip_continue && ! empty( $post_type_to_import ) && ! in_array( $post_type_to_import, $meta_box_post_types, true ) ) {
+                                continue;
 			}
 
 			if ( ! empty( $epl_meta_box['groups'] ) ) {
