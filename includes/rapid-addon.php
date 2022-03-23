@@ -332,6 +332,14 @@ if ( ! class_exists( 'RapidAddon' ) ) {
 
 		}
 
+                /**
+                 * Executes import for all import pro
+                 *
+                 * @param array $importData
+                 * @param array $parsedData
+                 * @since 2.0.6 Fix : undefined download_image notice and related warnings.
+                 * @return void
+                 */
 		function import( $importData, $parsedData ) {
 
 			if ( ! $this->is_active_addon( $importData['post_type'] ) ) {
@@ -362,8 +370,8 @@ if ( ! class_exists( 'RapidAddon' ) ) {
 								// import the specified image, then set the value of the field to the image ID in the media library
 
 								$image_url_or_path = $parsedData[ $field_slug ][ $index ];
-
-                                                                if ( ! array_key_exists( $field_slug, $import_options['download_image'] ) ) {
+                                                                
+                                                                if ( empty( $import_options['download_image'] ) || ! array_key_exists( $field_slug, $import_options['download_image'] ) ) {
 									continue 2;
 								}
 
@@ -382,7 +390,7 @@ if ( ! class_exists( 'RapidAddon' ) ) {
 							case 'file':
 								$image_url_or_path = $parsedData[ $field_slug ][ $index ];
 
-                                                                if ( ! array_key_exists( $field_slug, $import_options['download_image'] ) ) {
+                                                                if ( empty( $import_options['download_image'] ) || ! array_key_exists( $field_slug, $import_options['download_image'] ) ) {
 									continue 2;
 								}
 
