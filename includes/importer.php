@@ -312,7 +312,7 @@ add_action( 'pmxi_before_post_import', 'epl_wpimport_log_pmxi_gallery_image', 10
  *
  * @param string $vars Variables.
  *
- * @return mixed
+ * @return string
  * @since  1.0
  */
 function epl_wpimport_post_skipped_notification( $vars ) {
