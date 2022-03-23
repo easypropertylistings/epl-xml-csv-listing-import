@@ -63,16 +63,12 @@ function epl_wpimport_register_fields() {
 
 		foreach ( $epl_ai_meta_fields as $epl_meta_box ) {
 
-			$meta_box_post_types = $epl_meta_box['post_type'];
-
-			$is_core_post_type = in_array( $post_type_to_import, epl_get_core_post_types(), true ) ? true : false;
-
-			$skip_continue = true;
-
+			$meta_box_post_types   = $epl_meta_box['post_type'];
+			$is_core_post_type     = in_array( $post_type_to_import, epl_get_core_post_types(), true ) ? true : false;
+			$skip_continue         = true;
 			$core_post_types_in_mb = array_intersect( $meta_box_post_types, epl_get_core_post_types() );
 
 			if ( $is_core_post_type && ! empty( $core_post_types_in_mb ) ) {
-
 					$skip_continue = false;
 			}
 
@@ -180,16 +176,12 @@ function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 
 		foreach ( $epl_ai_meta_fields as $epl_meta_box ) {
 
-						$meta_box_post_types = $epl_meta_box['post_type'];
-
-						$is_core_post_type = in_array( $post_type_to_import, epl_get_core_post_types(), true ) ? true : false;
-
-						$skip_continue = true;
-
-						$core_post_types_in_mb = array_intersect( $meta_box_post_types, epl_get_core_post_types() );
+			$meta_box_post_types   = $epl_meta_box['post_type'];
+			$is_core_post_type     = in_array( $post_type_to_import, epl_get_core_post_types(), true ) ? true : false;
+			$skip_continue         = true;
+			$core_post_types_in_mb = array_intersect( $meta_box_post_types, epl_get_core_post_types() );
 
 			if ( $is_core_post_type && ! empty( $core_post_types_in_mb ) ) {
-
 					$skip_continue = false;
 			}
 
@@ -228,9 +220,7 @@ function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 									if ( is_array( $data[ $field['name'] ] ) ) {
 
 										if ( ! empty( $data[ $field['name'] ] ) ) {
-
 											$data[ $field['name'] ] = $data[ $field['name'] ]['image_url_or_path'];
-
 										} else {
 											$data[ $field['name'] ] = '';
 										}
