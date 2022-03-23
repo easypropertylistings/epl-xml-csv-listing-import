@@ -332,6 +332,14 @@ if ( ! class_exists( 'RapidAddon' ) ) {
 
 		}
 
+                /**
+                 * Executes import for all import pro
+                 *
+                 * @param array $importData
+                 * @param array $parsedData
+                 * @since 2.0.6 Fix : undefined download_image notice and related warnings.
+                 * @return void
+                 */
 		function import( $importData, $parsedData ) {
 
 			if ( ! $this->is_active_addon( $importData['post_type'] ) ) {
