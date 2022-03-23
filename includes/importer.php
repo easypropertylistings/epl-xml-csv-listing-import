@@ -216,7 +216,7 @@ function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 
 								// Field Import.
 								if ( 'file' === $field['type'] ) {
-									// If its a file type dont save whole array as meta data, only URL.
+									// If it is a file type do not save whole array as metadata, only URL.
 									if ( is_array( $data[ $field['name'] ] ) ) {
 
 										if ( ! empty( $data[ $field['name'] ] ) ) {
@@ -285,11 +285,11 @@ add_action( 'pmxi_before_post_import', 'epl_wpimport_log', 10, 1 );
  */
 function epl_wpimport_log_pmxi_gallery_image( $post_id ) {
 	/**
-	* Parameters
-	* $pid – the ID of the post/page/Custom Post Type that was just created.
-	* $attid – the ID of the attachment
-	* $image_filepath – the full path to the file: C:\path\to\wordpress\wp-content\uploads\2010\05\filename.png
-	*/
+	 * Parameters
+	 * $pid – the ID of the post/page/Custom Post Type that was just created.
+	 * $attid – the ID of the attachment
+	 * $image_filepath – the full path to the file: C:\path\to\wordpress\wp-content\uploads\2010\05\filename.png
+	 */
 
 	global $epl_wpimport;
 
@@ -351,7 +351,7 @@ function epl_wpimport_img_loop( $unique_id, $mod_time, $url, $id ) {
 }
 
 /**
- * Skip image uploading if if images mod date is not newer
+ * Skip image uploading if mages mod date is not newer
  *
  * @param string $default     Default type.
  * @param object $post_object Post object.
