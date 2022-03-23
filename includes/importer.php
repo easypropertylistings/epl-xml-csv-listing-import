@@ -63,21 +63,17 @@ function epl_wpimport_register_fields() {
 
 		foreach ( $epl_ai_meta_fields as $epl_meta_box ) {
 
-			$meta_box_post_types = $epl_meta_box['post_type'];
+			$meta_box_post_types   = $epl_meta_box['post_type'];
+			$is_core_post_type     = in_array( $post_type_to_import, epl_get_core_post_types(), true ) ? true : false;
+			$skip_continue         = true;
+			$core_post_types_in_mb = array_intersect( $meta_box_post_types, epl_get_core_post_types() );
 
-                        $is_core_post_type = in_array( $post_type_to_import, epl_get_core_post_types(), true ) ? true : false;
-
-                        $skip_continue = true;
-
-                        $core_post_types_in_mb = array_intersect($meta_box_post_types, epl_get_core_post_types() );
-
-                        if( $is_core_post_type && !empty( $core_post_types_in_mb ) ) {
-                               
-                                $skip_continue = false;
-                        }
+			if ( $is_core_post_type && ! empty( $core_post_types_in_mb ) ) {
+					$skip_continue = false;
+			}
 
 			if ( $skip_continue && ! empty( $post_type_to_import ) && ! in_array( $post_type_to_import, $meta_box_post_types, true ) ) {
-                                continue;
+								continue;
 			}
 
 			if ( ! empty( $epl_meta_box['groups'] ) ) {
@@ -160,10 +156,10 @@ add_action( 'init', 'epl_wpimport_register_fields' );
  */
 function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 
-        global $epl_wpimport;
+		global $epl_wpimport;
 
-        $post_type_to_import     = $import_options['options']['custom_type'];
-        
+		$post_type_to_import = $import_options['options']['custom_type'];
+
 	$epl_ai_meta_fields = epl_wpimport_get_meta_fields();
 	$imported_metas     = array();
 
@@ -180,22 +176,18 @@ function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 
 		foreach ( $epl_ai_meta_fields as $epl_meta_box ) {
 
-                        $meta_box_post_types = $epl_meta_box['post_type'];
+			$meta_box_post_types   = $epl_meta_box['post_type'];
+			$is_core_post_type     = in_array( $post_type_to_import, epl_get_core_post_types(), true ) ? true : false;
+			$skip_continue         = true;
+			$core_post_types_in_mb = array_intersect( $meta_box_post_types, epl_get_core_post_types() );
 
-                        $is_core_post_type = in_array( $post_type_to_import, epl_get_core_post_types(), true ) ? true : false;
-                
-                        $skip_continue = true;
-                
-                        $core_post_types_in_mb = array_intersect($meta_box_post_types, epl_get_core_post_types() );
-                
-                        if( $is_core_post_type && !empty( $core_post_types_in_mb ) ) {
-                                
-                                $skip_continue = false;
-                        }
-                
-                        if ( $skip_continue && ! empty( $post_type_to_import ) && ! in_array( $post_type_to_import, $meta_box_post_types, true ) ) {
-                                continue;
-                        }
+			if ( $is_core_post_type && ! empty( $core_post_types_in_mb ) ) {
+					$skip_continue = false;
+			}
+
+			if ( $skip_continue && ! empty( $post_type_to_import ) && ! in_array( $post_type_to_import, $meta_box_post_types, true ) ) {
+					continue;
+			}
 
 			if ( ! empty( $epl_meta_box['groups'] ) ) {
 				foreach ( $epl_meta_box['groups'] as $group ) {
@@ -224,13 +216,11 @@ function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 
 								// Field Import.
 								if ( 'file' === $field['type'] ) {
-									// If its a file type dont save whole array as meta data, only URL.
+									// If it is a file type do not save whole array as metadata, only URL.
 									if ( is_array( $data[ $field['name'] ] ) ) {
 
 										if ( ! empty( $data[ $field['name'] ] ) ) {
-
 											$data[ $field['name'] ] = $data[ $field['name'] ]['image_url_or_path'];
-
 										} else {
 											$data[ $field['name'] ] = '';
 										}
@@ -295,11 +285,11 @@ add_action( 'pmxi_before_post_import', 'epl_wpimport_log', 10, 1 );
  */
 function epl_wpimport_log_pmxi_gallery_image( $post_id ) {
 	/**
-	* Parameters
-	* $pid – the ID of the post/page/Custom Post Type that was just created.
-	* $attid – the ID of the attachment
-	* $image_filepath – the full path to the file: C:\path\to\wordpress\wp-content\uploads\2010\05\filename.png
-	*/
+	 * Parameters
+	 * $pid – the ID of the post/page/Custom Post Type that was just created.
+	 * $attid – the ID of the attachment
+	 * $image_filepath – the full path to the file: C:\path\to\wordpress\wp-content\uploads\2010\05\filename.png
+	 */
 
 	global $epl_wpimport;
 
@@ -322,7 +312,7 @@ add_action( 'pmxi_before_post_import', 'epl_wpimport_log_pmxi_gallery_image', 10
  *
  * @param string $vars Variables.
  *
- * @return mixed
+ * @return string
  * @since  1.0
  */
 function epl_wpimport_post_skipped_notification( $vars ) {
@@ -361,7 +351,7 @@ function epl_wpimport_img_loop( $unique_id, $mod_time, $url, $id ) {
 }
 
 /**
- * Skip image uploading if if images mod date is not newer
+ * Skip image uploading if mages mod date is not newer
  *
  * @param string $default     Default type.
  * @param object $post_object Post object.
