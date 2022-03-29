@@ -21,6 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 2.0.1 Removed global $epl_ai_meta_fields.
  * @since 2.0.5 Better support for extensions to only display its fields.
  * @since 2.0.6 Treat the core post types differently VS extension post types, loading all the meta fields of core if post type is from core EPL.
+ * @since 2.0.7 Fixed the notice for $epl_meta_box['post_type'] when it's string by typecasting to array.
  */
 function epl_wpimport_register_fields() {
 
@@ -63,7 +64,7 @@ function epl_wpimport_register_fields() {
 
 		foreach ( $epl_ai_meta_fields as $epl_meta_box ) {
 
-			$meta_box_post_types   = $epl_meta_box['post_type'];
+			$meta_box_post_types   = (array) $epl_meta_box['post_type'];
 			$is_core_post_type     = in_array( $post_type_to_import, epl_get_core_post_types(), true ) ? true : false;
 			$skip_continue         = true;
 			$core_post_types_in_mb = array_intersect( $meta_box_post_types, epl_get_core_post_types() );
@@ -153,6 +154,7 @@ add_action( 'init', 'epl_wpimport_register_fields' );
  * @since 2.0.2 Fix: Fields can be updated with empty values( '', false, 0)
  * @since 2.0.3 Fix: Fields are now correctly skipping when they are unchecked to update.
  * @since 2.0.6 Treat the core post types differently VS extension post types, updating all the meta fields of core if post type is from core EPL.
+ * @since 2.0.7 Fixed the notice for $epl_meta_box['post_type'] when it's string by typecasting to array.
  */
 function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 
@@ -176,7 +178,7 @@ function epl_wpimport_import_function( $post_id, $data, $import_options ) {
 
 		foreach ( $epl_ai_meta_fields as $epl_meta_box ) {
 
-			$meta_box_post_types   = $epl_meta_box['post_type'];
+			$meta_box_post_types   = (array) $epl_meta_box['post_type'];
 			$is_core_post_type     = in_array( $post_type_to_import, epl_get_core_post_types(), true ) ? true : false;
 			$skip_continue         = true;
 			$core_post_types_in_mb = array_intersect( $meta_box_post_types, epl_get_core_post_types() );
