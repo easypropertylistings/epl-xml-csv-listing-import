@@ -22,6 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 2.0.5 Better support for extensions to only display its fields.
  * @since 2.0.6 Treat the core post types differently VS extension post types, loading all the meta fields of core if post type is from core EPL.
  * @since 2.0.7 Fixed the notice for $epl_meta_box['post_type'] when it's string by typecasting to array.
+ * @since 2.0.9 Fixed : array offset notice on empty $epl_meta_box.
  */
 function epl_wpimport_register_fields() {
 
@@ -63,6 +64,10 @@ function epl_wpimport_register_fields() {
 	if ( ! empty( $epl_ai_meta_fields ) ) {
 
 		foreach ( $epl_ai_meta_fields as $epl_meta_box ) {
+
+                        if( empty( $epl_meta_box ) ) {
+                                continue;
+                        }
 
 			$meta_box_post_types   = (array) $epl_meta_box['post_type'];
 			$is_core_post_type     = in_array( $post_type_to_import, epl_get_core_post_types(), true ) ? true : false;
