@@ -22,6 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 2.0.5 Better support for extensions to only display its fields.
  * @since 2.0.6 Treat the core post types differently VS extension post types, loading all the meta fields of core if post type is from core EPL.
  * @since 2.0.7 Fixed the notice for $epl_meta_box['post_type'] when it's string by typecasting to array.
+ * @since 2.0.9 Fixed : array offset notice on empty $epl_meta_box.
  */
 function epl_wpimport_register_fields() {
 
@@ -63,6 +64,10 @@ function epl_wpimport_register_fields() {
 	if ( ! empty( $epl_ai_meta_fields ) ) {
 
 		foreach ( $epl_ai_meta_fields as $epl_meta_box ) {
+
+                        if( empty( $epl_meta_box ) ) {
+                                continue;
+                        }
 
 			$meta_box_post_types   = (array) $epl_meta_box['post_type'];
 			$is_core_post_type     = in_array( $post_type_to_import, epl_get_core_post_types(), true ) ? true : false;
@@ -362,6 +367,7 @@ function epl_wpimport_img_loop( $unique_id, $mod_time, $url, $id ) {
  * @return bool
  * @since  1.0
  * @since  2.0.3 Updated code for WP All Import Pro >= 4.6.1 with compatibility for lower versions.
+ * @since  2.0.8 Fix fatal error for unrecognised formats & added support for jupix format.
  */
 function epl_wpimport_is_image_to_update( $default, $post_object, $xml_object ) {
 	if ( ! in_array( $post_object['post_type'], epl_wpimport_allowed_post_types(), true ) ) {
@@ -403,10 +409,26 @@ function epl_wpimport_is_image_to_update( $default, $post_object, $xml_object ) 
 				if ( function_exists( 'EPL_MLS' ) ) {
 					$new_mod_date = $xml_object['images']['@attributes']['modTime'];
 				} else {
-					$new_mod_date =
-					isset( $xml_object['images']['img'] ) ?
-					current( $xml_object['images']['img'][0]['modTime'] ) :
-					current( $xml_object['objects']['img'][0]['modTime'] );
+					$new_mod_date = '';
+
+                                        if( isset( $xml_object['images']['img'] ) ) {
+
+                                                $new_mod_date = current( $xml_object['images']['img'][0]['modTime'] ); 
+                                        }
+                
+                                        if( isset( $xml_object['objects']['img'] ) ) {
+                                                
+                                                $new_mod_date = current( $xml_object['objects']['img'][0]['modTime'] ); 
+                                        }
+                
+                                        if( isset( $xml_object['images']['image'] ) ) {
+                                
+                                                if( !empty( $xml_object['images']['image'][0]['modified'] ) ) {
+                                                        
+                                                        $new_mod_date = current( $xml_object['images']['image'][0]['modified'] ); 
+                                                }
+                                                
+                                        }
 				}
 			}
 			$new_mod_date = apply_filters( 'epl_import_image_new_mod_date', $new_mod_date, $xml_object, $post_object );
@@ -471,8 +493,10 @@ add_filter( 'pmxi_is_images_to_update', 'epl_wpimport_is_image_to_update', 10, 3
  * @return bool
  * @since  1.0
  * @since 2.0.0 Added new filter epl_import_image_new_mod_date.
+ * @since  2.0.8 Fix fatal error for unrecognised formats & added support for jupix format.
  */
 function epl_wpimport_delete_images( $default, $post_object, $xml_object ) {
+        
 	if ( ! in_array( $post_object['post_type'], epl_wpimport_allowed_post_types(), true ) ) {
 		return $default;
 	}
@@ -487,19 +511,38 @@ function epl_wpimport_delete_images( $default, $post_object, $xml_object ) {
 
 	// Check if image mod time tag is present, use it.
 	if ( isset( $xml_object['feedsyncImageModtime'] ) ) {
+
 		$new_mod_date = $xml_object['feedsyncImageModtime'];
+
 	} else {
+
 		if ( function_exists( 'EPL_MLS' ) ) {
 			$new_mod_date = $xml_object['images']['@attributes']['modTime'];
 		} else {
-			$new_mod_date =
-			isset( $xml_object['images']['img'] ) ?
-			current( $xml_object['images']['img'][0]['modTime'] ) :
-			current( $xml_object['objects']['img'][0]['modTime'] );
+			$new_mod_date = '';
+
+                        if( isset( $xml_object['images']['img'] ) ) {
+
+                                $new_mod_date = current( $xml_object['images']['img'][0]['modTime'] ); 
+                        }
+
+                        if( isset( $xml_object['objects']['img'] ) ) {
+                                
+                                $new_mod_date = current( $xml_object['objects']['img'][0]['modTime'] ); 
+                        }
+
+                        if( isset( $xml_object['images']['image'] ) ) {
+                                
+                                if( !empty( $xml_object['images']['image'][0]['modified'] ) ) {
+
+                                        $new_mod_date = current( $xml_object['images']['image'][0]['modified'] ); 
+                                }
+                                
+                        }
 		}
 	}
+
 	$new_mod_date = apply_filters( 'epl_import_image_new_mod_date', $new_mod_date, $xml_object, $post_object );
-	$new_mod_date = strtotime( epl_feedsync_format_date( $new_mod_date ) );
 
 	$epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . __( 'Image Processing Started: Old Modified Date: ', 'epl-wpimport' ) . $mod_date . ' - ' . __( 'New Modified Date: ', 'epl-wpimport' ) . $new_mod_date . ' ' . __( 'Live Import: ', 'epl-wpimport' ) . $live_import );
 
@@ -508,6 +551,13 @@ function epl_wpimport_delete_images( $default, $post_object, $xml_object ) {
 		$epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . __( 'Live import off, default WP All Import functions', 'epl-wpimport' ) );
 		return $default;
 	} else {
+
+                if( empty( $mod_date ) && empty( $new_mod_date ) ) {
+                        return $default;
+                }
+
+                $new_mod_date = strtotime( epl_feedsync_format_date( $new_mod_date ) );
+
 		// possible delete.
 		if ( $mod_date === $new_mod_date ) {
 			// DO not delete.
