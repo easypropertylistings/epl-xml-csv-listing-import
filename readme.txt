@@ -44,6 +44,10 @@ Supported formats are CSV, XML and XLS files with full support for the Australia
 
 == Change log ==
 
+= 2.0.7 March 29, 2022 =
+
+* Fix: PHP warning notice for $epl_meta_box['post_type'] when it's string by typecasting to array.
+
 = 2.0.6 March 23, 2022 =
 
 * Tweak: Treat EPL core post types differently vs extension post types, loading all the meta fields of core if post type is from EPL core. So a single import script can be used for all core post types.
