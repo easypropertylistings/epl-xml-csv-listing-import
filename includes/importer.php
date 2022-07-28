@@ -412,11 +412,11 @@ function epl_wpimport_is_image_to_update( $default, $post_object, $xml_object ) 
 					$new_mod_date = '';
 
 					if ( isset( $xml_object['images']['img'] ) ) {
-							$new_mod_date = current( $xml_object['images']['img'][0]['modTime'] );
+						$new_mod_date = current( $xml_object['images']['img'][0]['modTime'] );
 					}
 
 					if ( isset( $xml_object['objects']['img'] ) ) {
-							$new_mod_date = current( $xml_object['objects']['img'][0]['modTime'] );
+						$new_mod_date = current( $xml_object['objects']['img'][0]['modTime'] );
 					}
 
 					if ( isset( $xml_object['images']['image'] ) ) {
@@ -513,11 +513,11 @@ function epl_wpimport_delete_images( $default, $post_object, $xml_object ) {
 			$new_mod_date = '';
 
 			if ( isset( $xml_object['images']['img'] ) ) {
-					$new_mod_date = current( $xml_object['images']['img'][0]['modTime'] );
+				$new_mod_date = current( $xml_object['images']['img'][0]['modTime'] );
 			}
 
 			if ( isset( $xml_object['objects']['img'] ) ) {
-					$new_mod_date = current( $xml_object['objects']['img'][0]['modTime'] );
+				$new_mod_date = current( $xml_object['objects']['img'][0]['modTime'] );
 			}
 
 			if ( isset( $xml_object['images']['image'] ) ) {
