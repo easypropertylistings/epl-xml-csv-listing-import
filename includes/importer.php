@@ -65,9 +65,9 @@ function epl_wpimport_register_fields() {
 
 		foreach ( $epl_ai_meta_fields as $epl_meta_box ) {
 
-                        if( empty( $epl_meta_box ) ) {
-                                continue;
-                        }
+			if ( empty( $epl_meta_box ) ) {
+					continue;
+			}
 
 			$meta_box_post_types   = (array) $epl_meta_box['post_type'];
 			$is_core_post_type     = in_array( $post_type_to_import, epl_get_core_post_types(), true ) ? true : false;
@@ -411,24 +411,23 @@ function epl_wpimport_is_image_to_update( $default, $post_object, $xml_object ) 
 				} else {
 					$new_mod_date = '';
 
-                                        if( isset( $xml_object['images']['img'] ) ) {
+					if ( isset( $xml_object['images']['img'] ) ) {
 
-                                                $new_mod_date = current( $xml_object['images']['img'][0]['modTime'] ); 
-                                        }
-                
-                                        if( isset( $xml_object['objects']['img'] ) ) {
-                                                
-                                                $new_mod_date = current( $xml_object['objects']['img'][0]['modTime'] ); 
-                                        }
-                
-                                        if( isset( $xml_object['images']['image'] ) ) {
-                                
-                                                if( !empty( $xml_object['images']['image'][0]['modified'] ) ) {
-                                                        
-                                                        $new_mod_date = current( $xml_object['images']['image'][0]['modified'] ); 
-                                                }
-                                                
-                                        }
+							$new_mod_date = current( $xml_object['images']['img'][0]['modTime'] );
+					}
+
+					if ( isset( $xml_object['objects']['img'] ) ) {
+
+							$new_mod_date = current( $xml_object['objects']['img'][0]['modTime'] );
+					}
+
+					if ( isset( $xml_object['images']['image'] ) ) {
+
+						if ( ! empty( $xml_object['images']['image'][0]['modified'] ) ) {
+
+												$new_mod_date = current( $xml_object['images']['image'][0]['modified'] );
+						}
+					}
 				}
 			}
 			$new_mod_date = apply_filters( 'epl_import_image_new_mod_date', $new_mod_date, $xml_object, $post_object );
@@ -496,7 +495,7 @@ add_filter( 'pmxi_is_images_to_update', 'epl_wpimport_is_image_to_update', 10, 3
  * @since 2.0.8 Fix fatal error for unrecognised formats & added support for Jupix format.
  */
 function epl_wpimport_delete_images( $default, $post_object, $xml_object ) {
-        
+
 	if ( ! in_array( $post_object['post_type'], epl_wpimport_allowed_post_types(), true ) ) {
 		return $default;
 	}
@@ -521,24 +520,23 @@ function epl_wpimport_delete_images( $default, $post_object, $xml_object ) {
 		} else {
 			$new_mod_date = '';
 
-                        if( isset( $xml_object['images']['img'] ) ) {
+			if ( isset( $xml_object['images']['img'] ) ) {
 
-                                $new_mod_date = current( $xml_object['images']['img'][0]['modTime'] ); 
-                        }
+					$new_mod_date = current( $xml_object['images']['img'][0]['modTime'] );
+			}
 
-                        if( isset( $xml_object['objects']['img'] ) ) {
-                                
-                                $new_mod_date = current( $xml_object['objects']['img'][0]['modTime'] ); 
-                        }
+			if ( isset( $xml_object['objects']['img'] ) ) {
 
-                        if( isset( $xml_object['images']['image'] ) ) {
-                                
-                                if( !empty( $xml_object['images']['image'][0]['modified'] ) ) {
+					$new_mod_date = current( $xml_object['objects']['img'][0]['modTime'] );
+			}
 
-                                        $new_mod_date = current( $xml_object['images']['image'][0]['modified'] ); 
-                                }
-                                
-                        }
+			if ( isset( $xml_object['images']['image'] ) ) {
+
+				if ( ! empty( $xml_object['images']['image'][0]['modified'] ) ) {
+
+								$new_mod_date = current( $xml_object['images']['image'][0]['modified'] );
+				}
+			}
 		}
 	}
 
@@ -552,11 +550,11 @@ function epl_wpimport_delete_images( $default, $post_object, $xml_object ) {
 		return $default;
 	} else {
 
-                if( empty( $mod_date ) && empty( $new_mod_date ) ) {
-                        return $default;
-                }
+		if ( empty( $mod_date ) && empty( $new_mod_date ) ) {
+				return $default;
+		}
 
-                $new_mod_date = strtotime( epl_feedsync_format_date( $new_mod_date ) );
+				$new_mod_date = strtotime( epl_feedsync_format_date( $new_mod_date ) );
 
 		// possible delete.
 		if ( $mod_date === $new_mod_date ) {
