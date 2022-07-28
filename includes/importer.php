@@ -21,15 +21,15 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 2.0.1 Removed global $epl_ai_meta_fields.
  * @since 2.0.5 Better support for extensions to only display its fields.
  * @since 2.0.6 Treat the core post types differently VS extension post types, loading all the meta fields of core if post type is from core EPL.
- * @since 2.0.7 Fixed the notice for $epl_meta_box['post_type'] when it's string by typecasting to array.
- * @since 2.0.9 Fixed : array offset notice on empty $epl_meta_box.
+ * @since 2.0.7 Fixed the notice for $epl_meta_box['post_type'] when its string by typecasting to array.
+ * @since 2.0.8 Fix: Offset notice error on empty $epl_meta_box array.
  */
 function epl_wpimport_register_fields() {
 
 	global $epl_wpimport;
 	$epl_ai_meta_fields = epl_wpimport_get_meta_fields();
 
-	// Initialize EPL WP All Import Pro add-on.
+	// Initialise EPL WP All Import Pro add-on.
 	$epl_wpimport        = new RapidAddon( 'Easy Property Listings Custom Fields', 'epl_wpimport_addon' );
 	$post_type_to_import = '';
 	$admin_screen        = ! empty( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore
@@ -52,7 +52,7 @@ function epl_wpimport_register_fields() {
 	} elseif ( 'pmxi-admin-import' === $admin_screen && class_exists( 'PMXI_Handler' ) ) {
 			// PMXI_Handler gives data from all import pro session.
 			$pxmi_session = new PMXI_Handler();
-                         //phpcs:ignore
+                        //phpcs:ignore
 			$pxmi_action      = ! empty( $_GET['action'] ) ? sanitize_text_field( wp_unslash( $_GET['action'] ) ) : '';
 			$pxmi_custom_type = $pxmi_session->get( 'custom_type' );
 
@@ -491,9 +491,9 @@ add_filter( 'pmxi_is_images_to_update', 'epl_wpimport_is_image_to_update', 10, 3
  * @param object $xml_object  XML object.
  *
  * @return bool
- * @since  1.0
+ * @since 1.0.0
  * @since 2.0.0 Added new filter epl_import_image_new_mod_date.
- * @since  2.0.8 Fix fatal error for unrecognised formats & added support for jupix format.
+ * @since 2.0.8 Fix fatal error for unrecognised formats & added support for Jupix format.
  */
 function epl_wpimport_delete_images( $default, $post_object, $xml_object ) {
         
