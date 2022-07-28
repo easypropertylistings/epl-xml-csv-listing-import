@@ -3,10 +3,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Easy Property Listings Import CSV, XML WP All Import "
-"Add On 2.0.7\n"
+"Add On 2.0.8\n"
 "Report-Msgid-Bugs-To: "
 "https://github.com/easypropertylistings/epl-xml-csv-listing-import/issues\n"
-"POT-Creation-Date: 2022-03-29 04:51:48+00:00\n"
+"POT-Creation-Date: 2022-07-28 03:20:15+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -49,16 +49,16 @@ msgstr ""
 msgid "Leave these EPL fields alone, update all other fields"
 msgstr ""
 
-#: includes/functions.php:178 includes/importer.php:177
-#: includes/importer.php:267 includes/importer.php:299
-#: includes/importer.php:323 includes/importer.php:423
-#: includes/importer.php:426 includes/importer.php:442
-#: includes/importer.php:446 includes/importer.php:450
-#: includes/importer.php:454 includes/importer.php:458
-#: includes/importer.php:504 includes/importer.php:508
-#: includes/importer.php:514 includes/importer.php:517
-#: includes/importer.php:539 includes/importer.php:591
-#: includes/importer.php:639
+#: includes/functions.php:178 includes/importer.php:182
+#: includes/importer.php:272 includes/importer.php:304
+#: includes/importer.php:328 includes/importer.php:445
+#: includes/importer.php:448 includes/importer.php:464
+#: includes/importer.php:468 includes/importer.php:472
+#: includes/importer.php:476 includes/importer.php:480
+#: includes/importer.php:547 includes/importer.php:551
+#: includes/importer.php:564 includes/importer.php:567
+#: includes/importer.php:589 includes/importer.php:641
+#: includes/importer.php:689
 #. Translators: %s is the meta key name.
 msgid "EPL IMPORTER"
 msgstr ""
@@ -114,141 +114,141 @@ msgstr ""
 msgid "Disable (Operates as per WP All Import Pro default)"
 msgstr ""
 
-#: includes/importer.php:133
+#: includes/importer.php:138
 msgid ""
 "Easy Property Listings Importer plugin recommends you install <a "
 "href='http://www.wpallimport.com/'>WP All Import Pro</a>"
 msgstr ""
 
-#: includes/importer.php:171 includes/importer.php:251
+#: includes/importer.php:176 includes/importer.php:256
 msgid "Preserve EPL Fields"
 msgstr ""
 
-#: includes/importer.php:177
+#: includes/importer.php:182
 msgid "UPDATING FIELDS"
 msgstr ""
 
-#: includes/importer.php:209 includes/importer.php:236
+#: includes/importer.php:214 includes/importer.php:241
 msgid "Field Updated:"
 msgstr ""
 
-#: includes/importer.php:209
+#: includes/importer.php:214
 msgid "Images Modified Date: "
 msgstr ""
 
-#: includes/importer.php:214 includes/importer.php:240
+#: includes/importer.php:219 includes/importer.php:245
 msgid "Field Skipped:"
 msgstr ""
 
-#: includes/importer.php:249
+#: includes/importer.php:254
 msgid "EPL Fields Updated"
 msgstr ""
 
-#: includes/importer.php:273
+#: includes/importer.php:278
 msgid "Record Skipping Enabled"
 msgstr ""
 
-#: includes/importer.php:273
+#: includes/importer.php:278
 msgid "Record Skipping Disabled"
 msgstr ""
 
-#: includes/importer.php:305
+#: includes/importer.php:310
 msgid "Record Skipping Enabled for Images"
 msgstr ""
 
-#: includes/importer.php:305
+#: includes/importer.php:310
 msgid "Record Skipping Disabled for Images"
 msgstr ""
 
-#: includes/importer.php:323 includes/importer.php:541
+#: includes/importer.php:328 includes/importer.php:591
 msgid "Record Skipped"
 msgstr ""
 
-#: includes/importer.php:423
+#: includes/importer.php:445
 msgid "Image Updating process started: Old Modified Date: "
 msgstr ""
 
-#: includes/importer.php:423
+#: includes/importer.php:445
 msgid "New Modified Date:"
 msgstr ""
 
-#: includes/importer.php:426
+#: includes/importer.php:448
 msgid "Updated Images, Uploading"
 msgstr ""
 
-#: includes/importer.php:442
+#: includes/importer.php:464
 msgid "Old Modified date greater than new modified date. Attachment Count: "
 msgstr ""
 
-#: includes/importer.php:446
+#: includes/importer.php:468
 msgid "Old Modified date equals new modified date. Attachment Count: "
 msgstr ""
 
-#: includes/importer.php:450
+#: includes/importer.php:472
 msgid "Insert & restore deleted attachments"
 msgstr ""
 
-#: includes/importer.php:454
+#: includes/importer.php:476
 msgid "No new images, skipping image update"
 msgstr ""
 
-#: includes/importer.php:458
+#: includes/importer.php:480
 msgid "New Images, updating"
 msgstr ""
 
-#: includes/importer.php:504
+#: includes/importer.php:547
 msgid "Image Processing Started: Old Modified Date: "
 msgstr ""
 
-#: includes/importer.php:504
+#: includes/importer.php:547
 msgid "New Modified Date: "
 msgstr ""
 
-#: includes/importer.php:504
+#: includes/importer.php:547
 msgid "Live Import: "
 msgstr ""
 
-#: includes/importer.php:508
+#: includes/importer.php:551
 msgid "Live import off, default WP All Import functions"
 msgstr ""
 
-#: includes/importer.php:514
+#: includes/importer.php:564
 msgid "Images unchanged, skipping image deletion"
 msgstr ""
 
-#: includes/importer.php:517
+#: includes/importer.php:567
 msgid "Images changes detected, deleting images"
 msgstr ""
 
-#: includes/importer.php:552
+#: includes/importer.php:602
 msgid "Date modified, updating..."
 msgstr ""
 
-#: includes/importer.php:556
+#: includes/importer.php:606
 msgid "Modified Listing, updating..."
 msgstr ""
 
-#: includes/importer.php:560
+#: includes/importer.php:610
 msgid "Updating Field..."
 msgstr ""
 
-#: includes/importer.php:564
+#: includes/importer.php:614
 msgid "Listing Modified Time Unchanged, Skipping Record Update."
 msgstr ""
 
-#: includes/importer.php:568
+#: includes/importer.php:618
 msgid "Updating Fields:"
 msgstr ""
 
-#: includes/importer.php:572
+#: includes/importer.php:622
 msgid "Skipped, previously imported record found for:"
 msgstr ""
 
-#: includes/importer.php:591
+#: includes/importer.php:641
 msgid "Deprecated version running"
 msgstr ""
 
-#: includes/importer.php:639
+#: includes/importer.php:689
 msgid "Active"
 msgstr ""
 
