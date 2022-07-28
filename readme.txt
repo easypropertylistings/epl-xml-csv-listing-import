@@ -47,7 +47,7 @@ Supported formats are CSV, XML and XLS files with full support for the Australia
 = 2.0.8 July 28, 2022 =
 
 * Fix: Fix: Offset notice error on empty $epl_meta_box array.
-* Fix: Fatal error for unrecognised image formats & added support for Jupix image mod time formating.
+* Fix: Fatal error for unrecognised image formats & added support for Jupix image mod time formatting.
 
 = 2.0.7 March 29, 2022 =
 
