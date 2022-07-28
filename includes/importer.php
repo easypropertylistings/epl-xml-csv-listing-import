@@ -412,20 +412,16 @@ function epl_wpimport_is_image_to_update( $default, $post_object, $xml_object ) 
 					$new_mod_date = '';
 
 					if ( isset( $xml_object['images']['img'] ) ) {
-
 							$new_mod_date = current( $xml_object['images']['img'][0]['modTime'] );
 					}
 
 					if ( isset( $xml_object['objects']['img'] ) ) {
-
 							$new_mod_date = current( $xml_object['objects']['img'][0]['modTime'] );
 					}
 
 					if ( isset( $xml_object['images']['image'] ) ) {
-
 						if ( ! empty( $xml_object['images']['image'][0]['modified'] ) ) {
-
-												$new_mod_date = current( $xml_object['images']['image'][0]['modified'] );
+							$new_mod_date = current( $xml_object['images']['image'][0]['modified'] );
 						}
 					}
 				}
@@ -459,13 +455,9 @@ function epl_wpimport_is_image_to_update( $default, $post_object, $xml_object ) 
 			// If attachment count is 0 then maybe all attachments are deleted for this listings due to faulty old mod date.
 			if ( 0 === absint( $count ) ) {
 				if ( $old_mod_date > $new_mod_date ) {
-
 					$epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . __( 'Old Modified date greater than new modified date. Attachment Count: ', 'epl-wpimport' ) . $count );
-
 				} else {
-
 					$epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . __( 'Old Modified date equals new modified date. Attachment Count: ', 'epl-wpimport' ) . $count );
-
 				}
 
 				$epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . __( 'Insert & restore deleted attachments' ) );
@@ -521,20 +513,16 @@ function epl_wpimport_delete_images( $default, $post_object, $xml_object ) {
 			$new_mod_date = '';
 
 			if ( isset( $xml_object['images']['img'] ) ) {
-
 					$new_mod_date = current( $xml_object['images']['img'][0]['modTime'] );
 			}
 
 			if ( isset( $xml_object['objects']['img'] ) ) {
-
 					$new_mod_date = current( $xml_object['objects']['img'][0]['modTime'] );
 			}
 
 			if ( isset( $xml_object['images']['image'] ) ) {
-
 				if ( ! empty( $xml_object['images']['image'][0]['modified'] ) ) {
-
-								$new_mod_date = current( $xml_object['images']['image'][0]['modified'] );
+					$new_mod_date = current( $xml_object['images']['image'][0]['modified'] );
 				}
 			}
 		}
