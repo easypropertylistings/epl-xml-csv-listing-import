@@ -6,7 +6,7 @@ msgstr ""
 "Add On 2.0.8\n"
 "Report-Msgid-Bugs-To: "
 "https://github.com/easypropertylistings/epl-xml-csv-listing-import/issues\n"
-"POT-Creation-Date: 2022-07-28 03:20:15+00:00\n"
+"POT-Creation-Date: 2022-07-28 03:25:02+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -51,14 +51,14 @@ msgstr ""
 
 #: includes/functions.php:178 includes/importer.php:182
 #: includes/importer.php:272 includes/importer.php:304
-#: includes/importer.php:328 includes/importer.php:445
-#: includes/importer.php:448 includes/importer.php:464
-#: includes/importer.php:468 includes/importer.php:472
-#: includes/importer.php:476 includes/importer.php:480
-#: includes/importer.php:547 includes/importer.php:551
-#: includes/importer.php:564 includes/importer.php:567
-#: includes/importer.php:589 includes/importer.php:641
-#: includes/importer.php:689
+#: includes/importer.php:328 includes/importer.php:440
+#: includes/importer.php:443 includes/importer.php:458
+#: includes/importer.php:460 includes/importer.php:463
+#: includes/importer.php:467 includes/importer.php:471
+#: includes/importer.php:533 includes/importer.php:537
+#: includes/importer.php:550 includes/importer.php:553
+#: includes/importer.php:575 includes/importer.php:627
+#: includes/importer.php:675
 #. Translators: %s is the meta key name.
 msgid "EPL IMPORTER"
 msgstr ""
@@ -81,36 +81,34 @@ msgstr ""
 #: includes/hooks.php:33
 msgid ""
 "When this setting is enabled and the import is run, the listings unique "
-"modified time is compared to the value in the imported data.\n"
-"\t\tIf the data is newer then the value in WordPress the listing will "
-"update.\n"
-"\t\tThis also performs a similar check with the modified image time "
-"allowing the data to update and not the images, greatly improving import "
-"performance."
+"modified time is compared to the value in the imported data. If the data is "
+"newer then the value in WordPress the listing will update. This also "
+"performs a similar check with the modified image time allowing the data to "
+"update and not the images, greatly improving import performance."
 msgstr ""
 
-#: includes/hooks.php:41
+#: includes/hooks.php:37
 #. Translators: %1$s and %2$s are links.
 msgid "Visit the <a href=\"%1$s\">codex</a> for detailed instructions."
 msgstr ""
 
-#: includes/hooks.php:46
+#: includes/hooks.php:42
 msgid "Settings"
 msgstr ""
 
-#: includes/hooks.php:47
+#: includes/hooks.php:43
 msgid "Importer Settings."
 msgstr ""
 
-#: includes/hooks.php:58
+#: includes/hooks.php:54
 msgid "Activate once initial import is set"
 msgstr ""
 
-#: includes/hooks.php:61
+#: includes/hooks.php:57
 msgid "Enable (Skip record import based on modified time)"
 msgstr ""
 
-#: includes/hooks.php:62
+#: includes/hooks.php:58
 msgid "Disable (Operates as per WP All Import Pro default)"
 msgstr ""
 
@@ -160,95 +158,95 @@ msgstr ""
 msgid "Record Skipping Disabled for Images"
 msgstr ""
 
-#: includes/importer.php:328 includes/importer.php:591
+#: includes/importer.php:328 includes/importer.php:577
 msgid "Record Skipped"
 msgstr ""
 
-#: includes/importer.php:445
+#: includes/importer.php:440
 msgid "Image Updating process started: Old Modified Date: "
 msgstr ""
 
-#: includes/importer.php:445
+#: includes/importer.php:440
 msgid "New Modified Date:"
 msgstr ""
 
-#: includes/importer.php:448
+#: includes/importer.php:443
 msgid "Updated Images, Uploading"
 msgstr ""
 
-#: includes/importer.php:464
+#: includes/importer.php:458
 msgid "Old Modified date greater than new modified date. Attachment Count: "
 msgstr ""
 
-#: includes/importer.php:468
+#: includes/importer.php:460
 msgid "Old Modified date equals new modified date. Attachment Count: "
 msgstr ""
 
-#: includes/importer.php:472
+#: includes/importer.php:463
 msgid "Insert & restore deleted attachments"
 msgstr ""
 
-#: includes/importer.php:476
+#: includes/importer.php:467
 msgid "No new images, skipping image update"
 msgstr ""
 
-#: includes/importer.php:480
+#: includes/importer.php:471
 msgid "New Images, updating"
 msgstr ""
 
-#: includes/importer.php:547
+#: includes/importer.php:533
 msgid "Image Processing Started: Old Modified Date: "
 msgstr ""
 
-#: includes/importer.php:547
+#: includes/importer.php:533
 msgid "New Modified Date: "
 msgstr ""
 
-#: includes/importer.php:547
+#: includes/importer.php:533
 msgid "Live Import: "
 msgstr ""
 
-#: includes/importer.php:551
+#: includes/importer.php:537
 msgid "Live import off, default WP All Import functions"
 msgstr ""
 
-#: includes/importer.php:564
+#: includes/importer.php:550
 msgid "Images unchanged, skipping image deletion"
 msgstr ""
 
-#: includes/importer.php:567
+#: includes/importer.php:553
 msgid "Images changes detected, deleting images"
 msgstr ""
 
-#: includes/importer.php:602
+#: includes/importer.php:588
 msgid "Date modified, updating..."
 msgstr ""
 
-#: includes/importer.php:606
+#: includes/importer.php:592
 msgid "Modified Listing, updating..."
 msgstr ""
 
-#: includes/importer.php:610
+#: includes/importer.php:596
 msgid "Updating Field..."
 msgstr ""
 
-#: includes/importer.php:614
+#: includes/importer.php:600
 msgid "Listing Modified Time Unchanged, Skipping Record Update."
 msgstr ""
 
-#: includes/importer.php:618
+#: includes/importer.php:604
 msgid "Updating Fields:"
 msgstr ""
 
-#: includes/importer.php:622
+#: includes/importer.php:608
 msgid "Skipped, previously imported record found for:"
 msgstr ""
 
-#: includes/importer.php:641
+#: includes/importer.php:627
 msgid "Deprecated version running"
 msgstr ""
 
-#: includes/importer.php:689
+#: includes/importer.php:675
 msgid "Active"
 msgstr ""
 
