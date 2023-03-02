@@ -1,28 +1,28 @@
 {
-  "name": "easy-property-listings-xml-csv-import",
-  "version": "2.0.5",
-  "description": "Import CSV and XML into Easy Property Listings with this WP All Import Add-on",
-  "main": "Gruntfile.js",
-  "dependencies": {
-    "grunt-contrib-uglify": "^4.0.1"
-  },
-  "devDependencies": {
-    "grunt-contrib-clean": "^2.0.0",
-    "grunt-contrib-cssmin": "^3.0.0",
-    "grunt-contrib-watch": "^1.1.0",
-    "grunt-wp-i18n": "^1.0.3"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/easypropertylistings/epl-xml-csv-listing-import.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/easypropertylistings/epl-xml-csv-listing-import/issues"
-  },
-  "homepage": "https://github.com/easypropertylistings/epl-xml-csv-listing-import#readme"
+	"name": "easy-property-listings-xml-csv-import",
+	"version": "2.0.8",
+	"description": "Import CSV and XML into Easy Property Listings with this WP All Import Add-on",
+	"main": "Gruntfile.js",
+	"dependencies": {
+		"grunt-contrib-uglify": "^4.0.1"
+	},
+	"devDependencies": {
+		"grunt-contrib-clean": "^2.0.0",
+		"grunt-contrib-cssmin": "^3.0.0",
+		"grunt-contrib-watch": "^1.1.0",
+		"grunt-wp-i18n": "^1.0.3"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/easypropertylistings/epl-xml-csv-listing-import.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/easypropertylistings/epl-xml-csv-listing-import/issues"
+	},
+	"homepage": "https://github.com/easypropertylistings/epl-xml-csv-listing-import#readme"
 }

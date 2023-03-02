@@ -21,15 +21,15 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 2.0.1 Removed global $epl_ai_meta_fields.
  * @since 2.0.5 Better support for extensions to only display its fields.
  * @since 2.0.6 Treat the core post types differently VS extension post types, loading all the meta fields of core if post type is from core EPL.
- * @since 2.0.7 Fixed the notice for $epl_meta_box['post_type'] when it's string by typecasting to array.
- * @since 2.0.9 Fixed : array offset notice on empty $epl_meta_box.
+ * @since 2.0.7 Fixed the notice for $epl_meta_box['post_type'] when its string by typecasting to array.
+ * @since 2.0.8 Fix: Offset notice error on empty $epl_meta_box array.
  */
 function epl_wpimport_register_fields() {
 
 	global $epl_wpimport;
 	$epl_ai_meta_fields = epl_wpimport_get_meta_fields();
 
-	// Initialize EPL WP All Import Pro add-on.
+	// Initialise EPL WP All Import Pro add-on.
 	$epl_wpimport        = new RapidAddon( 'Easy Property Listings Custom Fields', 'epl_wpimport_addon' );
 	$post_type_to_import = '';
 	$admin_screen        = ! empty( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore
@@ -52,7 +52,7 @@ function epl_wpimport_register_fields() {
 	} elseif ( 'pmxi-admin-import' === $admin_screen && class_exists( 'PMXI_Handler' ) ) {
 			// PMXI_Handler gives data from all import pro session.
 			$pxmi_session = new PMXI_Handler();
-                         //phpcs:ignore
+                        //phpcs:ignore
 			$pxmi_action      = ! empty( $_GET['action'] ) ? sanitize_text_field( wp_unslash( $_GET['action'] ) ) : '';
 			$pxmi_custom_type = $pxmi_session->get( 'custom_type' );
 
@@ -65,9 +65,9 @@ function epl_wpimport_register_fields() {
 
 		foreach ( $epl_ai_meta_fields as $epl_meta_box ) {
 
-                        if( empty( $epl_meta_box ) ) {
-                                continue;
-                        }
+			if ( empty( $epl_meta_box ) ) {
+					continue;
+			}
 
 			$meta_box_post_types   = (array) $epl_meta_box['post_type'];
 			$is_core_post_type     = in_array( $post_type_to_import, epl_get_core_post_types(), true ) ? true : false;
@@ -411,24 +411,19 @@ function epl_wpimport_is_image_to_update( $default, $post_object, $xml_object ) 
 				} else {
 					$new_mod_date = '';
 
-                                        if( isset( $xml_object['images']['img'] ) ) {
+					if ( isset( $xml_object['images']['img'] ) ) {
+						$new_mod_date = current( $xml_object['images']['img'][0]['modTime'] );
+					}
 
-                                                $new_mod_date = current( $xml_object['images']['img'][0]['modTime'] ); 
-                                        }
-                
-                                        if( isset( $xml_object['objects']['img'] ) ) {
-                                                
-                                                $new_mod_date = current( $xml_object['objects']['img'][0]['modTime'] ); 
-                                        }
-                
-                                        if( isset( $xml_object['images']['image'] ) ) {
-                                
-                                                if( !empty( $xml_object['images']['image'][0]['modified'] ) ) {
-                                                        
-                                                        $new_mod_date = current( $xml_object['images']['image'][0]['modified'] ); 
-                                                }
-                                                
-                                        }
+					if ( isset( $xml_object['objects']['img'] ) ) {
+						$new_mod_date = current( $xml_object['objects']['img'][0]['modTime'] );
+					}
+
+					if ( isset( $xml_object['images']['image'] ) ) {
+						if ( ! empty( $xml_object['images']['image'][0]['modified'] ) ) {
+							$new_mod_date = current( $xml_object['images']['image'][0]['modified'] );
+						}
+					}
 				}
 			}
 			$new_mod_date = apply_filters( 'epl_import_image_new_mod_date', $new_mod_date, $xml_object, $post_object );
@@ -460,13 +455,9 @@ function epl_wpimport_is_image_to_update( $default, $post_object, $xml_object ) 
 			// If attachment count is 0 then maybe all attachments are deleted for this listings due to faulty old mod date.
 			if ( 0 === absint( $count ) ) {
 				if ( $old_mod_date > $new_mod_date ) {
-
 					$epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . __( 'Old Modified date greater than new modified date. Attachment Count: ', 'epl-wpimport' ) . $count );
-
 				} else {
-
 					$epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . __( 'Old Modified date equals new modified date. Attachment Count: ', 'epl-wpimport' ) . $count );
-
 				}
 
 				$epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . __( 'Insert & restore deleted attachments' ) );
@@ -491,12 +482,12 @@ add_filter( 'pmxi_is_images_to_update', 'epl_wpimport_is_image_to_update', 10, 3
  * @param object $xml_object  XML object.
  *
  * @return bool
- * @since  1.0
+ * @since 1.0.0
  * @since 2.0.0 Added new filter epl_import_image_new_mod_date.
- * @since  2.0.8 Fix fatal error for unrecognised formats & added support for jupix format.
+ * @since 2.0.8 Fix fatal error for unrecognised formats & added support for Jupix format.
  */
 function epl_wpimport_delete_images( $default, $post_object, $xml_object ) {
-        
+
 	if ( ! in_array( $post_object['post_type'], epl_wpimport_allowed_post_types(), true ) ) {
 		return $default;
 	}
@@ -521,24 +512,19 @@ function epl_wpimport_delete_images( $default, $post_object, $xml_object ) {
 		} else {
 			$new_mod_date = '';
 
-                        if( isset( $xml_object['images']['img'] ) ) {
+			if ( isset( $xml_object['images']['img'] ) ) {
+				$new_mod_date = current( $xml_object['images']['img'][0]['modTime'] );
+			}
 
-                                $new_mod_date = current( $xml_object['images']['img'][0]['modTime'] ); 
-                        }
+			if ( isset( $xml_object['objects']['img'] ) ) {
+				$new_mod_date = current( $xml_object['objects']['img'][0]['modTime'] );
+			}
 
-                        if( isset( $xml_object['objects']['img'] ) ) {
-                                
-                                $new_mod_date = current( $xml_object['objects']['img'][0]['modTime'] ); 
-                        }
-
-                        if( isset( $xml_object['images']['image'] ) ) {
-                                
-                                if( !empty( $xml_object['images']['image'][0]['modified'] ) ) {
-
-                                        $new_mod_date = current( $xml_object['images']['image'][0]['modified'] ); 
-                                }
-                                
-                        }
+			if ( isset( $xml_object['images']['image'] ) ) {
+				if ( ! empty( $xml_object['images']['image'][0]['modified'] ) ) {
+					$new_mod_date = current( $xml_object['images']['image'][0]['modified'] );
+				}
+			}
 		}
 	}
 
@@ -552,11 +538,11 @@ function epl_wpimport_delete_images( $default, $post_object, $xml_object ) {
 		return $default;
 	} else {
 
-                if( empty( $mod_date ) && empty( $new_mod_date ) ) {
-                        return $default;
-                }
+		if ( empty( $mod_date ) && empty( $new_mod_date ) ) {
+				return $default;
+		}
 
-                $new_mod_date = strtotime( epl_feedsync_format_date( $new_mod_date ) );
+				$new_mod_date = strtotime( epl_feedsync_format_date( $new_mod_date ) );
 
 		// possible delete.
 		if ( $mod_date === $new_mod_date ) {

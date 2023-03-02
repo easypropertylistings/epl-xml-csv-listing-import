@@ -192,7 +192,7 @@ add_filter( 'pmxi_custom_field_to_update', 'epl_wpimport_pmxi_custom_field_to_up
  * @param array  $options Options.
  * @param string $cur_meta_key Current meta key.
  *
- * @return bool|mixed|void
+ * @return false|string
  * @since 2.0
  * @since 2.0.0 Removed epl custom field deleting process.
  * @since 2.0.4 Added check if post type is allowed in epl all import.
