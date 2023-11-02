@@ -430,3 +430,97 @@ function epl_wpimport_is_field_skipped( $field ) {
 
 	return false;
 }
+
+function epl_wpimport_get_duplicate_attachments( $limit = 50, $post_types = [] ) {
+
+        if( empty( $post_types ) ) {
+                $post_types = epl_get_core_post_types();
+        }
+        
+        global $wpdb;
+        
+        // Query to find duplicate attachment URLs.
+        $sql = "SELECT meta_value, COUNT(*) AS count
+        FROM {$wpdb->postmeta}
+        WHERE meta_key = '_wp_attached_file'
+        GROUP BY meta_value
+        HAVING count > 1
+        LIMIT $limit";
+        
+        $duplicate_urls = $wpdb->get_results($sql);
+        
+        $duplicate_attachments = array();
+        
+        if ($duplicate_urls) {
+                foreach ($duplicate_urls as $duplicate_url) {
+                        
+                        $sql = "SELECT post_id
+                        FROM {$wpdb->postmeta}
+                        WHERE meta_key = '_wp_attached_file'
+                        AND meta_value = %s";
+
+                        $post_ids = $wpdb->get_col($wpdb->prepare($sql, $duplicate_url->meta_value));
+                        
+                        $parent_posts = array();
+                        foreach ($post_ids as $post_id) {
+                                $post_object = get_post($post_id);
+                                $parent_object = get_post($post_object->post_parent);
+                                
+                                if ( is_object( $parent_object )  && in_array( $parent_object->post_type, $post_types ) ) {
+                                        $parent_posts[$post_id] = $post_object->post_parent;
+                                }
+                        }
+
+                        if( !empty( $parent_posts ) ) {
+                                $duplicate_attachments[] = array(
+                                        'attachment_url' => $duplicate_url->meta_value,
+                                        'post_ids' => $post_ids,
+                                        'parent_posts' => $parent_posts,
+                                );
+                        }
+                        
+                }
+        }
+        
+        return $duplicate_attachments;
+}
+
+function epl_wpimport_delete_duplicate_attachments( $dryrun = true ) {
+
+        if( $dryrun ) {
+                echo "Dry run enabled no actual queries will be performed<br>";
+        }
+        
+        $duplicate_attachments = epl_wpimport_get_duplicate_attachments();
+        
+        if (!empty($duplicate_attachments)) {
+
+                foreach ($duplicate_attachments as $duplicate) {
+
+                        if (count($duplicate['post_ids']) > 1) {
+
+                                $keep_post_id = array_shift($duplicate['post_ids']);
+                                
+                                foreach ($duplicate['post_ids'] as $post_id) {
+
+                                        if ($post_id !== get_post_thumbnail_id($duplicate['parent_posts'][$post_id])) {
+
+                                                if( !$dryrun ) {
+                                                        wp_delete_post($post_id, true);
+                                                } 
+                                                
+                                                echo "Deleted duplicate attachment with post ID: $post_id<br>";
+                                        } else {
+                                                if( !$dryrun ) {
+                                                        wp_delete_post($keep_post_id, true);
+                                                } 
+                                                
+                                                echo "Deleted duplicate attachment with post ID: $keep_post_id (non-featured image).<br>";
+                                        }
+                                }
+                        }
+                }
+        } else {
+                echo "No duplicate attachments found.";
+        }
+}
