@@ -6,6 +6,8 @@
  * @copyright   Copyright (c) 2014, Soflyy
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @version     1.1.1
+ * 
+ * @since 2.1.0 Fix : dynamic properties warnings.
  */
 
 if ( ! class_exists( 'RapidAddon' ) ) {
@@ -23,6 +25,9 @@ if ( ! class_exists( 'RapidAddon' ) ) {
 		public $notice_text;
 		public $logger        = null;
 		public $when_to_run   = false;
+                public $active_post_types = array();
+		public $active_themes = array();
+		public $active_plugins = array();
 		public $image_options = array(
 			'download_images'                    => 'yes',
 			'download_featured_delim'            => ',',
