@@ -11,7 +11,7 @@
  */
 
 if ( ! class_exists( 'RapidAddon' ) ) {
-
+	#[AllowDynamicProperties]
 	class RapidAddon {
 
 		public $name;
