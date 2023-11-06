@@ -574,13 +574,12 @@ function epl_wpimport_delete_duplicate_attachments( $dryrun = true ) {
 							wp_delete_post( $post_id, true );
 						}
 
-						echo "Deleted duplicate attachment with post ID: $post_id<br>";
+						echo esc_html__( "Deleted duplicate attachment with post ID:", 'epl-wpimport'). $post_id . "<br>";
 					} else {
 						if ( ! $dryrun ) {
 							wp_delete_post( $keep_post_id, true );
 						}
-
-						echo "Deleted duplicate attachment with post ID: $keep_post_id (non-featured image).<br>";
+                                                echo sprintf(__('Deleted duplicate attachment with post ID: %d (non-featured image).', 'epl-wpimport'), $keep_post_id). "<br>";
 					}
 				}
 			}
