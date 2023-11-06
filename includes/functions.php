@@ -433,166 +433,172 @@ function epl_wpimport_is_field_skipped( $field ) {
 
 /**
  * Check if an attachment exists with the given URL.
+ *
  * @since 2.0.9
  */
-function epl_wpimport_get_attachment_by_url($image_url) {
-        
-        $attachment = get_posts(array(
-            'post_type'      => 'attachment',
-            'post_status'    => 'inherit',
-            'meta_key'       => '_wp_attached_file',
-            'meta_value'     => $image_url,
-            'posts_per_page' => 1,
-        ));
-    
-        return !empty($attachment) ? $attachment[0] : null;
+function epl_wpimport_get_attachment_by_url( $image_url ) {
+
+	$attachment = get_posts(
+		array(
+			'post_type'      => 'attachment',
+			'post_status'    => 'inherit',
+			'meta_key'       => '_wp_attached_file',
+			'meta_value'     => $image_url,
+			'posts_per_page' => 1,
+		)
+	);
+
+	return ! empty( $attachment ) ? $attachment[0] : null;
 }
 
 /**
  * Callback for wp_all_import_handle_upload, checks if duplicate attachments exists & halts the process.
+ *
  * @since 2.0.9
  */
-function epl_wpimport_wp_all_import_handle_upload($handle_image) {
+function epl_wpimport_wp_all_import_handle_upload( $handle_image ) {
 
-        $image_filepath = $handle_image['file'];
-        $image_url = $handle_image['url'];
-        $file_mime_type = $handle_image['type'];
-    
-        $existing_attachment = epl_wpimport_get_attachment_by_url($image_url);
-    
-        if ($existing_attachment) {
-            return array();
-        }
-    
-        return $handle_image;
+		$image_filepath = $handle_image['file'];
+		$image_url      = $handle_image['url'];
+		$file_mime_type = $handle_image['type'];
+
+		$existing_attachment = epl_wpimport_get_attachment_by_url( $image_url );
+
+	if ( $existing_attachment ) {
+		return array();
+	}
+
+		return $handle_image;
 }
 
-add_filter( 'wp_all_import_handle_upload', 'epl_wpimport_wp_all_import_handle_upload');
+add_filter( 'wp_all_import_handle_upload', 'epl_wpimport_wp_all_import_handle_upload' );
 
 /**
  * Get list of duplicate attachments for EPL post types.
+ *
  * @since 2.0.9
  */
-function epl_wpimport_get_duplicate_attachments( $limit = 50, $post_types = [] ) {
+function epl_wpimport_get_duplicate_attachments( $limit = 50, $post_types = array() ) {
 
-        if( empty( $post_types ) ) {
-                $post_types = epl_get_core_post_types();
-        }
-        
-        global $wpdb;
-        
-        // Query to find duplicate attachment URLs.
-        $sql = "SELECT meta_value, COUNT(*) AS count
+	if ( empty( $post_types ) ) {
+			$post_types = epl_get_core_post_types();
+	}
+
+		global $wpdb;
+
+		// Query to find duplicate attachment URLs.
+		$sql = "SELECT meta_value, COUNT(*) AS count
         FROM {$wpdb->postmeta}
         WHERE meta_key = '_wp_attached_file'
         GROUP BY meta_value
         HAVING count > 1
         LIMIT $limit";
-        
-        $duplicate_urls = $wpdb->get_results($sql);
-        
-        $duplicate_attachments = array();
-        
-        if ($duplicate_urls) {
-                foreach ($duplicate_urls as $duplicate_url) {
-                        
-                        $sql = "SELECT post_id
+
+		$duplicate_urls = $wpdb->get_results( $sql );
+
+		$duplicate_attachments = array();
+
+	if ( $duplicate_urls ) {
+		foreach ( $duplicate_urls as $duplicate_url ) {
+
+				$sql = "SELECT post_id
                         FROM {$wpdb->postmeta}
                         WHERE meta_key = '_wp_attached_file'
                         AND meta_value = %s";
 
-                        $post_ids = $wpdb->get_col($wpdb->prepare($sql, $duplicate_url->meta_value));
-                        
-                        $parent_posts = array();
-                        foreach ($post_ids as $post_id) {
-                                $post_object = get_post($post_id);
-                                $parent_object = get_post($post_object->post_parent);
-                                
-                                if ( is_object( $parent_object )  && in_array( $parent_object->post_type, $post_types ) ) {
-                                        $parent_posts[$post_id] = $post_object->post_parent;
-                                }
-                        }
+				$post_ids = $wpdb->get_col( $wpdb->prepare( $sql, $duplicate_url->meta_value ) );
 
-                        if( !empty( $parent_posts ) ) {
-                                $duplicate_attachments[] = array(
-                                        'attachment_url' => $duplicate_url->meta_value,
-                                        'post_ids' => $post_ids,
-                                        'parent_posts' => $parent_posts,
-                                );
-                        }
-                        
-                }
-        }
-        
-        return $duplicate_attachments;
+				$parent_posts = array();
+			foreach ( $post_ids as $post_id ) {
+				$post_object   = get_post( $post_id );
+				$parent_object = get_post( $post_object->post_parent );
+
+				if ( is_object( $parent_object ) && in_array( $parent_object->post_type, $post_types ) ) {
+						$parent_posts[ $post_id ] = $post_object->post_parent;
+				}
+			}
+
+			if ( ! empty( $parent_posts ) ) {
+					$duplicate_attachments[] = array(
+						'attachment_url' => $duplicate_url->meta_value,
+						'post_ids'       => $post_ids,
+						'parent_posts'   => $parent_posts,
+					);
+			}
+		}
+	}
+
+		return $duplicate_attachments;
 }
 
 /**
  * Delete the duplicate attachments from the listings.
+ *
  * @since 2.0.9
  */
 function epl_wpimport_delete_duplicate_attachments( $dryrun = true ) {
 
-        if( $dryrun ) {
-                echo "<b>".__('Dry run enabled, no actual queries will be performed', 'epl-wpimport')."</b><br><br>";
-        } else {
-                echo "<b>".__('Dry run disabled, actual queries to delete duplicate attachments will be performed', 'epl-wpimport')."</b><br><br>";
-        }
-        
-        $duplicate_attachments = epl_wpimport_get_duplicate_attachments();
-        
-        if (!empty($duplicate_attachments)) {
+	if ( $dryrun ) {
+			echo '<b>' . __( 'Dry run enabled, no actual queries will be performed', 'epl-wpimport' ) . '</b><br><br>';
+	} else {
+			echo '<b>' . __( 'Dry run disabled, actual queries to delete duplicate attachments will be performed', 'epl-wpimport' ) . '</b><br><br>';
+	}
 
-                foreach ($duplicate_attachments as $duplicate) {
+		$duplicate_attachments = epl_wpimport_get_duplicate_attachments();
 
-                        if (count($duplicate['post_ids']) > 1) {
+	if ( ! empty( $duplicate_attachments ) ) {
 
-                                $keep_post_id = array_shift($duplicate['post_ids']);
-                                
-                                foreach ($duplicate['post_ids'] as $post_id) {
+		foreach ( $duplicate_attachments as $duplicate ) {
 
-                                        if ($post_id !== get_post_thumbnail_id($duplicate['parent_posts'][$post_id])) {
+			if ( count( $duplicate['post_ids'] ) > 1 ) {
 
-                                                if( !$dryrun ) {
-                                                        wp_delete_post($post_id, true);
-                                                } 
-                                                
-                                                echo "Deleted duplicate attachment with post ID: $post_id<br>";
-                                        } else {
-                                                if( !$dryrun ) {
-                                                        wp_delete_post($keep_post_id, true);
-                                                } 
-                                                
-                                                echo "Deleted duplicate attachment with post ID: $keep_post_id (non-featured image).<br>";
-                                        }
-                                }
-                        }
-                }
-        } else {
-                echo "No duplicate attachments found.";
-        }
+				$keep_post_id = array_shift( $duplicate['post_ids'] );
+
+				foreach ( $duplicate['post_ids'] as $post_id ) {
+
+					if ( $post_id !== get_post_thumbnail_id( $duplicate['parent_posts'][ $post_id ] ) ) {
+
+						if ( ! $dryrun ) {
+									wp_delete_post( $post_id, true );
+						}
+
+						echo "Deleted duplicate attachment with post ID: $post_id<br>";
+					} else {
+						if ( ! $dryrun ) {
+							wp_delete_post( $keep_post_id, true );
+						}
+
+								echo "Deleted duplicate attachment with post ID: $keep_post_id (non-featured image).<br>";
+					}
+				}
+			}
+		}
+	} else {
+			echo 'No duplicate attachments found.';
+	}
 }
 
 /**
  * Trigger the deletion of duplicate attachments.
+ *
  * @since 2.0.9
  */
 function epl_wpimport_trigger_duplicate_deletion() {
 
-        if( !is_user_logged_in() || !current_user_can("administrator") ) {
-                return;
-        }
+	if ( ! is_user_logged_in() || ! current_user_can( 'administrator' ) ) {
+			return;
+	}
 
-        if( !isset( $_GET['epl_wpimport_delete_duplicate_attachments'] ) ) {
-                return;
-        }
+	if ( ! isset( $_GET['epl_wpimport_delete_duplicate_attachments'] ) ) {
+			return;
+	}
 
-        $runmode = isset( $_GET['mode'] ) ?  sanitize_key( $_GET['mode'] ) :'';
-        $runmode = 'live' == $runmode ? false : true;
+		$runmode = isset( $_GET['mode'] ) ? sanitize_key( $_GET['mode'] ) : '';
+		$runmode = 'live' == $runmode ? false : true;
 
-        epl_wpimport_delete_duplicate_attachments( $runmode );
+		epl_wpimport_delete_duplicate_attachments( $runmode );
 
-        wp_die();
+		wp_die();
 }
 
-add_action( 'admin_init', 'epl_wpimport_trigger_duplicate_deletion');
+add_action( 'admin_init', 'epl_wpimport_trigger_duplicate_deletion' );
