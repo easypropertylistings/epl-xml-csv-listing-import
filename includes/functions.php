@@ -431,6 +431,48 @@ function epl_wpimport_is_field_skipped( $field ) {
 	return false;
 }
 
+/**
+ * Check if an attachment exists with the given URL.
+ * @since 2.0.9
+ */
+function epl_wpimport_get_attachment_by_url($image_url) {
+        
+        $attachment = get_posts(array(
+            'post_type'      => 'attachment',
+            'post_status'    => 'inherit',
+            'meta_key'       => '_wp_attached_file',
+            'meta_value'     => $image_url,
+            'posts_per_page' => 1,
+        ));
+    
+        return !empty($attachment) ? $attachment[0] : null;
+}
+
+/**
+ * Callback for wp_all_import_handle_upload, checks if duplicate attachments exists & halts the process.
+ * @since 2.0.9
+ */
+function epl_wpimport_wp_all_import_handle_upload($handle_image) {
+
+        $image_filepath = $handle_image['file'];
+        $image_url = $handle_image['url'];
+        $file_mime_type = $handle_image['type'];
+    
+        $existing_attachment = epl_wpimport_get_attachment_by_url($image_url);
+    
+        if ($existing_attachment) {
+            return array();
+        }
+    
+        return $handle_image;
+}
+
+add_filter( 'wp_all_import_handle_upload', 'epl_wpimport_wp_all_import_handle_upload');
+
+/**
+ * Get list of duplicate attachments for EPL post types.
+ * @since 2.0.9
+ */
 function epl_wpimport_get_duplicate_attachments( $limit = 50, $post_types = [] ) {
 
         if( empty( $post_types ) ) {
@@ -485,10 +527,16 @@ function epl_wpimport_get_duplicate_attachments( $limit = 50, $post_types = [] )
         return $duplicate_attachments;
 }
 
+/**
+ * Delete the duplicate attachments from the listings.
+ * @since 2.0.9
+ */
 function epl_wpimport_delete_duplicate_attachments( $dryrun = true ) {
 
         if( $dryrun ) {
-                echo "Dry run enabled no actual queries will be performed<br>";
+                echo "<b>".__('Dry run enabled, no actual queries will be performed', 'epl-wpimport')."</b><br><br>";
+        } else {
+                echo "<b>".__('Dry run disabled, actual queries to delete duplicate attachments will be performed', 'epl-wpimport')."</b><br><br>";
         }
         
         $duplicate_attachments = epl_wpimport_get_duplicate_attachments();
@@ -524,3 +572,27 @@ function epl_wpimport_delete_duplicate_attachments( $dryrun = true ) {
                 echo "No duplicate attachments found.";
         }
 }
+
+/**
+ * Trigger the deletion of duplicate attachments.
+ * @since 2.0.9
+ */
+function epl_wpimport_trigger_duplicate_deletion() {
+
+        if( !is_user_logged_in() || !current_user_can("administrator") ) {
+                return;
+        }
+
+        if( !isset( $_GET['epl_wpimport_delete_duplicate_attachments'] ) ) {
+                return;
+        }
+
+        $runmode = isset( $_GET['mode'] ) ?  sanitize_key( $_GET['mode'] ) :'';
+        $runmode = 'live' == $runmode ? false : true;
+
+        epl_wpimport_delete_duplicate_attachments( $runmode );
+
+        wp_die();
+}
+
+add_action( 'admin_init', 'epl_wpimport_trigger_duplicate_deletion');
