@@ -44,7 +44,7 @@ Supported formats are CSV, XML and XLS files with full support for the Australia
 
 == Change log ==
 
-= 2.1 November 3, 2023 =
+= 2.1 November 6, 2023 =
 
 * New: Image duplicate checker process added to prevent duplicate images during import
 * Fix: PHP 8.2 compatibility improvements.
