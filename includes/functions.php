@@ -496,16 +496,23 @@ function epl_wpimport_get_duplicate_attachments( $limit = 50, $post_types = arra
 
 	global $wpdb;
 
+        $offset = 0;
+        $page_num = isset( $_GET['page_num'] ) ? intval( $_GET['page_num'] ) : 1;
+
+        if( $page_num > 1 ) {
+                $offset = $limit * ( $page_num - 1 );
+        }
+
 	// Query to find duplicate attachment URLs.
 	$sql = "SELECT meta_value, COUNT(*) AS count
         FROM {$wpdb->postmeta}
         WHERE meta_key = '_wp_attached_file'
         GROUP BY meta_value
         HAVING count > 1
-        LIMIT $limit";
+        LIMIT $offset, $limit";
 
 	$duplicate_urls = $wpdb->get_results( $sql );
-
+        
 	$duplicate_attachments = array();
 
 	if ( $duplicate_urls ) {
@@ -517,7 +524,7 @@ function epl_wpimport_get_duplicate_attachments( $limit = 50, $post_types = arra
                         AND meta_value = %s";
 
 			$post_ids = $wpdb->get_col( $wpdb->prepare( $sql, $duplicate_url->meta_value ) );
-
+                        
 			$parent_posts = array();
 			foreach ( $post_ids as $post_id ) {
 				$post_object   = get_post( $post_id );
@@ -614,3 +621,34 @@ function epl_wpimport_trigger_duplicate_deletion() {
 }
 
 add_action( 'admin_init', 'epl_wpimport_trigger_duplicate_deletion' );
+
+/**
+ * Function checks if there are pending attachments after import pro is done deleting them.
+ * Deletes if found.
+ * 
+ * @since 2.2
+ */
+function epl_wpimport_check_deleted_attachments( $parent_id, $epl_wpimport = null ) {
+
+        $attachments = get_posts(array('post_parent' => $parent_id, 'post_type' => 'attachment', 'numberposts' => -1, 'post_status' => null));
+        
+        $ids = [];
+        foreach ($attachments as $attach) {
+
+                if ( wp_attachment_is_image( $attach->ID ) ) {
+
+                        if ( !empty( $attach->ID ) ) {
+
+                                $file = get_attached_file( $attach->ID );
+                                        
+                                wp_delete_attachment($attach->ID, TRUE);
+                                $ids[] = $attach->ID;
+                        }
+                }
+        }
+
+        if( !empty( $ids ) && is_object( $epl_wpimport ) ) {
+
+                $epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . __( 'Deleted duplicate attachments : ', 'epl-wpimport' ) . implode(',', $ids ) );
+        }
+}
