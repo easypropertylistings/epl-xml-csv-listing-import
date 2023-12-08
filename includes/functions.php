@@ -574,18 +574,19 @@ function epl_wpimport_delete_duplicate_attachments( $dryrun = true ) {
 							wp_delete_post( $post_id, true );
 						}
 
-						echo esc_html__( "Deleted duplicate attachment with post ID:", 'epl-wpimport'). $post_id . "<br>";
+						echo esc_html__( 'Deleted duplicate attachment with post ID:', 'epl-wpimport' ) . esc_html( $post_id ) . '<br>';
 					} else {
 						if ( ! $dryrun ) {
 							wp_delete_post( $keep_post_id, true );
 						}
-                                                echo sprintf(__('Deleted duplicate attachment with post ID: %d (non-featured image).', 'epl-wpimport'), $keep_post_id). "<br>";
+						// Translators: the %d is the image ID.
+						echo sprintf( esc_html__( 'Deleted duplicate attachment with post ID: %d (non-featured image).', 'epl-wpimport' ), $keep_post_id ) . '<br>';
 					}
 				}
 			}
 		}
 	} else {
-		echo 'No duplicate attachments found.';
+		echo esc_html__( 'No duplicate attachments found.', 'epl-wpimport' );
 	}
 }
 
