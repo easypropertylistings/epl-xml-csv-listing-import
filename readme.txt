@@ -7,7 +7,7 @@ Tags: real estate, easy property listings, wp all import, csv, xml, xls, import,
 Requires PHP: 7.1
 Requires at least: 3.9
 Tested up to: 6.4
-Stable Tag: 2.1
+Stable Tag: 2.2
 License: GNU Version 2 or Any Later Version
 
 Import listings into Easy Property Listings with this WP All Import add-on for WordPress. Created for maximum performance.
