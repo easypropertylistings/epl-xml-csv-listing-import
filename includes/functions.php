@@ -487,11 +487,12 @@ add_filter( 'wp_all_import_handle_upload', 'epl_wpimport_wp_all_import_handle_up
  *
  * @return array
  * @since 2.1
+ * @since 2.2 Image counter for deleting unattached images.
  */
 function epl_wpimport_get_duplicate_attachments( $limit = 50, $post_types = array() ) {
 
 	if ( empty( $post_types ) ) {
-			$post_types = epl_get_core_post_types();
+		$post_types = epl_get_core_post_types();
 	}
 
 	global $wpdb;
@@ -499,7 +500,7 @@ function epl_wpimport_get_duplicate_attachments( $limit = 50, $post_types = arra
         $offset = 0;
         $page_num = isset( $_GET['page_num'] ) ? intval( $_GET['page_num'] ) : 1;
 
-        if( $page_num > 1 ) {
+        if ( $page_num > 1 ) {
                 $offset = $limit * ( $page_num - 1 );
         }
 
@@ -647,8 +648,7 @@ function epl_wpimport_check_deleted_attachments( $parent_id, $epl_wpimport = nul
                 }
         }
 
-        if( !empty( $ids ) && is_object( $epl_wpimport ) ) {
-
+        if ( ! empty( $ids ) && is_object( $epl_wpimport ) ) {
                 $epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . __( 'Deleted duplicate attachments : ', 'epl-wpimport' ) . implode(',', $ids ) );
         }
 }
