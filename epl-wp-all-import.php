@@ -26,7 +26,7 @@
  * @package  EPL-IMPORTER-ADD-ON
  * @category Importer
  * @author   Merv Barrett
- * @version  2.1
+ * @version  2.2
  */
 
 // Exit if accessed directly.
