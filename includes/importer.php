@@ -368,7 +368,7 @@ function epl_wpimport_img_loop( $unique_id, $mod_time, $url, $id ) {
  * @since  1.0
  * @since  2.0.3 Updated code for WP All Import Pro >= 4.6.1 with compatibility for lower versions.
  * @since  2.0.8 Fix fatal error for unrecognised formats & added support for jupix format.
- * @since  2.2 Fix : check & remove any broken attachments if left by wp all import pro.
+ * @since  2.2 Fix: Check & remove any broken attachments if left by wp all import pro.
  */
 function epl_wpimport_is_image_to_update( $default, $post_object, $xml_object ) {
 	if ( ! in_array( $post_object['post_type'], epl_wpimport_allowed_post_types(), true ) ) {
@@ -442,7 +442,7 @@ function epl_wpimport_is_image_to_update( $default, $post_object, $xml_object ) 
 
 		if ( $old_mod_date < $new_mod_date ) {
 			$epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . __( 'Updated Images, Uploading', 'epl-wpimport' ) . '...' );
-                        epl_wpimport_check_deleted_attachments( $post_object['ID'], $epl_wpimport );
+			epl_wpimport_check_deleted_attachments( $post_object['ID'], $epl_wpimport );
 			return true;
 		} else {
 
