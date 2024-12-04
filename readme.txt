@@ -6,7 +6,7 @@ Donate link: https://easypropertylistings.com.au/support-the-site/
 Tags: real estate, easy property listings, wp all import, csv, xml, xls, import, reaxml, jupix, BLM, MLS
 Requires PHP: 7.1
 Requires at least: 3.9
-Tested up to: 6.5.4
+Tested up to: 6.7.1
 Stable Tag: 2.2
 License: GNU Version 2 or Any Later Version
 
