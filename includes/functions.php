@@ -487,21 +487,22 @@ add_filter( 'wp_all_import_handle_upload', 'epl_wpimport_wp_all_import_handle_up
  *
  * @return array
  * @since 2.1
+ * @since 2.2 Image counter for deleting unattached images.
  */
 function epl_wpimport_get_duplicate_attachments( $limit = 50, $post_types = array() ) {
 
 	if ( empty( $post_types ) ) {
-			$post_types = epl_get_core_post_types();
+		$post_types = epl_get_core_post_types();
 	}
 
 	global $wpdb;
 
-        $offset = 0;
-        $page_num = isset( $_GET['page_num'] ) ? intval( $_GET['page_num'] ) : 1;
+		$offset   = 0;
+		$page_num = isset( $_GET['page_num'] ) ? intval( $_GET['page_num'] ) : 1;
 
-        if( $page_num > 1 ) {
-                $offset = $limit * ( $page_num - 1 );
-        }
+	if ( $page_num > 1 ) {
+			$offset = $limit * ( $page_num - 1 );
+	}
 
 	// Query to find duplicate attachment URLs.
 	$sql = "SELECT meta_value, COUNT(*) AS count
@@ -512,7 +513,7 @@ function epl_wpimport_get_duplicate_attachments( $limit = 50, $post_types = arra
         LIMIT $offset, $limit";
 
 	$duplicate_urls = $wpdb->get_results( $sql );
-        
+
 	$duplicate_attachments = array();
 
 	if ( $duplicate_urls ) {
@@ -524,7 +525,7 @@ function epl_wpimport_get_duplicate_attachments( $limit = 50, $post_types = arra
                         AND meta_value = %s";
 
 			$post_ids = $wpdb->get_col( $wpdb->prepare( $sql, $duplicate_url->meta_value ) );
-                        
+
 			$parent_posts = array();
 			foreach ( $post_ids as $post_id ) {
 				$post_object   = get_post( $post_id );
@@ -625,30 +626,39 @@ add_action( 'admin_init', 'epl_wpimport_trigger_duplicate_deletion' );
 /**
  * Function checks if there are pending attachments after import pro is done deleting them.
  * Deletes if found.
- * 
+ *
+ * @param string $parent_id    Parent ID.
+ * @param null   $epl_wpimport Check if EPL importer is active.
+ *
  * @since 2.2
  */
 function epl_wpimport_check_deleted_attachments( $parent_id, $epl_wpimport = null ) {
 
-        $attachments = get_posts(array('post_parent' => $parent_id, 'post_type' => 'attachment', 'numberposts' => -1, 'post_status' => null));
-        
-        $ids = [];
-        foreach ($attachments as $attach) {
+	$attachments = get_posts(
+		array(
+			'post_parent' => $parent_id,
+			'post_type'   => 'attachment',
+			'numberposts' => -1,
+			'post_status' => null,
+		)
+	);
 
-                if ( wp_attachment_is_image( $attach->ID ) ) {
+	$ids = array();
+	foreach ( $attachments as $attach ) {
 
-                        if ( !empty( $attach->ID ) ) {
+		if ( wp_attachment_is_image( $attach->ID ) ) {
 
-                                $file = get_attached_file( $attach->ID );
-                                        
-                                wp_delete_attachment($attach->ID, TRUE);
-                                $ids[] = $attach->ID;
-                        }
-                }
-        }
+			if ( ! empty( $attach->ID ) ) {
 
-        if( !empty( $ids ) && is_object( $epl_wpimport ) ) {
+				$file = get_attached_file( $attach->ID );
 
-                $epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . __( 'Deleted duplicate attachments : ', 'epl-wpimport' ) . implode(',', $ids ) );
-        }
+				wp_delete_attachment( $attach->ID, true );
+				$ids[] = $attach->ID;
+			}
+		}
+	}
+
+	if ( ! empty( $ids ) && is_object( $epl_wpimport ) ) {
+		$epl_wpimport->log( __( 'EPL IMPORTER', 'epl-wpimport' ) . ': ' . __( 'Deleted duplicate attachments : ', 'epl-wpimport' ) . implode( ',', $ids ) );
+	}
 }
