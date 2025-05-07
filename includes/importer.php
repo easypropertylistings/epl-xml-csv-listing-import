@@ -406,25 +406,35 @@ function epl_wpimport_is_image_to_update( $default, $post_object, $xml_object ) 
 			// Check if image mod time tag is present, use it.
 			if ( isset( $xml_object['feedsyncImageModtime'] ) ) {
 				$new_mod_date = $xml_object['feedsyncImageModtime'];
+
+			} elseif ( function_exists( 'EPL_MLS' ) ) {
+				$new_mod_date = $xml_object['images']['@attributes']['modTime'] ?? '';
+
 			} else {
-				if ( function_exists( 'EPL_MLS' ) ) {
-					$new_mod_date = $xml_object['images']['@attributes']['modTime'];
-				} else {
-					$new_mod_date = '';
+				$new_mod_date = '';
 
-					if ( isset( $xml_object['images']['img'] ) ) {
-						$new_mod_date = current( $xml_object['images']['img'][0]['modTime'] );
-					}
+				if (
+					isset( $xml_object['images']['img'][0]['modTime'] ) &&
+					! is_null( $xml_object['images']['img'][0]['modTime'] )
+				) {
+					$mod_time = $xml_object['images']['img'][0]['modTime'];
+					$new_mod_date = is_array( $mod_time ) ? current( $mod_time ) : (string) $mod_time;
+				}
 
-					if ( isset( $xml_object['objects']['img'] ) ) {
-						$new_mod_date = current( $xml_object['objects']['img'][0]['modTime'] );
-					}
+				if (
+					isset( $xml_object['objects']['img'][0]['modTime'] ) &&
+					! is_null( $xml_object['objects']['img'][0]['modTime'] )
+				) {
+					$mod_time = $xml_object['objects']['img'][0]['modTime'];
+					$new_mod_date = is_array( $mod_time ) ? current( $mod_time ) : (string) $mod_time;
+				}
 
-					if ( isset( $xml_object['images']['image'] ) ) {
-						if ( ! empty( $xml_object['images']['image'][0]['modified'] ) ) {
-							$new_mod_date = current( $xml_object['images']['image'][0]['modified'] );
-						}
-					}
+				if (
+					isset( $xml_object['images']['image'][0]['modified'] ) &&
+					! empty( $xml_object['images']['image'][0]['modified'] )
+				) {
+					$mod_time = $xml_object['images']['image'][0]['modified'];
+					$new_mod_date = is_array( $mod_time ) ? current( $mod_time ) : (string) $mod_time;
 				}
 			}
 			$new_mod_date = apply_filters( 'epl_import_image_new_mod_date', $new_mod_date, $xml_object, $post_object );
@@ -502,31 +512,38 @@ function epl_wpimport_delete_images( $default, $post_object, $xml_object ) {
 		$mod_date = strtotime( epl_feedsync_format_date( $prop_img_mod_date ) );
 	}
 
-	// Check if image mod time tag is present, use it.
+	// Check if image mod time tag is present
 	if ( isset( $xml_object['feedsyncImageModtime'] ) ) {
-
 		$new_mod_date = $xml_object['feedsyncImageModtime'];
 
+	} elseif ( function_exists( 'EPL_MLS' ) ) {
+		$new_mod_date = $xml_object['images']['@attributes']['modTime'] ?? '';
+
 	} else {
+		$new_mod_date = '';
 
-		if ( function_exists( 'EPL_MLS' ) ) {
-			$new_mod_date = $xml_object['images']['@attributes']['modTime'];
-		} else {
-			$new_mod_date = '';
+		if (
+			isset( $xml_object['images']['img'][0]['modTime'] ) &&
+			! is_null( $xml_object['images']['img'][0]['modTime'] )
+		) {
+			$mod_time = $xml_object['images']['img'][0]['modTime'];
+			$new_mod_date = is_array( $mod_time ) ? current( $mod_time ) : (string) $mod_time;
+		}
 
-			if ( isset( $xml_object['images']['img'] ) ) {
-				$new_mod_date = current( $xml_object['images']['img'][0]['modTime'] );
-			}
+		if (
+			isset( $xml_object['objects']['img'][0]['modTime'] ) &&
+			! is_null( $xml_object['objects']['img'][0]['modTime'] )
+		) {
+			$mod_time = $xml_object['objects']['img'][0]['modTime'];
+			$new_mod_date = is_array( $mod_time ) ? current( $mod_time ) : (string) $mod_time;
+		}
 
-			if ( isset( $xml_object['objects']['img'] ) ) {
-				$new_mod_date = current( $xml_object['objects']['img'][0]['modTime'] );
-			}
-
-			if ( isset( $xml_object['images']['image'] ) ) {
-				if ( ! empty( $xml_object['images']['image'][0]['modified'] ) ) {
-					$new_mod_date = current( $xml_object['images']['image'][0]['modified'] );
-				}
-			}
+		if (
+			isset( $xml_object['images']['image'][0]['modified'] ) &&
+			! empty( $xml_object['images']['image'][0]['modified'] )
+		) {
+			$mod_time = $xml_object['images']['image'][0]['modified'];
+			$new_mod_date = is_array( $mod_time ) ? current( $mod_time ) : (string) $mod_time;
 		}
 	}
 
