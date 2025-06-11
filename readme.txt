@@ -47,6 +47,8 @@ Supported formats are CSV, XML and XLS files with full support for the Australia
 
 = 2.2.1 June 11, 2025 =
 
+* Fix: Fatal error issue fixed when expecting array.
+
 = 2.2 June 24, 2024 =
 
 * New: Checks for broken attachments after WP All Import has completed the import and deletes them.
