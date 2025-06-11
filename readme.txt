@@ -3,7 +3,7 @@ Author URI: https://www.realestateconnected.com.au/
 Plugin URI: https://wordpress.org/plugins/easy-property-listings-xml-csv-import/
 Contributors: mervb1
 Donate link: https://easypropertylistings.com.au/support-the-site/
-Tags: real estate, easy property listings, wp all import, csv, xml, xls, import, reaxml, jupix, BLM, MLS
+Tags: real estate, xml, import, csv, reaxml
 Requires PHP: 7.1
 Requires at least: 3.9
 Tested up to: 6.8.1
