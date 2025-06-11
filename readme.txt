@@ -8,7 +8,7 @@ Requires PHP: 7.1
 Requires at least: 3.9
 Tested up to: 6.8.1
 Stable Tag: 2.2.1
-License: GNU Version 2 or Any Later Version
+License: GPLv2 or later
 
 Import listings into Easy Property Listings with this WP All Import add-on for WordPress. Created for maximum performance.
 
