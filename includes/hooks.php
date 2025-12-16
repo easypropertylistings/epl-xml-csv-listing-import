@@ -21,6 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @return null|array
  * @since 1.0.0
+ * @since 2.2.2 Fix: csrf vulnerability.
  */
 function epl_wpimport_extensions_options_filter( $epl_fields = null ) {
 	$fields        = array();

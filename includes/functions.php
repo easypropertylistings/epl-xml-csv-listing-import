@@ -602,6 +602,7 @@ function epl_wpimport_delete_duplicate_attachments( $dryrun = true ) {
  * Trigger the deletion of duplicate attachments.
  *
  * @since 2.1
+ * @since 2.2.2 Fix: csrf vulnerability.
  */
 function epl_wpimport_trigger_duplicate_deletion() {
 

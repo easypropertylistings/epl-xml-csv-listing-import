@@ -6,8 +6,8 @@ Donate link: https://easypropertylistings.com.au/support-the-site/
 Tags: real estate, xml, import, csv, reaxml
 Requires PHP: 7.1
 Requires at least: 3.9
-Tested up to: 6.8.1
-Stable Tag: 2.2.1
+Tested up to: 6.9
+Stable Tag: 2.2.2
 License: GPLv2 or later
 
 Import listings into Easy Property Listings with this WP All Import add-on for WordPress. Created for maximum performance.
@@ -44,6 +44,10 @@ Supported formats are CSV, XML and XLS files with full support for the Australia
 6. Recommend Import settings
 
 == Change log ==
+
+= 2.2.2 December 16, 2025 =
+
+* Fix: csrf vulnerability.
 
 = 2.2.1 June 11, 2025 =
 
