@@ -613,6 +613,12 @@ function epl_wpimport_trigger_duplicate_deletion() {
 			return;
 	}
 
+	$nonce = isset( $_GET['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ) : '';
+
+	if ( ! wp_verify_nonce( $nonce, 'epl_wpimport_delete_duplicate_attachments' ) ) {
+		wp_die( esc_html__( 'Security check failed. Please try again.', 'epl-wpimport' ) );
+	}
+
 	$runmode = isset( $_GET['mode'] ) ? sanitize_key( $_GET['mode'] ) : '';
 	$runmode = 'live' === $runmode ? false : true;
 
