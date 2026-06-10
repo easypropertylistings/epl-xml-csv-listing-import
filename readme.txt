@@ -6,7 +6,7 @@ Donate link: https://easypropertylistings.com.au/support-the-site/
 Tags: real estate, xml, import, csv, reaxml
 Requires PHP: 7.1
 Requires at least: 3.9
-Tested up to: 6.9
+Tested up to: 7.0.0
 Stable Tag: 2.2.2
 License: GPLv2 or later
 
@@ -25,6 +25,9 @@ Supported formats are CSV, XML and XLS files with full support for the Australia
 
 > <strong>Support</strong><br>
 > Need help configuring your imports? Not a problem, head over to the [Support Pricing](https://easypropertylistings.com.au/support-ticket/pricing/?utm_source=readme&utm_medium=description_tab&utm_content=support_pricing&utm_campaign=wordpressorg_import) page and purchase a plan or installation service.
+
+> <strong>Sync your website automatically with FeedSync</strong><br>
+> This add-on imports your REAXML feed into Easy Property Listings. If you'd rather your website kept itself up to date the moment your CRM changes, the same way portals do... that's what [FeedSync](https://feedsync.com.au/?utm_source=readme&utm_medium=description_tab&utm_content=feedsync_platform&utm_campaign=wordpressorg_import_feedsync) does. It takes the same listing feed your portals already receive and keeps your WordPress site in sync, so your website stops being the one place you have to update by hand.
 
 == Installation ==
 
